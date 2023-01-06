@@ -1,0 +1,22 @@
+﻿@model IEnumerable<GardenViewModel.TempCartViewModel>
+@if (Model != null && Model.Count() > 0)
+{
+    double total = 0;
+
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+        <i class="fa fa-shopping-bag"></i>
+        <span class="badge">@Model.Count()</span>
+    </a>
+    <ul class="dropdown-menu cart-list">
+        @foreach (var cartItem in Model)
+        {
+            <li>
+                <a href="#" class="photo"><img src="~/Areas/Admin/UploadImg/ProductImg/@cartItem.Image" class="cart-thumb" alt="" /></a>
+                <h6><a href="#">@cartItem.ProdName</a></h6>
+                <p>@cartItem.Quantity x - <span class="price"><i class="fa fa-rupee"></i> @cartItem.Price.ToString("0.00")</span></p>
+            </li>
+            total += (cartItem.Price * cartItem.Quantity);
+        }
+        <li class="total"> <span class="pull-right"><strong>Total</strong>: <i class="fa fa-rupee"></i> @total.ToString("0.00")</span> <a href="@Url.Action("ShoppingCart","Shop")" class="btn btn-default btn-cart">Cart</a> </li>
+    </ul>
+}

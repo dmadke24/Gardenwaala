@@ -1,0 +1,51 @@
+﻿@using GardenViewModel
+@model IEnumerable<OrderListViewModel>
+@{
+    Layout = null;
+}
+<div class="main-nav shadow-sm sticky">
+    @Html.Action("HeaderMenu", "Home")
+</div>
+</div>
+<h3 class="mb_10 main_title">My Order List</h3>
+<div class="row">
+    <div class="col-xs-12 mb_xs-30">
+        <div class="cart-item-table commun-table">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Order No</th>
+                            <th>Ship To</th>
+                            <th>Total</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (OrderListViewModel odt in Model)
+                        {
+                            <tr>
+                                <td>
+                                    <a href="javascript:void(0);">
+                                        <div class="product-image"># @odt.OrderId</div>
+                                    </a>
+                                </td>
+                                <td>
+                                    <div class="product-title"> <a href="javascript:void(0);">@odt.ShipName</a> </div>
+                                    <div class="product-info-stock-sku ">
+                                        <div>
+                                            <label>Order Date: </label>
+                                            <span class="info-deta">@odt.OrderDt</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><div class="base-price price-box"> <span class="price">@odt.GrandTotal.ToString("0.00")</span> </div></td>
+                                <td><a href="@Url.Action("OrderDetail", "MyAccount", new { oid = @odt.OrderId })"><i title="Order Detail" data-id="100" class="fa fa-info"></i></a> | <a href="@Url.Action("OrderDetail", "MyAccount", new { oid = @odt.OrderId })"><i title="Track Order" data-id="100" class="fa fa-search-plus"></i></a></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

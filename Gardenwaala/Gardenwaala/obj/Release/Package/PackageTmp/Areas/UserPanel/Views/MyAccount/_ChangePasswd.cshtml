@@ -1,0 +1,43 @@
+﻿@using GardenViewModel
+@model ChangePasswordViewModel
+
+<div class="col-sm-6">
+    @using (Html.BeginForm("ChangePwd", "MyAccount", FormMethod.Post, new { @class = "main-form full", autocomplete = "off" }))
+    {
+        <div class="col-sm-12">
+            <div class="form-group">
+                <label class="control-label">Old Password <span class="required">*</span></label>
+                @Html.PasswordFor(c => c.OldPassword, new { @class = "form-control border-form-control", autocomplete = "off", placeholder = "Old Password" })
+                @Html.ValidationMessageFor(c => c.OldPassword)
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <div class="form-group">
+                <label class="control-label">New Password <span class="required">*</span></label>
+                @Html.PasswordFor(c => c.NewPassword, new { @class = "form-control border-form-control", autocomplete = "off", placeholder = "New Password" })
+                @Html.ValidationMessageFor(c => c.NewPassword)
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <div class="form-group">
+                <label class="control-label">Confirm Password <span class="required">*</span></label>
+                @Html.PasswordFor(c => c.ConfirmPassword, new { @class = "form-control border-form-control", autocomplete = "off", placeholder = "Confirm Password" })
+                @Html.ValidationMessageFor(c => c.ConfirmPassword)
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 text-right">
+                <button type="button" class="btn btn-outline-danger"> Cancel </button>
+                <button type="submit" class="btn btn-primary"> Change Password </button>
+            </div>
+        </div>
+
+    }
+</div>
+@section Register
+{
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+
+}

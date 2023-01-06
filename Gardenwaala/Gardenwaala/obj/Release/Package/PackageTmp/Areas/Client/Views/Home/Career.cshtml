@@ -1,0 +1,76 @@
+﻿@using GardenViewModel
+@model IEnumerable<CareerViewModel>
+<div class="breadcrumb">
+    <h1>Current Opening</h1>
+</div>
+<div class="container">
+    @if (Model.Count() != 0)
+    {
+        <div class="row ">
+            <div class="col-sm-12">
+                <div class="row">
+                    @foreach (CareerViewModel job in Model)
+                    {
+                    <div class="col-md-12 prodetail caption product-thumb">
+                        <h3 data-name="product_name" class="product-name">Opening for: @job.Position</h3>
+                        <ul class="list-unstyled product_info mtb_20">
+                            <li>
+                                <label>Experience:</label>
+                                <span> @job.Experience</span>
+                            </li>
+                            <li>
+                                <label>Qualification:</label>
+                                <span> @job.Qualification</span>
+                            </li>
+                            <li>
+                                <label>Department:</label>
+                                <span> @job.Department</span>
+                            </li>
+                            @if (job.Package != null)
+                            {
+                                <li>
+                                    <label>Package:</label>
+                                    <span> @job.Package</span>
+                                </li>
+                            }
+                            <li>
+                                <label>Key Skills:</label>
+                                <span> @job.keyskills</span>
+                            </li>
+                            <li>
+                                <label>No of Position:</label>
+                                <span> @job.Openings</span>
+                            </li>
+                            @if (job.City != null)
+                            {
+                                <li>
+                                    <label>City:</label>
+                                    <span> @job.City</span>
+                                </li>
+                            }
+                            <li>
+                                <label>Location:</label>
+                                <span> @job.Location</span>
+                            </li>
+                        </ul>
+                        @if (job.Requirements != null)
+                        {
+                            <p class="product-desc mtb_30">@Html.Raw(job.Requirements)</p>
+                        }
+                        @if (job.Description != null)
+                        {
+                            <p class="product-desc mtb_30">@Html.Raw(job.Description)</p>
+                        }
+                        <hr>
+                        <p class="product-desc mtb_30">Contact: +91 8669999696 / Email at: support@gardenwaala.com </p>
+                    </div>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <h3>No Records Found!</h3>
+    }
+</div>

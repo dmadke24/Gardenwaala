@@ -1,0 +1,77 @@
+﻿@model IEnumerable<GardenViewModel.TempCartViewModel>
+@if (Model != null && Model.Count() > 0)
+{
+    double total = 0;
+    int cnt = Model.Count();
+    <div class="card-body p-0">
+        <div class="cart-table">
+            <div class="table-responsive">
+                <table class="table cart_summary">
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Description</th>
+                            <th>Delivery Options</th>
+                            <th>Quantity</th>
+                            <th>Subtotal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var cartItem in Model)
+                        {
+                            <tr>
+                                <td class="cart_product"><a href="@Url.Action("ProductDetail", "Shop", new { pid = @cartItem.ProductId })"><img class="img-fluid" src="~/Areas/Admin/UploadImg/ProductImg/@cartItem.Image" alt="@cartItem.ProdName"></a></td>
+                                <td class="cart_description">
+                                    <h6 class="product-name"><a href="@Url.Action("ProductDetail", "Shop", new { pid = @cartItem.ProductId })">@cartItem.ProdName</a></h6>
+                                    <p class="f-12 text-secondary mb-1 pt-1 pb-1">5/4 Review</p>
+                                    <hr>
+                                    <a class="text-info" href="#"><i class="icofont-heart"></i> Move to Shortlist</a> &nbsp; &nbsp; <a class="text-danger" href="@Url.Action("DeleteCartItem", new { TempId = cartItem.TempId })"><i class="icofont-trash"></i> Remove Item</a>
+                                </td>
+                                <td>
+                                    <p class="text-secondary"><i class="icofont-check-circled"></i> Next Day </p>
+                                </td>
+                                <td class="qty">
+                                    @*<select class="custom-select custom-select-sm">
+                                            <option selected>1</option>
+                                            <option value="1">2</option>
+                                            <option value="2">3</option>
+                                            <option value="3">4</option>
+                                        </select>*@
+                                    <p class="text-secondary">@cartItem.Quantity</p>
+                                </td>
+                                <td class="price">
+                                    <p class="f-14 mb-0 text-dark">₹ @cartItem.Price<br> @*<del class="small text-secondary">$ 500.00 </del>*@</p>
+                                </td>
+                            </tr>
+                            total += (cartItem.Price * cartItem.Quantity);
+
+                        }
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            @*<td colspan="3">
+                                    <form class="form-inline float-right">
+                                        <div class="form-group">
+                                            <input type="text" placeholder="Have a promo code?" class="form-control border-form-control form-control-sm">
+                                        </div>
+                                        &nbsp;
+                                        <button class="btn btn-outline-primary float-left btn-sm" type="submit">Apply</button>
+                                    </form>
+                                </td>*@
+                            <td colspan="2">Dilevery Fees : ₹ 0.00 </td>
+                        </tr>
+                        <tr>
+                            <td class="text-right" colspan="3">Total products (tax incl.)</td>
+                            <td colspan="2">₹ @total.ToString("0.00")</td>
+                        </tr>
+                        <tr>
+                            <td class="text-right" colspan="3"><strong>You Pay</strong></td>
+                            <td class="text-danger" colspan="2"><strong>₹ @total.ToString("0.00")</strong></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+            <button data-toggle="collapse" data-target="#collapsefour" aria-expanded="false" aria-controls="collapsefour" class="btn btn-primary btn-lg btn-block text-left" type="button"><span class="float-left"><i class="icofont icofont-cart"></i> PROCEED TO PAYMENT </span><span class="float-right"><strong>₹ @total.ToString("0.00")</strong> <span class="icofont icofont-bubble-right"></span></span></button>
+        </div>
+    </div>
+}

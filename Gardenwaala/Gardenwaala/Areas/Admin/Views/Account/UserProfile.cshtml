@@ -1,0 +1,458 @@
+﻿@model UserViewModel
+@{
+    ViewBag.Heading = "User Profile";
+    bool redirectFlag = ViewBag.RedirectFromTask;
+    //string duration;
+    
+    //TimeSpan ts = DateTime.Now.Subtract(currentUser.LastLogin);
+    //if(ts.Days>7)
+    //{
+    //    duration = currentUser.LastLogin.ToString("dd/MM/yyyy");
+    //}
+    //else if (ts.Days > 0)
+    //{
+    //    duration = ts.Days.ToString() + " days ago";
+    //}
+    //else if (ts.Hours > 0 && ts.Days==0 && ts.Minutes<60)
+    //{
+    //    duration = ts.Minutes.ToString() + " Minutes ago";
+    //}
+    //else if (ts.Hours > 0)
+    //{
+    //    duration = ts.Hours.ToString() + " hours ago";
+    //}
+    //else
+    //{
+    //    duration = ts.Seconds.ToString() + " seconds ago";
+    //}
+}
+<div class="clearfix">
+    <div class="alert alert-success no-margin alert-dismissable">
+        <button type="button" class="close" data-dismiss="alert">
+            <i class="ace-icon fa fa-times"></i>
+        </button>
+        <i class="ace-icon fa fa-umbrella bigger-120 blue"></i>
+        @if (TempData["Msg"] == null)
+        {
+            <text>Click on the image below or on profile fields to edit them ...</text>
+        }
+        else
+        {
+            @TempData["Msg"]
+        }
+    </div>
+</div>
+<div class="hr dotted"></div>
+<div>
+    <div id="user-profile-2" class="user-profile">
+        <div class="tabbable">
+            <ul class="nav nav-tabs padding-18">
+                <li class="@(!redirectFlag?"active":string.Empty)">
+                    <a data-toggle="tab" href="#home">
+                        <i class="green ace-icon fa fa-user bigger-120"></i>
+                        Profile
+                    </a>
+                </li>
+
+                <li>
+                    <a data-toggle="tab" href="#plan">
+                        <i class="orange ace-icon fa fa-cog bigger-125"></i>
+                        My Plan
+                    </a>
+                </li>
+
+                <li>
+                    <a data-toggle="tab" href="#pass">
+                        <i class="blue ace-icon fa fa-key bigger-125"></i>
+                        Change Password
+                    </a>
+                </li>
+                @if (User.IsInRole("CRM") || User.IsInRole("Enterprise"))
+                {
+                    <li class="@(redirectFlag?"active":string.Empty)">
+                        <a data-toggle="tab" href="#official">
+                            <i class="red ace-icon fa fa-envelope-o bigger-125"></i>
+                            Official Email &amp; SMS
+                        </a>
+                    </li>
+                }
+            </ul>
+            <div class="tab-content no-border padding-24">
+                <div id="home" class="tab-pane@(!redirectFlag ? " in active" : string.Empty)">
+                    @using (Html.BeginForm("Update", "Account", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(u => u.Image)
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-3 center">
+                                <span class="profile-picture">
+                                    <img id="currImg" class="editable img-responsive" alt="@Model.Name" src="/Areas/Admin/UploadImgImages/UserImg/@Model.Image" />
+                                    <input type="file" id="ImageFile" name="ImageFile" data-val="true" data-val-filesize="Upload file upto 2 mb" data-val-extension="Invalid File Type" data-val-extension-extension="png,jpg,jpeg,gif" style="display:none" />
+                                </span>
+                                <div class="profile-contact-info">
+                                    @Html.ValidationMessage("ImageFile")
+                                </div>
+                                <div class="space-4"></div>
+                                <div class="width-80 label label-info label-xlg arrowed-in arrowed-in-right">
+                                    <div class="inline position-relative">
+                                        <a href="javascript:void(0);" class="user-title-label dropdown-toggle" id="aChange">
+                                            <span class="white">Change Avatar</span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="space space-4"></div>
+                                <div class="profile-contact-info">
+                                    <div class="profile-contact-links align-left">
+                                        <a href="#" class="btn btn-link" title="Role">
+                                            <i class="ace-icon fa fa-certificate bigger-120 green"></i>
+                                            @Model.ToolName
+                                        </a>
+                                        <br />
+                                        <a href="#" class="btn btn-link" title="Cateogry">
+                                            <i class="ace-icon fa fa-folder-open-o bigger-120 pink"></i>
+                                            @Model.SubCategoryName
+                                        </a>
+                                        <br />
+                                        <a href="@Model.Website" target="_blank" class="btn btn-link" title="Website">
+                                            <i class="ace-icon fa fa-globe bigger-125 blue"></i>
+                                            @(string.IsNullOrEmpty(Model.Website) ? string.Empty : Model.Website.Substring(Model.Website.LastIndexOf('/') + 1))
+                                        </a>
+                                    </div>
+                                    <div class="space-6"></div>
+                                </div>
+                            </div><!-- /.col -->
+
+                            <div class="col-xs-12 col-sm-9">
+                                <h4 class="blue">
+                                    <span class="middle">@Model.Name</span>
+                                </h4>
+
+                                <div class="profile-user-info">
+                                    <div class="profile-info-row">
+                                        @Html.LabelFor(u => u.Name, new { @class = "profile-info-name" })
+                                        <div class="profile-info-value">
+                                            @Html.TextBoxFor(u => u.Name, new { @class = "col-xs-12 col-sm-6" })
+                                            @Html.ValidationMessageFor(u => u.Name, "", new { @class = "my-error  col-xs-12 col-sm-6" })
+                                        </div>
+                                    </div>
+                                    <div class="profile-info-row">
+                                        @Html.LabelFor(u => u.Email, new { @class = "profile-info-name" })
+                                        <div class="profile-info-value">
+                                            <span>@Model.Email</span>
+                                        </div>
+                                    </div>
+                                    <div class="profile-info-row">
+                                        @Html.LabelFor(u => u.ContactNo, new { @class = "profile-info-name" })
+
+                                        <div class="profile-info-value">
+                                            @Html.TextBoxFor(u => u.ContactNo, new { @class = "col-xs-12 col-sm-6" })
+                                            @Html.ValidationMessageFor(u => u.ContactNo, "", new { @class = "my-error col-xs-12 col-sm-6" })
+                                        </div>
+                                    </div>
+                                    <div class="profile-info-row">
+                                        @Html.LabelFor(u => u.Gender, new { @class = "profile-info-name" })
+                                        <div class="profile-info-value">
+                                            <div class="radio col-xs-12 col-sm-6">
+                                                <label>
+                                                    @Html.RadioButtonFor(m => m.Gender, "m", new { @class = "ace" })
+                                                    <span class="lbl"> Male</span>
+                                                </label>
+                                                <label>
+                                                    @Html.RadioButtonFor(m => m.Gender, "f", new { @class = "ace" })
+                                                    <span class="lbl"> Female</span>
+                                                </label>
+                                            </div>
+                                            @Html.ValidationMessageFor(u => u.Gender, "", new { @class = "my-error col-xs-12 col-sm-6" })
+                                        </div>
+                                    </div>
+                                    <div class="profile-info-row">
+                                        <div class="profile-info-name"> Select Area </div>
+                                        <div class="profile-info-value">
+                                            @Html.DropDownListFor(u => u.AreaId, new SelectList(Model.AreaList, "ID", "Text"), "Select Area", new { @class = "col-xs-12 col-sm-6" })
+                                            @Html.ValidationMessageFor(u => u.AreaId, "", new { @class = "my-error col-xs-12 col-sm-6" })
+                                        </div>
+                                    </div>
+                                    <div class="profile-info-row">
+                                        <div class="profile-info-name"> Address </div>
+                                        <div class="profile-info-value">
+                                            @Html.TextAreaFor(u => u.Address, new { @class = "col-xs-12 col-sm-6" })
+                                            @Html.ValidationMessageFor(u => u.Address, "", new { @class = "my-error col-xs-12 col-sm-6" })
+                                        </div>
+                                    </div>
+
+                                    <div class="profile-info-row">
+                                        <div class="profile-info-name"> Joined </div>
+                                        <div class="profile-info-value">
+                                            <span>@Model.CreatedDt.ToString("dd/MM/yyyy")</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="profile-info-row">
+                                        <div class="profile-info-name"> Last Login </div>
+
+                                        <div class="profile-info-value">
+                                            <span> @currentUser.LastLogin.ToString("dd-MMM-yyyy hh:mm tt")</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="hr hr-8 dotted"></div>
+                            </div><!-- /.col -->
+                        </div><!-- /.row -->
+                        <div class="hr hr10 hr-double"></div>
+
+                        <div class="clearfix form-actions">
+                            <div class="col-md-offset-3 col-md-9">
+                                <button class="btn btn-info" type="submit">
+                                    <i class="ace-icon fa fa-check bigger-110"></i>
+                                    Update
+                                </button>
+
+                                &nbsp; &nbsp;
+                                <button class="btn" type="reset">
+                                    <i class="ace-icon fa fa-undo bigger-110"></i>
+                                    Reset
+                                </button>
+                            </div>
+                        </div>
+                    }
+                    <div class="space-20"></div>
+                </div><!-- /#home -->
+
+                <div id="plan" class="tab-pane">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h3 class="row header smaller lighter blue">
+                                <span class="col-xs-6"> My Plan </span><!-- /.col -->
+
+
+                            </h3>
+
+                            <div id="accordion" class="accordion-style1 panel-group">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                                                <i class="ace-icon fa fa-angle-down bigger-110" data-icon-hide="ace-icon fa fa-angle-down" data-icon-show="ace-icon fa fa-angle-right"></i>
+                                                &nbsp;Membership Details
+                                            </a>
+                                        </h4>
+                                    </div>
+
+                                    <div class="panel-collapse collapse in" id="collapseOne">
+                                        <div class="panel-body">
+                                            <table class="table table-striped table-bordered table-hover dataTable no-footer">
+                                                <tbody>
+                                                    <tr>
+                                                        <td><label>Start Date: </label></td>
+                                                        <td> <strong> @Model.StartDt.ToString("dd/MM/yyyy") </strong></td>
+
+                                                    </tr>
+                                                    <tr>
+                                                        <td><label>Expiry Date: </label></td>
+                                                        <td> <strong> @Model.EndDt.ToString("dd/MM/yyyy") </strong></td>
+
+                                                    </tr>
+                                                    <tr>
+                                                        <td> <label>Selected Tool: </label></td>
+                                                        <!--<td>  <strong>    Enterprise Launch Plan </strong> </td>-->
+                                                        <td>  <strong> @Model.ToolName </strong> </td>
+
+                                                    </tr>
+                                                    <tr>
+                                                        <td> <label>Selected Website Plan: </label></td>
+                                                        <!--<td>  <strong>    Enterprise Launch Plan </strong> </td>-->
+                                                        <td>  <strong> @Model.PName </strong> </td>
+
+                                                    </tr>
+                                                    <tr>
+
+                                                        <td> <label>Package Cost: Rs.</label></td>
+                                                        <td> <strong> @Model.Price </strong></td>
+
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                @*<div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                                                    <i class="ace-icon fa fa-angle-right bigger-110" data-icon-hide="ace-icon fa fa-angle-down" data-icon-show="ace-icon fa fa-angle-right"></i>
+                                                    &nbsp;Pramotional Messaging
+                                                </a>
+                                            </h4>
+                                        </div>
+
+                                        <div class="panel-collapse collapse" id="collapseTwo">
+                                            <div class="panel-body">
+                                                <table class="table table-striped table-bordered table-hover dataTable no-footer">
+                                                    <tbody>
+
+                                                        <tr>
+                                                            <td> <label>Type</label></td>
+                                                            <td> <strong>  Limit </strong></td>
+                                                            <td> <strong>  Available </strong></td>
+
+
+                                                        </tr>
+                                                        <tr>
+                                                            <td> <label>Transactional SMS:</label></td>
+                                                            <td> <strong>  @Model.TransSMS </strong></td>
+                                                            <td> <strong>  5000 </strong></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td> <label>Pramotional SMS:</label></td>
+                                                            <td> <strong>  @Model.PromoSMS </strong></td>
+                                                            <td> <strong>   0 </strong></td>
+
+
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>*@
+
+                                @*<div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+                                                    <i class="ace-icon fa fa-angle-right bigger-110" data-icon-hide="ace-icon fa fa-angle-down" data-icon-show="ace-icon fa fa-angle-right"></i>
+                                                    &nbsp;Features
+                                                </a>
+                                            </h4>
+                                        </div>
+
+                                        <div class="panel-collapse collapse" id="collapseThree">
+                                            <div class="panel-body">
+                                                <table class="table table-striped table-bordered table-hover dataTable no-footer">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td> <label>Website</label></td>
+                                                            <td> <strong>Dynamic &amp; Responsive Website</strong></td>
+
+                                                        </tr>
+                                                        <tr>
+                                                            <td> <label>CRM</label></td>
+                                                            <td> <strong>   Integrated CRM</strong></td>
+
+                                                        </tr>
+                                                        <tr>
+                                                            <td> <label>Graphics </label></td>
+                                                            <td> <strong> Virtual graphics designer</strong></td>
+
+                                                        </tr>
+                                                        <tr>
+                                                            <td> <label>Social Media </label></td>
+                                                            <td> <strong> Innovatiq Autopost</strong></td>
+
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>*@
+                            </div>
+                        </div><!-- /.col -->
+
+                    </div><!-- /.row -->
+
+                </div><!-- /#feed -->
+                <!--Change password-->
+
+                <div id="pass" class="tab-pane">
+                    @using (Html.BeginForm("ChangePassword", "Account"))
+                    {
+                        <div class="profile-user-info">
+                            <div class="profile-info-row">
+                                <div class="profile-info-name"> Old Password </div>
+
+                                <div class="profile-info-value">
+                                    <input class="col-xs-12 col-sm-4" id="OldPassword" name="OldPassword" placeholder="Old Password" type="password" data-val="true" data-val-required="Old Password is Blank" />
+                                    @Html.ValidationMessage("OldPassword", new { @class = "my-error col-xs-12 col-sm-6" })
+                                </div>
+                            </div>
+                            <div class="profile-info-row">
+                                <div class="profile-info-name"> New Password </div>
+                                <div class="profile-info-value">
+                                    <input class="col-xs-12 col-sm-4" id="NewPassword" name="NewPassword" placeholder="New Password" type="password" data-val="true" data-val-length="Password should 8 To 10 Character long" data-val-length-max="10" data-val-length-min="8" data-val-required="New Password is Blank" />
+                                    @Html.ValidationMessage("NewPassword", new { @class = "my-error col-xs-12 col-sm-6" })
+                                </div>
+                            </div>
+                            <div class="profile-info-row">
+                                <div class="profile-info-name"> Confirm Password </div>
+
+                                <div class="profile-info-value">
+                                    <input class="col-xs-12 col-sm-4" id="ConfirmPassword" name="ConfirmPassword" placeholder="Confirm Password" type="password" data-val="true" data-val-equalto="New Password &amp; Confirm Password do not Match" data-val-equalto-other="*.NewPassword" data-val-required="Confirm Password is Blank">
+                                    @Html.ValidationMessage("ConfirmPassword", new { @class = "my-error col-xs-12 col-sm-6" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hr hr10 hr-double"></div>
+
+                        <div class="clearfix form-actions">
+                            <div class="col-md-offset-3 col-md-9">
+                                <button class="btn btn-info" type="submit">
+                                    <i class="ace-icon fa fa-check bigger-110"></i>
+                                    Change
+                                </button>
+
+                                &nbsp; &nbsp;
+                                <button class="btn" type="reset">
+                                    <i class="ace-icon fa fa-undo bigger-110"></i>
+                                    Reset
+                                </button>
+                            </div>
+                        </div>
+                    }
+                </div>
+                @if (User.IsInRole("CRM") || User.IsInRole("Enterprise"))
+                {
+                    <div id="official" class="tab-pane@(redirectFlag ? " in active" : string.Empty)">
+                        @Html.Action("Get", "Communication")
+                    </div>
+                }
+            </div><!-- /#friends -->
+
+
+        </div>
+    </div>
+</div>
+
+<!-- PAGE CONTENT ENDS -->
+@section LoadDataTable{
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Areas/Admin/AdminDesign/js/chosen.jquery.min.js"></script>
+    <script type="text/javascript">
+        $.validator.unobtrusive.adapters.addBool("filesize");
+        $.validator.addMethod("filesize", function (value, element, params) {
+            var files = $(element).prop('files');
+            size = files[0].size;
+            return (size <= 2097152);
+        });
+        $(document).ready(function () {
+            $("#ImageFile").hide();
+
+            $("#aChange").click(function () {
+                $("#currImg").hide();
+                $("#ImageFile").show();
+                $('#ImageFile').ace_file_input({
+                    style: 'well',
+                    btn_choose: 'Drop Image here or click to choose',
+                    btn_change: null,
+                    no_icon: 'ace-icon fa fa-cloud-upload',
+                    droppable: true,
+                    thumbnail: 'fit'//large | fit
+                    ,
+                    preview_error: function (filename, error_code) {
+                    }
+                });
+            });
+
+        });
+    </script>
+}

@@ -1,0 +1,88 @@
+﻿@model IEnumerable<VisitorCountViewModel>
+
+<div class="widget-box">
+    <div class="widget-header">
+        <h4 class="widget-title lighter smaller">
+            <i class="ace-icon fa fa-users red bigger-150"></i>
+            Monthly Visitors
+        </h4>
+    </div>
+    <div class="widget-body">
+        <div class="widget-main no-padding">
+            <div class="table-responsive">
+
+                <div id="wrapper">
+                    <div class="chart">
+                        <table id="data-table" border="1" cellpadding="10" cellspacing="0"
+                               summary="Percentage of knowledge acquired during my experience
+            for each technology or language.">
+                            <thead>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (VisitorCountViewModel monCnt in Model)
+                                {
+                                    <tr>
+                                        @if(monCnt.VisitorMonth==1)
+                                        { 
+                                        <th scope="row">Jan</th>
+                                        }
+                                        else if(monCnt.VisitorMonth==2)
+                                        {
+                                        <th scope="row">Feb</th>
+                                        }
+                                        else if (monCnt.VisitorMonth == 3)
+                                        {
+                                            <th scope="row">Mar</th>
+                                        }
+                                        else if (monCnt.VisitorMonth == 4)
+                                        {
+                                            <th scope="row">Apr</th>
+                                        }
+                                        else if (monCnt.VisitorMonth == 5)
+                                        {
+                                            <th scope="row">May</th>
+                                        }
+                                        else if (monCnt.VisitorMonth == 6)
+                                        {
+                                            <th scope="row">Jun</th>
+                                        }
+                                        else if (monCnt.VisitorMonth == 7)
+                                        {
+                                            <th scope="row">Jul</th>
+                                        }
+                                        else if (monCnt.VisitorMonth == 8)
+                                        {
+                                            <th scope="row">Aug</th>
+                                        }
+                                        else if (monCnt.VisitorMonth == 9)
+                                        {
+                                            <th scope="row">Sep</th>
+                                        }
+                                        else if (monCnt.VisitorMonth == 10)
+                                        {
+                                            <th scope="row">Oct</th>
+                                        }
+                                        else if (monCnt.VisitorMonth == 11)
+                                        {
+                                            <th scope="row">Nov</th>
+                                        }
+                                        else if (monCnt.VisitorMonth == 12)
+                                        {
+                                            <th scope="row">Dec</th>
+                                        }
+                                        <td>@monCnt.VisitorCnt</td>
+                                    </tr>
+                                }
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div><!-- /.widget-main -->
+    </div><!-- /.widget-body -->
+</div>

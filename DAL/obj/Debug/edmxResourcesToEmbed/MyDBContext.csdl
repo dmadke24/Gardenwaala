@@ -1,0 +1,753 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="GardenDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="GardenDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="C__MigrationHistory" EntityType="GardenDBModel.C__MigrationHistory" />
+    <EntitySet Name="Areas" EntityType="GardenDBModel.Area" />
+    <EntitySet Name="Banners" EntityType="GardenDBModel.Banner" />
+    <EntitySet Name="Careers" EntityType="GardenDBModel.Career" />
+    <EntitySet Name="Categories" EntityType="GardenDBModel.Category" />
+    <EntitySet Name="Cities" EntityType="GardenDBModel.City" />
+    <EntitySet Name="Countries" EntityType="GardenDBModel.Country" />
+    <EntitySet Name="DiscountCoupons" EntityType="GardenDBModel.DiscountCoupon" />
+    <EntitySet Name="Enquiries" EntityType="GardenDBModel.Enquiry" />
+    <EntitySet Name="Epamphlets" EntityType="GardenDBModel.Epamphlet" />
+    <EntitySet Name="FAQs" EntityType="GardenDBModel.FAQ" />
+    <EntitySet Name="InvoiceDetails" EntityType="GardenDBModel.InvoiceDetail" />
+    <EntitySet Name="Invoices" EntityType="GardenDBModel.Invoice" />
+    <EntitySet Name="Jobs" EntityType="GardenDBModel.Job" />
+    <EntitySet Name="OrderDetails" EntityType="GardenDBModel.OrderDetail" />
+    <EntitySet Name="Orders" EntityType="GardenDBModel.Order" />
+    <EntitySet Name="OTPs" EntityType="GardenDBModel.OTP" />
+    <EntitySet Name="Products" EntityType="GardenDBModel.Product" />
+    <EntitySet Name="RecentUpdates" EntityType="GardenDBModel.RecentUpdate" />
+    <EntitySet Name="Roles" EntityType="GardenDBModel.Role" />
+    <EntitySet Name="States" EntityType="GardenDBModel.State" />
+    <EntitySet Name="SubCategories" EntityType="GardenDBModel.SubCategory" />
+    <EntitySet Name="Taxes" EntityType="GardenDBModel.Tax" />
+    <EntitySet Name="TempCarts" EntityType="GardenDBModel.TempCart" />
+    <EntitySet Name="Testimonials" EntityType="GardenDBModel.Testimonial" />
+    <EntitySet Name="Users" EntityType="GardenDBModel.User" />
+    <EntitySet Name="UserTypes" EntityType="GardenDBModel.UserType" />
+    <EntitySet Name="Visitors" EntityType="GardenDBModel.Visitor" />
+    <EntitySet Name="GetBillDetails" EntityType="GardenDBModel.GetBillDetail" />
+    <EntitySet Name="GetOrderDetails" EntityType="GardenDBModel.GetOrderDetail" />
+    <EntitySet Name="GetSaleProducts" EntityType="GardenDBModel.GetSaleProduct" />
+    <EntitySet Name="GetUserDetails" EntityType="GardenDBModel.GetUserDetail" />
+    <AssociationSet Name="FK_dbo_Areas_dbo_Cities_CityId" Association="GardenDBModel.FK_dbo_Areas_dbo_Cities_CityId">
+      <End Role="City" EntitySet="Cities" />
+      <End Role="Area" EntitySet="Areas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_DiscountCoupons_FoodType" Association="GardenDBModel.FK_dbo_DiscountCoupons_FoodType">
+      <End Role="Category" EntitySet="Categories" />
+      <End Role="DiscountCoupon" EntitySet="DiscountCoupons" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FoodMenus_FoodTypes" Association="GardenDBModel.FK_FoodMenus_FoodTypes">
+      <End Role="Category" EntitySet="Categories" />
+      <End Role="Product" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FoodSubTypes_FoodTypes" Association="GardenDBModel.FK_FoodSubTypes_FoodTypes">
+      <End Role="Category" EntitySet="Categories" />
+      <End Role="SubCategory" EntitySet="SubCategories" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Cities_dbo_States_StateId" Association="GardenDBModel.FK_dbo_Cities_dbo_States_StateId">
+      <End Role="State" EntitySet="States" />
+      <End Role="City" EntitySet="Cities" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_States_dbo_Countries_CountryId" Association="GardenDBModel.FK_dbo_States_dbo_Countries_CountryId">
+      <End Role="Country" EntitySet="Countries" />
+      <End Role="State" EntitySet="States" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Invoices_dbo_DiscountCoupons_CouponId" Association="GardenDBModel.FK_dbo_Invoices_dbo_DiscountCoupons_CouponId">
+      <End Role="DiscountCoupon" EntitySet="DiscountCoupons" />
+      <End Role="Invoice" EntitySet="Invoices" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Orders_dbo_DiscountCoupons_CouponId" Association="GardenDBModel.FK_dbo_Orders_dbo_DiscountCoupons_CouponId">
+      <End Role="DiscountCoupon" EntitySet="DiscountCoupons" />
+      <End Role="Order" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_InvoiceDetails_dbo_Invoices_InvoiceId" Association="GardenDBModel.FK_dbo_InvoiceDetails_dbo_Invoices_InvoiceId">
+      <End Role="Invoice" EntitySet="Invoices" />
+      <End Role="InvoiceDetail" EntitySet="InvoiceDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderDetails_FoodMenu" Association="GardenDBModel.FK_OrderDetails_FoodMenu">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="OrderDetail" EntitySet="OrderDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderDetails_Orders" Association="GardenDBModel.FK_OrderDetails_Orders">
+      <End Role="Order" EntitySet="Orders" />
+      <End Role="OrderDetail" EntitySet="OrderDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Orders_dbo_Users_User_UserId" Association="GardenDBModel.FK_dbo_Orders_dbo_Users_User_UserId">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Order" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FoodMenus_FoodSubTypes" Association="GardenDBModel.FK_FoodMenus_FoodSubTypes">
+      <End Role="SubCategory" EntitySet="SubCategories" />
+      <End Role="Product" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_RecentUpdates_dbo_Users_User_UserId" Association="GardenDBModel.FK_dbo_RecentUpdates_dbo_Users_User_UserId">
+      <End Role="User" EntitySet="Users" />
+      <End Role="RecentUpdate" EntitySet="RecentUpdates" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Users_Role" Association="GardenDBModel.FK_Users_Role">
+      <End Role="Role" EntitySet="Roles" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TempCart_User" Association="GardenDBModel.FK_TempCart_User">
+      <End Role="User" EntitySet="Users" />
+      <End Role="TempCart" EntitySet="TempCarts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Users_Usertype" Association="GardenDBModel.FK_Users_Usertype">
+      <End Role="UserType" EntitySet="UserTypes" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="C__MigrationHistory">
+    <Key>
+      <PropertyRef Name="MigrationId" />
+      <PropertyRef Name="ContextKey" />
+    </Key>
+    <Property Name="MigrationId" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="ContextKey" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="Model" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+    <Property Name="ProductVersion" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Area">
+    <Key>
+      <PropertyRef Name="AreaId" />
+    </Key>
+    <Property Name="AreaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="CityId" Type="Int32" Nullable="false" />
+    <Property Name="Status" Type="Boolean" Nullable="false" />
+    <Property Name="Pincode" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="City" Relationship="GardenDBModel.FK_dbo_Areas_dbo_Cities_CityId" FromRole="Area" ToRole="City" />
+  </EntityType>
+  <EntityType Name="Banner">
+    <Key>
+      <PropertyRef Name="BannerId" />
+    </Key>
+    <Property Name="BannerId" Type="Int32" Nullable="false" />
+    <Property Name="Image" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Career">
+    <Key>
+      <PropertyRef Name="JobTitleId" />
+    </Key>
+    <Property Name="JobTitleId" Type="Int32" Nullable="false" />
+    <Property Name="Position" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Experience" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Requirements" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Location" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDt" Type="DateTime" Nullable="false" Precision="7" />
+    <Property Name="Status" Type="Boolean" Nullable="false" />
+    <Property Name="Qualification" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Department" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Package" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="KeySkills" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Openings" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="CategoryId" />
+    </Key>
+    <Property Name="CategoryId" Type="Int32" Nullable="false" />
+    <Property Name="CategoryName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Image" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Status" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="DiscountCoupons" Relationship="GardenDBModel.FK_dbo_DiscountCoupons_FoodType" FromRole="Category" ToRole="DiscountCoupon" />
+    <NavigationProperty Name="Products" Relationship="GardenDBModel.FK_FoodMenus_FoodTypes" FromRole="Category" ToRole="Product" />
+    <NavigationProperty Name="SubCategories" Relationship="GardenDBModel.FK_FoodSubTypes_FoodTypes" FromRole="Category" ToRole="SubCategory" />
+  </EntityType>
+  <EntityType Name="City">
+    <Key>
+      <PropertyRef Name="CityId" />
+    </Key>
+    <Property Name="CityId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StateId" Type="Int32" Nullable="false" />
+    <Property Name="CityName" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Areas" Relationship="GardenDBModel.FK_dbo_Areas_dbo_Cities_CityId" FromRole="City" ToRole="Area" />
+    <NavigationProperty Name="State" Relationship="GardenDBModel.FK_dbo_Cities_dbo_States_StateId" FromRole="City" ToRole="State" />
+  </EntityType>
+  <EntityType Name="Country">
+    <Key>
+      <PropertyRef Name="CountryId" />
+    </Key>
+    <Property Name="CountryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CName" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="States" Relationship="GardenDBModel.FK_dbo_States_dbo_Countries_CountryId" FromRole="Country" ToRole="State" />
+  </EntityType>
+  <EntityType Name="DiscountCoupon">
+    <Key>
+      <PropertyRef Name="CouponId" />
+    </Key>
+    <Property Name="CouponId" Type="Int32" Nullable="false" />
+    <Property Name="Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Title" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="ValidFrom" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ValidTo" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DiscountPercent" Type="Single" Nullable="false" />
+    <Property Name="CategoryId" Type="Int32" />
+    <Property Name="Image" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Category" Relationship="GardenDBModel.FK_dbo_DiscountCoupons_FoodType" FromRole="DiscountCoupon" ToRole="Category" />
+    <NavigationProperty Name="Invoices" Relationship="GardenDBModel.FK_dbo_Invoices_dbo_DiscountCoupons_CouponId" FromRole="DiscountCoupon" ToRole="Invoice" />
+    <NavigationProperty Name="Orders" Relationship="GardenDBModel.FK_dbo_Orders_dbo_DiscountCoupons_CouponId" FromRole="DiscountCoupon" ToRole="Order" />
+  </EntityType>
+  <EntityType Name="Enquiry">
+    <Key>
+      <PropertyRef Name="EnquiryId" />
+    </Key>
+    <Property Name="EnquiryId" Type="Int32" Nullable="false" />
+    <Property Name="EnqDt" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="true" />
+    <Property Name="EmailId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="ContactNo" Type="String" Nullable="false" MaxLength="13" FixedLength="false" Unicode="true" />
+    <Property Name="AlternatContactNo" Type="String" MaxLength="13" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsReplied" Type="Boolean" Nullable="false" />
+    <Property Name="Feedback" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Subject" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Epamphlet">
+    <Key>
+      <PropertyRef Name="EpamphletId" />
+    </Key>
+    <Property Name="EpamphletId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Subject" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Link" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="FAQ">
+    <Key>
+      <PropertyRef Name="FaqId" />
+    </Key>
+    <Property Name="FaqId" Type="Int32" Nullable="false" />
+    <Property Name="Question" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Answer" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="InvoiceDetail">
+    <Key>
+      <PropertyRef Name="InvoiceDetailId" />
+    </Key>
+    <Property Name="InvoiceDetailId" Type="Int64" Nullable="false" />
+    <Property Name="Particulars" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Price" Type="Single" Nullable="false" />
+    <Property Name="Qty" Type="Int32" Nullable="false" />
+    <Property Name="InvoiceId" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="Invoice" Relationship="GardenDBModel.FK_dbo_InvoiceDetails_dbo_Invoices_InvoiceId" FromRole="InvoiceDetail" ToRole="Invoice" />
+  </EntityType>
+  <EntityType Name="Invoice">
+    <Key>
+      <PropertyRef Name="InvoiceId" />
+    </Key>
+    <Property Name="InvoiceId" Type="Int64" Nullable="false" />
+    <Property Name="InvoiveDt" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Amount" Type="Single" Nullable="false" />
+    <Property Name="TaxAmount" Type="Single" Nullable="false" />
+    <Property Name="DiscountAmount" Type="Single" Nullable="false" />
+    <Property Name="IsPaid" Type="Boolean" Nullable="false" />
+    <Property Name="PayMode" Type="Byte" Nullable="false" />
+    <Property Name="ReceivedAmt" Type="Single" Nullable="false" />
+    <Property Name="CustomerId" Type="Int64" Nullable="false" />
+    <Property Name="CouponId" Type="Int32" />
+    <Property Name="BillNo" Type="Int64" />
+    <NavigationProperty Name="DiscountCoupon" Relationship="GardenDBModel.FK_dbo_Invoices_dbo_DiscountCoupons_CouponId" FromRole="Invoice" ToRole="DiscountCoupon" />
+    <NavigationProperty Name="InvoiceDetails" Relationship="GardenDBModel.FK_dbo_InvoiceDetails_dbo_Invoices_InvoiceId" FromRole="Invoice" ToRole="InvoiceDetail" />
+  </EntityType>
+  <EntityType Name="Job">
+    <Key>
+      <PropertyRef Name="JobId" />
+    </Key>
+    <Property Name="JobId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Experience" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="Qualification" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="Skill" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="OrderDetail">
+    <Key>
+      <PropertyRef Name="OrderDetId" />
+    </Key>
+    <Property Name="OrderDetId" Type="Int64" Nullable="false" />
+    <Property Name="Price" Type="Single" Nullable="false" />
+    <Property Name="Qty" Type="Single" Nullable="false" />
+    <Property Name="OrderId" Type="Int64" Nullable="false" />
+    <Property Name="ProductId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Product" Relationship="GardenDBModel.FK_OrderDetails_FoodMenu" FromRole="OrderDetail" ToRole="Product" />
+    <NavigationProperty Name="Order" Relationship="GardenDBModel.FK_OrderDetails_Orders" FromRole="OrderDetail" ToRole="Order" />
+  </EntityType>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="OrderId" />
+    </Key>
+    <Property Name="OrderId" Type="Int64" Nullable="false" />
+    <Property Name="OrderDt" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="ShipName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="ShipAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ShipCity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ShipArea" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="ShipPinCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="ShipPhone" Type="String" MaxLength="13" FixedLength="false" Unicode="true" />
+    <Property Name="BillName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="BillAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="BillCity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="BillArea" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="BillPinCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="BillPhone" Type="String" MaxLength="13" FixedLength="false" Unicode="true" />
+    <Property Name="PayMode" Type="Byte" Nullable="false" />
+    <Property Name="PayRemark" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CouponId" Type="Int32" />
+    <Property Name="DeliveryCharges" Type="Single" Nullable="false" />
+    <Property Name="DiscountAmt" Type="Single" Nullable="false" />
+    <Property Name="TotalAmt" Type="Single" Nullable="false" />
+    <Property Name="TaxAmt" Type="Single" Nullable="false" />
+    <Property Name="PaymentStatus" Type="Boolean" Nullable="false" />
+    <Property Name="User_UserId" Type="Int32" />
+    <Property Name="OrderStatus" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="PaymentId" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="PaymentDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="DiscountCoupon" Relationship="GardenDBModel.FK_dbo_Orders_dbo_DiscountCoupons_CouponId" FromRole="Order" ToRole="DiscountCoupon" />
+    <NavigationProperty Name="OrderDetails" Relationship="GardenDBModel.FK_OrderDetails_Orders" FromRole="Order" ToRole="OrderDetail" />
+    <NavigationProperty Name="User" Relationship="GardenDBModel.FK_dbo_Orders_dbo_Users_User_UserId" FromRole="Order" ToRole="User" />
+  </EntityType>
+  <EntityType Name="OTP">
+    <Key>
+      <PropertyRef Name="OTPId" />
+    </Key>
+    <Property Name="OTPId" Type="Int32" Nullable="false" />
+    <Property Name="Code" Type="Int32" Nullable="false" />
+    <Property Name="MobileNo" Type="String" Nullable="false" MaxLength="13" FixedLength="false" Unicode="true" />
+    <Property Name="SentTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="IsVerified" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="ProductId" />
+    </Key>
+    <Property Name="ProductId" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Price" Type="Single" Nullable="false" />
+    <Property Name="OfferPrice" Type="Single" />
+    <Property Name="NoOfPieces" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+    <Property Name="NetWeight" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CategoryId" Type="Int32" Nullable="false" />
+    <Property Name="SubCategoryId" Type="Int32" Nullable="false" />
+    <Property Name="Image1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Image2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Image3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Status" Type="Boolean" Nullable="false" />
+    <Property Name="Priority" Type="Byte" Nullable="false" />
+    <Property Name="HomeSlide" Type="Boolean" Nullable="false" />
+    <Property Name="BestSeller" Type="Boolean" Nullable="false" />
+    <Property Name="GrossWeight" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Height" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="Size" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="Stock" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Category" Relationship="GardenDBModel.FK_FoodMenus_FoodTypes" FromRole="Product" ToRole="Category" />
+    <NavigationProperty Name="OrderDetails" Relationship="GardenDBModel.FK_OrderDetails_FoodMenu" FromRole="Product" ToRole="OrderDetail" />
+    <NavigationProperty Name="SubCategory" Relationship="GardenDBModel.FK_FoodMenus_FoodSubTypes" FromRole="Product" ToRole="SubCategory" />
+  </EntityType>
+  <EntityType Name="RecentUpdate">
+    <Key>
+      <PropertyRef Name="UpdateId" />
+    </Key>
+    <Property Name="UpdateId" Type="Int32" Nullable="false" />
+    <Property Name="Title" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="UpdateDt" Type="DateTime" Nullable="false" Precision="7" />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Image" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Image1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Image2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Link" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="ScheduleDt" Type="DateTime" Nullable="false" Precision="7" />
+    <Property Name="Status" Type="Boolean" Nullable="false" />
+    <Property Name="User_UserId" Type="Int32" />
+    <NavigationProperty Name="User" Relationship="GardenDBModel.FK_dbo_RecentUpdates_dbo_Users_User_UserId" FromRole="RecentUpdate" ToRole="User" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="RoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Name="Status" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Users" Relationship="GardenDBModel.FK_Users_Role" FromRole="Role" ToRole="User" />
+  </EntityType>
+  <EntityType Name="State">
+    <Key>
+      <PropertyRef Name="StateId" />
+    </Key>
+    <Property Name="StateId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SName" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="CountryId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Cities" Relationship="GardenDBModel.FK_dbo_Cities_dbo_States_StateId" FromRole="State" ToRole="City" />
+    <NavigationProperty Name="Country" Relationship="GardenDBModel.FK_dbo_States_dbo_Countries_CountryId" FromRole="State" ToRole="Country" />
+  </EntityType>
+  <EntityType Name="SubCategory">
+    <Key>
+      <PropertyRef Name="SubCategoryId" />
+    </Key>
+    <Property Name="SubCategoryId" Type="Int32" Nullable="false" />
+    <Property Name="SubCategoryName" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Image" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="CategoryId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Category" Relationship="GardenDBModel.FK_FoodSubTypes_FoodTypes" FromRole="SubCategory" ToRole="Category" />
+    <NavigationProperty Name="Products" Relationship="GardenDBModel.FK_FoodMenus_FoodSubTypes" FromRole="SubCategory" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="Tax">
+    <Key>
+      <PropertyRef Name="TaxId" />
+    </Key>
+    <Property Name="TaxId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CGST" Type="Single" Nullable="false" />
+    <Property Name="SGST" Type="Single" Nullable="false" />
+    <Property Name="VAT" Type="Single" />
+    <Property Name="ServiceTax" Type="Single" />
+  </EntityType>
+  <EntityType Name="TempCart">
+    <Key>
+      <PropertyRef Name="TempId" />
+    </Key>
+    <Property Name="TempId" Type="Int32" Nullable="false" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="ProductId" Type="Int32" Nullable="false" />
+    <Property Name="Price" Type="Double" Nullable="false" />
+    <Property Name="Quantity" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="User" Relationship="GardenDBModel.FK_TempCart_User" FromRole="TempCart" ToRole="User" />
+  </EntityType>
+  <EntityType Name="Testimonial">
+    <Key>
+      <PropertyRef Name="TestimonialId" />
+    </Key>
+    <Property Name="TestimonialId" Type="Int32" Nullable="false" />
+    <Property Name="TestimonialDt" Type="DateTime" Precision="7" />
+    <Property Name="CName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Image" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Profession" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Organization" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Gender" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ContactNo" Type="String" Nullable="false" MaxLength="13" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDt" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="LastLogin" Type="DateTime" Precision="7" />
+    <Property Name="Image" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="Boolean" Nullable="false" />
+    <Property Name="UserTypeId" Type="Int32" Nullable="false" />
+    <Property Name="RoleId" Type="Int32" />
+    <NavigationProperty Name="Orders" Relationship="GardenDBModel.FK_dbo_Orders_dbo_Users_User_UserId" FromRole="User" ToRole="Order" />
+    <NavigationProperty Name="RecentUpdates" Relationship="GardenDBModel.FK_dbo_RecentUpdates_dbo_Users_User_UserId" FromRole="User" ToRole="RecentUpdate" />
+    <NavigationProperty Name="Role" Relationship="GardenDBModel.FK_Users_Role" FromRole="User" ToRole="Role" />
+    <NavigationProperty Name="TempCarts" Relationship="GardenDBModel.FK_TempCart_User" FromRole="User" ToRole="TempCart" />
+    <NavigationProperty Name="UserType" Relationship="GardenDBModel.FK_Users_Usertype" FromRole="User" ToRole="UserType" />
+  </EntityType>
+  <EntityType Name="UserType">
+    <Key>
+      <PropertyRef Name="UserTypeId" />
+    </Key>
+    <Property Name="UserTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Users" Relationship="GardenDBModel.FK_Users_Usertype" FromRole="UserType" ToRole="User" />
+  </EntityType>
+  <EntityType Name="Visitor">
+    <Key>
+      <PropertyRef Name="VisitorId" />
+    </Key>
+    <Property Name="VisitorId" Type="Int64" Nullable="false" />
+    <Property Name="IpAddress" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
+    <Property Name="VisitDt" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="GetBillDetail">
+    <Key>
+      <PropertyRef Name="Price" />
+      <PropertyRef Name="OrderId" />
+      <PropertyRef Name="ProductId" />
+      <PropertyRef Name="OrderDt" />
+      <PropertyRef Name="DeliveryCharges" />
+      <PropertyRef Name="DiscountAmt" />
+      <PropertyRef Name="TotalAmt" />
+      <PropertyRef Name="Name" />
+      <PropertyRef Name="Qty" />
+    </Key>
+    <Property Name="Price" Type="Single" Nullable="false" />
+    <Property Name="OrderId" Type="Int64" Nullable="false" />
+    <Property Name="ProductId" Type="Int32" Nullable="false" />
+    <Property Name="OrderDt" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DeliveryCharges" Type="Single" Nullable="false" />
+    <Property Name="DiscountAmt" Type="Single" Nullable="false" />
+    <Property Name="TotalAmt" Type="Single" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Qty" Type="Single" Nullable="false" />
+  </EntityType>
+  <EntityType Name="GetOrderDetail">
+    <Key>
+      <PropertyRef Name="OrderDt" />
+      <PropertyRef Name="TotalAmount" />
+      <PropertyRef Name="DeliveryCharges" />
+      <PropertyRef Name="DiscountAmt" />
+      <PropertyRef Name="FinalAmount" />
+      <PropertyRef Name="PayMode" />
+    </Key>
+    <Property Name="OrderDt" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="TotalAmount" Type="Single" Nullable="false" />
+    <Property Name="DeliveryCharges" Type="Single" Nullable="false" />
+    <Property Name="DiscountAmt" Type="Single" Nullable="false" />
+    <Property Name="FinalAmount" Type="Single" Nullable="false" />
+    <Property Name="PayMode" Type="Byte" Nullable="false" />
+    <Property Name="PayRemark" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="GetSaleProduct">
+    <Key>
+      <PropertyRef Name="Name" />
+      <PropertyRef Name="OrderDt" />
+      <PropertyRef Name="Qty" />
+    </Key>
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="OrderDt" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Qty" Type="Single" Nullable="false" />
+  </EntityType>
+  <EntityType Name="GetUserDetail">
+    <Key>
+      <PropertyRef Name="Name" />
+      <PropertyRef Name="Email" />
+      <PropertyRef Name="ContactNo" />
+      <PropertyRef Name="CreatedDt" />
+    </Key>
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Gender" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ContactNo" Type="String" Nullable="false" MaxLength="13" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDt" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <Association Name="FK_dbo_Areas_dbo_Cities_CityId">
+    <End Type="GardenDBModel.City" Role="City" Multiplicity="1" />
+    <End Type="GardenDBModel.Area" Role="Area" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="City">
+        <PropertyRef Name="CityId" />
+      </Principal>
+      <Dependent Role="Area">
+        <PropertyRef Name="CityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_DiscountCoupons_FoodType">
+    <End Type="GardenDBModel.Category" Role="Category" Multiplicity="0..1" />
+    <End Type="GardenDBModel.DiscountCoupon" Role="DiscountCoupon" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="CategoryId" />
+      </Principal>
+      <Dependent Role="DiscountCoupon">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FoodMenus_FoodTypes">
+    <End Type="GardenDBModel.Category" Role="Category" Multiplicity="1" />
+    <End Type="GardenDBModel.Product" Role="Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="CategoryId" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FoodSubTypes_FoodTypes">
+    <End Type="GardenDBModel.Category" Role="Category" Multiplicity="1" />
+    <End Type="GardenDBModel.SubCategory" Role="SubCategory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="CategoryId" />
+      </Principal>
+      <Dependent Role="SubCategory">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Cities_dbo_States_StateId">
+    <End Type="GardenDBModel.State" Role="State" Multiplicity="1" />
+    <End Type="GardenDBModel.City" Role="City" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="State">
+        <PropertyRef Name="StateId" />
+      </Principal>
+      <Dependent Role="City">
+        <PropertyRef Name="StateId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_States_dbo_Countries_CountryId">
+    <End Type="GardenDBModel.Country" Role="Country" Multiplicity="1" />
+    <End Type="GardenDBModel.State" Role="State" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="CountryId" />
+      </Principal>
+      <Dependent Role="State">
+        <PropertyRef Name="CountryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Invoices_dbo_DiscountCoupons_CouponId">
+    <End Type="GardenDBModel.DiscountCoupon" Role="DiscountCoupon" Multiplicity="0..1" />
+    <End Type="GardenDBModel.Invoice" Role="Invoice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DiscountCoupon">
+        <PropertyRef Name="CouponId" />
+      </Principal>
+      <Dependent Role="Invoice">
+        <PropertyRef Name="CouponId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Orders_dbo_DiscountCoupons_CouponId">
+    <End Type="GardenDBModel.DiscountCoupon" Role="DiscountCoupon" Multiplicity="0..1" />
+    <End Type="GardenDBModel.Order" Role="Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DiscountCoupon">
+        <PropertyRef Name="CouponId" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="CouponId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_InvoiceDetails_dbo_Invoices_InvoiceId">
+    <End Type="GardenDBModel.Invoice" Role="Invoice" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="GardenDBModel.InvoiceDetail" Role="InvoiceDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Invoice">
+        <PropertyRef Name="InvoiceId" />
+      </Principal>
+      <Dependent Role="InvoiceDetail">
+        <PropertyRef Name="InvoiceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderDetails_FoodMenu">
+    <End Type="GardenDBModel.Product" Role="Product" Multiplicity="1" />
+    <End Type="GardenDBModel.OrderDetail" Role="OrderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ProductId" />
+      </Principal>
+      <Dependent Role="OrderDetail">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderDetails_Orders">
+    <End Type="GardenDBModel.Order" Role="Order" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="GardenDBModel.OrderDetail" Role="OrderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="OrderId" />
+      </Principal>
+      <Dependent Role="OrderDetail">
+        <PropertyRef Name="OrderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Orders_dbo_Users_User_UserId">
+    <End Type="GardenDBModel.User" Role="User" Multiplicity="0..1" />
+    <End Type="GardenDBModel.Order" Role="Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="User_UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FoodMenus_FoodSubTypes">
+    <End Type="GardenDBModel.SubCategory" Role="SubCategory" Multiplicity="1" />
+    <End Type="GardenDBModel.Product" Role="Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SubCategory">
+        <PropertyRef Name="SubCategoryId" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="SubCategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_RecentUpdates_dbo_Users_User_UserId">
+    <End Type="GardenDBModel.User" Role="User" Multiplicity="0..1" />
+    <End Type="GardenDBModel.RecentUpdate" Role="RecentUpdate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="RecentUpdate">
+        <PropertyRef Name="User_UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Users_Role">
+    <End Type="GardenDBModel.Role" Role="Role" Multiplicity="0..1" />
+    <End Type="GardenDBModel.User" Role="User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="RoleId" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TempCart_User">
+    <End Type="GardenDBModel.User" Role="User" Multiplicity="1" />
+    <End Type="GardenDBModel.TempCart" Role="TempCart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="TempCart">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Users_Usertype">
+    <End Type="GardenDBModel.UserType" Role="UserType" Multiplicity="1" />
+    <End Type="GardenDBModel.User" Role="User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserType">
+        <PropertyRef Name="UserTypeId" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="UserTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

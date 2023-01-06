@@ -1,0 +1,122 @@
+﻿@using GardenViewModel
+@model ProductViewModel
+<!-- =====  BANNER STRAT  ===== -->
+<div class="breadcrumb">
+    @*<h1>@Model.Name</h1>*@
+</div>
+<!-- =====  BREADCRUMB END===== -->
+<!-- =====  CONTAINER START  ===== -->
+<div class="container">
+    <div class="row ">
+        <div class="col-sm-12">
+            <div class="row">
+                <div class="col-md-6">
+                    <div><a class="thumbnails"> <img data-name="product_image" src="~/Areas/Admin/UploadImg/ProductImg/@Model.Image1" alt="" /></a></div>
+                    <div id="product-thumbnail" class="owl-carousel">
+                        <div class="item">
+                            <div class="image-additional"><a class="thumbnail" href="~/Areas/Admin/UploadImg/ProductImg/@Model.Image1" data-fancybox="group1"> <img src="~/Areas/Admin/UploadImg/ProductImg/@Model.Image1" alt="@Model.Name" /></a></div>
+                        </div>
+                        @if (Model.Image2 != null)
+                        {
+                            <div class="item">
+                                <div class="image-additional"><a class="thumbnail" href="~/Areas/Admin/UploadImg/ProductImg/@Model.Image2" data-fancybox="group1"> <img src="~/Areas/Admin/UploadImg/ProductImg/@Model.Image2" alt="@Model.Name" /></a></div>
+                            </div>
+                        }
+                        @if (Model.Image3 != null)
+                        {
+                            <div class="item">
+                                <div class="image-additional"><a class="thumbnail" href="~/Areas/Admin/UploadImg/ProductImg/@Model.Image3" data-fancybox="group1"> <img src="~/Areas/Admin/UploadImg/ProductImg/@Model.Image3" alt="@Model.Name" /></a></div>
+                            </div>
+                        }
+                    </div>
+                </div>
+                <div class="col-md-6 prodetail caption product-thumb">
+                    <h1 data-name="product_name" class="product-name"><a href="javascript:void(0);" title="@Model.Name">@Model.Name</a></h1>
+                    <div class="rating"> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i class="fa fa-star fa-stack-1x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i class="fa fa-star fa-stack-1x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i class="fa fa-star fa-stack-1x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i class="fa fa-star fa-stack-1x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i class="fa fa-star fa-stack-x"></i></span> </div>
+                    <span class="price">
+                        <span class="price small garden-price"><i class="fa fa-rupee"></i> @Model.Price.ToString("0.00") </span><span class="amount">
+                            <span class="currencySymbol"><i class="fa fa-rupee"></i> </span> @Model.OfferPrice.Value.ToString("0.00")
+                        </span>
+                    </span>
+                    <hr>
+                    @*<ul class="list-unstyled product_info mtb_10">
+                            <li>
+                                <label>@Model.CategoryName</label>
+                                <span> <a href="#">@Model.SubCategoryName</a></span>
+                            </li>
+                        </ul>*@
+                    <p class="product-desc mtb_30"> @Html.Raw(Model.Description)</p>
+                    <div id="product">
+                        <div class="qty mt_30 form-group2">
+                            <label>Qty</label>
+                            <input name="qty" id="qty" min="1" value="1" type="number">
+                        </div>
+                        <div class="button-group mt_30" style="width:50%">
+                            <input type="button" id="btnAddToCart" name="btnAddToCart" value="Add to Cart" class="form-control btn btn-login about-heading"></input>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="heading-part text-center mb_20 ">
+                        <h2 class="main_title">Related Products</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                @Html.Action("RelatedProducts")
+            </div>
+        </div>
+    </div>
+    @*<div id="brand_carouse" class="ptb_30 text-center">
+            <div class="type-01">
+                <div class="heading-part text-center mb_20 ">
+                    <h2 class="main_title">Favourite Brands</h2>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="brand owl-carousel ptb_20">
+                            <div class="item text-center"> <a href="#"><img src="images/brand/brand1.png" alt="Disney" class="img-responsive" /></a> </div>
+                            <div class="item text-center"> <a href="#"><img src="images/brand/brand2.png" alt="Dell" class="img-responsive" /></a> </div>
+                            <div class="item text-center"> <a href="#"><img src="images/brand/brand3.png" alt="Harley" class="img-responsive" /></a> </div>
+                            <div class="item text-center"> <a href="#"><img src="images/brand/brand4.png" alt="Canon" class="img-responsive" /></a> </div>
+                            <div class="item text-center"> <a href="#"><img src="images/brand/brand5.png" alt="Canon" class="img-responsive" /></a> </div>
+                            <div class="item text-center"> <a href="#"><img src="images/brand/brand6.png" alt="Canon" class="img-responsive" /></a> </div>
+                            <div class="item text-center"> <a href="#"><img src="images/brand/brand7.png" alt="Canon" class="img-responsive" /></a> </div>
+                            <div class="item text-center"> <a href="#"><img src="images/brand/brand8.png" alt="Canon" class="img-responsive" /></a> </div>
+                            <div class="item text-center"> <a href="#"><img src="images/brand/brand9.png" alt="Canon" class="img-responsive" /></a> </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>*@
+</div>
+<!-- =====  CONTAINER END  ===== -->
+@section ContentViewScript
+{
+    <script>
+       $(document).ready(function () {
+           $('#btnAddToCart').click(function () {
+               $.ajax({
+                   url: '@Url.Action("AddToTempCart")',
+                   data: { prodid:@Model.ProductId, qty: $('#qty').val(), price:@Model.OfferPrice},
+                   type: 'POST',
+                   //dataType: 'json',
+                   success: function (result, status, xhr) {
+                       alert(result);
+                       $('#cartItems').html(result);
+                       /*if (result.Status == true) {
+                           for (i = 0; i < result.Data.length; i++) {
+
+                           }
+                       }
+                       else if (result.Status == false) {
+                           alert(result.Msg);
+                       }*/
+                   }
+               });
+           });
+       });
+    </script>
+}

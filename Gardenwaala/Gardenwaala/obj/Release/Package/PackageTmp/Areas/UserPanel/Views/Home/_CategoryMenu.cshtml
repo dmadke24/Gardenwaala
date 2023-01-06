@@ -1,0 +1,19 @@
+﻿@using GardenViewModel
+@model IEnumerable<CategoryViewModel>
+
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            @foreach (CategoryViewModel cat in Model)
+            {
+                <div class="col-2">
+                    <div class="offers-block">
+                        <a href="@Url.Action("ProductListCategory", "Shop", new { pid = @cat.CategoryId })">
+                            <img class="img-fluid" src="~/Areas/Admin/UploadImg/CategoryImg/@cat.Image" alt="@cat.CategoryName">
+                        </a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>

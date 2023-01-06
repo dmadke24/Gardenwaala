@@ -1,0 +1,17 @@
+﻿@using GardenViewModel
+@model OnlyEmailViewModel
+@{
+    AjaxOptions opt = new AjaxOptions()
+    {
+        HttpMethod = "Post",
+        Url = Url.Action("NewsSubscribe", "Home"),
+        OnSuccess = "ShowNewsMsg"
+    };
+}
+@using (Ajax.BeginForm(opt))
+{
+    <div class="form-group">
+        @Html.TextBoxFor(e => e.Email, new { @class = "mb_20", placeholder = "Enter your email address",@autocomplete="off" })
+        <button type="submit" class="btn">Subscribe</button>
+    </div>
+}

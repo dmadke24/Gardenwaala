@@ -1,0 +1,206 @@
+﻿@{
+    ViewBag.Heading = "Products";
+    ViewBag.CurrentMenu = "pdt";
+
+    string delTitle = "";
+    string delMsg = "";
+    string delClass = "";
+    if (TempData["delStatus"] != null)
+    {
+        if (Convert.ToBoolean(TempData["delStatus"]) == true)
+        {
+            delTitle = "Success";
+            delMsg = "Record Deleted Successfully";
+            delClass = "success";
+        }
+        else
+        {
+            delTitle = "Error";
+            delMsg = "Can't Delete Record";
+            delClass = "danger";
+        }
+    }
+}
+
+<div class="page-header">
+    <h1>
+        Products
+    </h1>
+</div><!-- /.page-header -->
+@if (TempData["delStatus"] != null)
+{
+    <div class="alert alert-@delClass" id="divDel">
+        <strong>
+            <i class="ace-icon fa fa-times"></i>
+            @delTitle!
+        </strong>
+        @delMsg
+    </div>
+}
+<div class="row">
+    <div class="col-xs-12">
+        <!-- PAGE CONTENT BEGINS -->
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="table-header">
+                    <div class="row">
+                        <div class="col-xs-8">
+                            @using (Html.BeginForm("Go", "Product", FormMethod.Post, new { id = "frmStatus", name = "frmStatus" }))
+                            {
+                                <span id="head">Result For "Products"</span>
+                                <input type="hidden" name="skip" id="skip" />
+                                <input type="hidden" name="sortColumn" id="sortColumn" />
+                                <input type="hidden" name="sortDir" id="sortDir" />
+                                <input type="hidden" name="pgSize" id="pgSize" />
+                                <input type="hidden" name="chkIds" id="chkIds" />
+                                <div id="divStatus" class="row">
+                                    <div class="col-sm-3">
+                                        <select name="Status" id="Status" class="mymargin form-control input-sm">
+                                            <option value="">Change Status</option>
+                                            <option value="true">Active</option>
+                                            <option value="false">Inactive</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-1">
+                                        <input type="submit" value="Go" id="btnGo" class="btn btn-info btn-sm" />
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label for="Status" generated="true" class="field-validation-error"></label>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                        <div class="col-xs-4">
+                            <div class="pull-right">
+                                <a class="btn icon-btn btn-danger" href="@Url.Action("Create")"><span class="glyphicon btn-glyphicon glyphicon-plus img-circle text-danger"></span>New Product</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- div.table-responsive -->
+                <!-- div.dataTables_borderWrap -->
+                <div>
+                    <table id="tbl" class="table table-striped table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th><input type="checkbox" id="SelectAll" /></th>
+                                <th>Name</th>
+                                <th>Category</th>
+                                <th>Price</th>
+                                <th>Home Slider</th>
+                                <th>Best Seller</th>
+                                <th>Image</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div><!-- /.col -->
+</div><!-- /.row -->
+<!-- <![endif]-->
+<!--[if IE]>
+<![endif]-->
+<!-- inline scripts related to this page -->
+@section LoadDataTable{
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Areas/Admin/assets/js/UserAdmin.js"></script>
+    <script>
+        $(document).ready(function () {
+            var oTable=$('#tbl').DataTable({
+                "pageLength":@(TempData.Peek("PageSize")!=null?TempData.Peek("PageSize"):20),
+                "lengthMenu": [5, 10, 15, 20],
+                "processing": true,
+                "serverSide": true,
+                "filter": true,
+                "orderMulti": false,
+                rowReorder: {
+                    selector: 'td:nth-child(1)'
+                },
+                "responsive": true,
+                "ajax": {
+                    "url": "@Url.Action("LoadData")",
+                    "type": "post",
+                    "dataType": "json"
+                },
+                "columnDefs": [
+                    {
+                        "width": "1%", "targets": 0, 'searchable': false, 'orderable': false, 'className': 'flat',
+                        'render': function (data, type, full, meta) {
+                            return '<input type="checkbox" name="Ids" id="Ids" value="' + data + '"/>';
+                        },
+                    },
+                    { "width": "25%", "targets": 1 ,'orderable': false,
+                        'render':function(data, type, full, meta){
+                            return data + ' (' + full['Priority'] + ')';
+                        }
+                    },
+                    { "width": "12%", "targets": 2 ,'orderable': false},
+                    { "width": "12%", "targets": 3 ,'orderable': true},
+                      { "width": "8%", "targets": 4 ,'orderable': false},
+                    { "width": "8%", "targets": 5 ,'orderable': true},
+
+                    { "width": "15%", "targets": 6 ,'orderable': false,
+                        'render':function(data,type,full,meta){
+                            if(data)
+                                return '<img width="40%" src="/Areas/Admin/UploadImg/ProductImg/'+ data +'" />';
+                            else
+                                return 'N/A';
+                        }
+                    },
+                    { "width": "15%", "targets": 7, 'orderable': true },
+                    { "width": "15%", "targets": 8 , 'orderable': true }
+                ],
+                "columns": [
+                    { "data": "ProductId", "name": "ProductId" },
+                    { "data": "Name", "name": "Name" },
+                    { "data": "CategoryName", "name": "CategoryName" },
+                    { "data": "Price", "name": "Price" },
+                     { "data": "HomeSlide", "name": "HomeSlide" ,
+                         'render': function (data) {
+                             if (data == true)
+                                 return '<span class="label label-sm label-success">Yes</span>';
+                             else
+                                 return '<span class="label label-sm label-warning">No</span>';
+                         }
+                     },
+                    { "data": "BestSeller", "name": "BestSeller",
+                        'render': function (data) {
+                            if (data == true)
+                                return '<span class="label label-sm label-success">Yes</span>';
+                            else
+                                return '<span class="label label-sm label-warning">No</span>';
+                        }
+                    },
+                    { "data": "Image1", "name": "Image1" },
+                    {
+                        "data": "Status", "name": "Status", 'orderable': false,
+                        'render': function (data) {
+                            if (data == true)
+                                return '<span class="label label-sm label-success">Active</span>';
+                            else
+                                return '<span class="label label-sm label-warning">Inactive</span>';
+                        }
+                    },
+                    {
+                        "data": "ProductId", 'orderable': false, "render": function (data) {
+                            return '<a title="Edit" href="@Url.Action("Edit")/' + data + '" class="green"><i class="ace-icon fa fa-pencil bigger-130"></i></a>   <a title="Delete" href="@Url.Action("Delete")/' + data + '" class="red" onclick="return confirm(\'Are you Sure to Delete?\')"><i class="ace-icon fa fa-trash-o bigger-130"></i></a>'
+                        }
+                    }
+                ],
+                //"order": [[1, 'asc']],
+                initComplete: function () {
+                    $('#tbl_filter input').unbind();
+                    $('#tbl_filter input').bind('keyup', function (e) {
+                        if (e.keyCode == 13 || !this.value) {
+                            oTable.search(this.value).draw();
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+}

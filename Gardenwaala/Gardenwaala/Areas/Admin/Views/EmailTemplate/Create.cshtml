@@ -1,0 +1,127 @@
+﻿@model EmailTemplateViewModel
+
+@{
+    ViewBag.Heading = "Email Template";
+    string action;
+    ViewBag.CurrentMenu = "emailt";
+
+    if (Model == null)
+    {
+        ViewBag.Title = "Create";
+        action = "Create";
+        ViewBag.Breadcrumbs = "New Email Template";
+    }
+    else
+    {
+        ViewBag.Title = "Edit";
+        action = "Edit";
+        ViewBag.Breadcrumbs = "Edit Email Template";
+    }
+
+}
+<div class="page-header">
+    <h1>
+        @action
+        <small>
+            <i class="ace-icon fa fa-angle-double-right"></i>
+            Email Template
+        </small>
+    </h1>
+</div><!-- /.page-header -->
+@*<div class="ace-settings-container" id="ace-settings-container">
+        <div class="btn btn-app btn-xs btn-warning ace-settings-btn" id="ace-settings-btn">
+            <i class="ace-icon fa fa-question-circle bigger-130"></i>
+        </div>
+
+        <div class="ace-settings-box clearfix" id="ace-settings-box">
+            <h3>Help</h3>
+            <p>This section contains the detail about your Branches.</p>
+            <ul class="help_list">
+                <li>Specify branch name, address and contact number. </li>
+                <li>Specify longitude and latitude which can help you to point your branch office on the Google map.</li>
+            </ul>
+
+        </div><!-- help-box -->
+    </div>*@
+@Html.ValidationSummary(true, "Error", new { @class = "alert alert-danger" })
+<div class="row">
+    <div class="col-xs-12">
+        @Html.Partial("_TopTemplateMenu")
+        <!-- PAGE CONTENT BEGINS -->
+        @using (Html.BeginForm(action, "EmailTemplate", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+
+            if (action == "Edit")
+            {
+                @Html.HiddenFor(m => m.EmailTemplateId)
+            }
+            else
+            {
+                @Html.Hidden("EmailTemplateId", 0)
+            }
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Subject, new { @class = "col-sm-3 control-label no-padding-right" })
+
+                <div class="col-sm-5">
+                    @Html.TextBoxFor(m => m.Subject, new { @class = "col-xs-10 col-sm-5 width-100" })
+                </div>
+                <div class="col-sm-4">
+
+                    @Html.ValidationMessageFor(m => m.Subject, "", new { @class = "col-xs-12 col-sm-6" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Description, new { @class = "col-sm-3 control-label no-padding-right" })
+
+                <div class="col-sm-5">
+                    @Html.TextAreaFor(m => m.Description, new { @class = "col-xs-10 col-sm-5 width-100", rows = "5" })
+                </div>
+                <div class="col-sm-4">
+                    @Html.ValidationMessageFor(m => m.Description, "", new { @class = "col-xs-12 col-sm-6" })
+                </div>
+            </div>
+            <div class="space-4"></div>
+            <div class="clearfix form-actions">
+                <div class="col-md-offset-3 col-md-9">
+                    <button class="btn btn-info" type="submit">
+                        <i class="ace-icon fa fa-check bigger-110"></i>
+                        Submit
+                    </button>
+                    &nbsp; &nbsp; &nbsp;
+                    <button class="btn" type="reset">
+                        <i class="ace-icon fa fa-undo bigger-110"></i>
+                        Reset
+                    </button>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+@section Validation{
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script type="text/javascript">
+        jQuery(function ($) {
+            $('#sidebar2').insertBefore('.page-content');
+
+            $('.navbar-toggle[data-target="#sidebar2"]').insertAfter('#menu-toggler');
+
+
+            $(document).on('settings.ace.two_menu', function (e, event_name, event_val) {
+                if (event_name == 'sidebar_fixed') {
+                    if ($('#sidebar').hasClass('sidebar-fixed')) {
+                        $('#sidebar2').addClass('sidebar-fixed');
+                        $('#navbar').addClass('h-navbar');
+                    }
+                    else {
+                        $('#sidebar2').removeClass('sidebar-fixed')
+                        $('#navbar').removeClass('h-navbar');
+                    }
+                }
+            }).triggerHandler('settings.ace.two_menu', ['sidebar_fixed', $('#sidebar').hasClass('sidebar-fixed')]);
+        })
+    </script>
+}

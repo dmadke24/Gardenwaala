@@ -1,0 +1,87 @@
+﻿@model CommunicationViewModel
+@using (Html.BeginForm("Add", "Communication"))
+{
+    <div class="profile-user-info">
+        <div class="profile-info-row">
+            <div class="profile-info-name"> Email Hostname </div>
+            <div class="profile-info-value">
+                @if (Model == null)
+                {
+                    @Html.TextBoxFor(m => m.EmailHost, new { placeholder = "Email Hostname", @class = "col-xs-12 col-sm-4" })
+                }
+                else
+                {
+                    @Html.TextBoxFor(m => m.EmailHost, new { @readonly = "readonly", @class = "col-xs-12 col-sm-4" })
+                }
+                @Html.ValidationMessageFor(m => m.EmailHost, "", new { @class = "my-error col-xs-12 col-sm-6" })
+            </div>
+        </div>
+        <div class="profile-info-row">
+            <div class="profile-info-name"> Official Email ID </div>
+            <div class="profile-info-value">
+                @if (Model == null)
+                {
+                    @Html.TextBoxFor(m => m.EmailId, new { placeholder = "Official Email ID", @class = "col-xs-12 col-sm-4" })
+                }
+                else
+                {
+                    @Html.TextBoxFor(m => m.EmailId, new { @readonly = "readonly", @class = "col-xs-12 col-sm-4" })
+
+                }
+                @Html.ValidationMessageFor(m => m.EmailId, "", new { @class = "my-error col-xs-12 col-sm-6" })
+            </div>
+        </div>
+        <div class="profile-info-row">
+            <div class="profile-info-name"> Email Password </div>
+            <div class="profile-info-value">
+                @Html.TextBoxFor(m => m.EmailPass, new { placeholder = "Email Password", @class = "col-xs-12 col-sm-4" })
+                @Html.ValidationMessageFor(m => m.EmailPass, "", new { @class = "my-error col-xs-12 col-sm-6" })
+            </div>
+        </div>
+        <div class="profile-info-row">
+            <div class="profile-info-name"> SMS Sender ID </div>
+            <div class="profile-info-value">
+                @if (Model == null)
+                {
+                    @Html.TextBoxFor(m => m.SMSId, new { placeholder = "SMS Sender ID", @class = "col-xs-12 col-sm-4" })
+                }
+                else
+                {
+                    @Html.TextBoxFor(m => m.SMSId, new { @readonly = "readonly", @class = "col-xs-12 col-sm-4" })
+                }
+                @Html.ValidationMessageFor(m => m.SMSId, "", new { @class = "my-error col-xs-12 col-sm-6" })
+            </div>
+        </div>
+        <div class="profile-info-row">
+            <div class="profile-info-name"> Thank you message </div>
+            <div class="profile-info-value">
+                @Html.TextAreaFor(m => m.ThankMsg, new { placeholder = "Thank you message...", @class = "col-xs-12 col-sm-4" })
+                @Html.ValidationMessageFor(m => m.ThankMsg, "", new { @class = "my-error col-xs-12 col-sm-6" })
+            </div>
+        </div>
+
+        <div class="profile-info-row">
+            <div class="profile-info-name"> Birth Day message </div>
+            <div class="profile-info-value">
+                @Html.TextAreaFor(m => m.BdayMsg, new { placeholder = "Birth Day message...", @class = "col-xs-12 col-sm-4" })
+                @Html.ValidationMessageFor(m => m.BdayMsg, "", new { @class = "my-error col-xs-12 col-sm-6" })
+            </div>
+        </div>
+    </div>
+    <div class="hr hr10 hr-double"></div>
+
+    <div class="clearfix form-actions">
+        <div class="col-md-offset-3 col-md-9">
+            <button class="btn btn-info" type="submit">
+                <i class="ace-icon fa fa-check bigger-110"></i>
+                Submit
+            </button>
+
+            &nbsp; &nbsp;
+            <button class="btn" type="reset">
+                <i class="ace-icon fa fa-undo bigger-110"></i>
+                Reset
+            </button>
+        </div>
+    </div>
+}

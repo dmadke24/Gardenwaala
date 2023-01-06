@@ -1,0 +1,9 @@
+﻿@if (Model != null && Model != 0)
+{
+    <li class="nav-item cart-nav" id="cartItemsCnt" style="display:block">
+        <a data-toggle="offcanvas" class="nav-link" href="javascript:void(0);">
+            <i class="icofont-basket"></i> Cart
+            <span class="badge badge-danger">@Model</span>
+        </a>
+    </li>
+}

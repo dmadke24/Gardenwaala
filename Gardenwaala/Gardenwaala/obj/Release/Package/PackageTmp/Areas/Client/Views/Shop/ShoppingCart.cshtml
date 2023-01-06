@@ -1,0 +1,149 @@
+﻿@model IEnumerable<GardenViewModel.TempCartViewModel>
+@if (Model != null || Model.Count() > 0)
+{
+    double total = 0;
+    <div class="breadcrumb">
+        <h1>Shopping Cart</h1>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 mb_xs-30">
+                <div class="cart-item-table commun-table">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Product</th>
+                                    <th>Product Name</th>
+                                    <th>Price</th>
+                                    <th>Quantity</th>
+                                    <th>Sub Total</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var cartItem in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            <a href="@Url.Action("ProductDetail", new { pid = cartItem.ProductId })">
+                                                <div class="product-image"><img alt="Streetwear" src="~/Areas/Admin/UploadImg/ProductImg/@cartItem.Image"></div>
+                                            </a>
+                                        </td>
+                                        <td><div class="product-title"> <a href="javascript:void(0);">@cartItem.ProdName</a> </div></td>
+                                        <td>
+                                            <ul>
+                                                <li>
+                                                    <div class="base-price price-box"> <span class="price">₹@cartItem.Price.ToString("0.00")</span> </div>
+                                                </li>
+                                            </ul>
+                                        </td>
+                                        <td>
+                                            <div class="input-box">
+                                                <input type="number" value="@cartItem.Quantity" class="quantity_cart">
+                                            </div>
+                                        </td>
+                                        <td><div class="total-price price-box"> <span class="price">₹@(cartItem.Price * cartItem.Quantity).00</span> </div></td>
+                                        <td>
+                                            <a href="@Url.Action("DeleteCartItem", new { TempId = cartItem.TempId })" title="Remove item"><i title="Remove Item From Cart" data-id="100" class="fa fa-trash cart-remove-item"></i></a>
+                                        </td>
+                                    </tr>
+                                    total += (cartItem.Price * cartItem.Quantity);
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mb_30">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="mt_30"> <a href="@Url.Action("Index", "Home")" class="btn btn-black">Continue Shopping</a> </div>
+                </div>
+                @*<div class="col-sm-6">
+                    <div class="mt_30 pull-right"> <a class="btn btn-black">Update Cart</a> </div>
+                </div>*@
+            </div>
+        </div>
+        <hr>
+
+        <hr>
+        <div class="mtb_30">
+            <div class="row">
+                <div class="col-sm-6">
+                    @*<div class="estimate">
+                            <div class="heading-part mb_20">
+                                <h3 class="sub_title">Estimate shipping and tax</h3>
+                            </div>
+                            <form class="full">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="input-box mb_20">
+                                            <select id="country_id">
+                                                <option selected="" value="">Select Country</option>
+                                                <option value="1">India</option>
+                                                <option value="2">China</option>
+                                                <option value="3">Pakistan</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="input-box mb_20">
+                                            <select id="state_id">
+                                                <option selected="" value="1">Select State/Province</option>
+                                                <option value="2">---</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="input-box mb_20">
+                                            <select id="city_id">
+                                                <option selected="" value="1">Select City</option>
+                                                <option value="2">---</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>*@
+                </div>
+                <div class="col-sm-6">
+                    <div class="cart-total-table commun-table">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th colspan="2">Cart Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Item(s) Subtotal</td>
+                                        <td><div class="price-box"> <span class="price">₹@total.ToString("0.00")</span> </div></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Shipping</td>
+                                        <td><div class="price-box"> <span class="price">₹0.00</span> </div></td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Amount Payable</b></td>
+                                        <td><div class="price-box"> <span class="price"><b>₹@total.ToString("0.00")</b></span> </div></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="mt_30">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="pull-right"> <a href="@Url.Action("Billing")" class="btn btn-black">Proceed to checkout </a> </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

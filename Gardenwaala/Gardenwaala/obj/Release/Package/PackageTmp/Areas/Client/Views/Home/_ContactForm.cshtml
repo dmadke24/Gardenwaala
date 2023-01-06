@@ -1,0 +1,34 @@
+﻿@using GardenViewModel
+@model EnquiryViewModel
+@{
+    <!-- For Ajax Call -->
+    AjaxOptions opt = new AjaxOptions();
+    opt.HttpMethod = "Post";
+    opt.Url = Url.Action("Contact", "Home");
+    opt.OnSuccess = "ShowMsg";
+    opt.LoadingElementId = "ajaxLoader";
+
+}
+<div id="contact_form">
+    @*<form id="contact_body" method="post" action="http://html.lionode.com/batota/b001/contact_me.php">*@
+    @using (Ajax.BeginForm(opt))
+    {
+        <label class="full-with-form"><span>Name</span></label>
+        @Html.TextBoxFor(m => m.Name, new { @class = "full-with-form", placeholder = "Full Name*" })
+        @Html.ValidationMessageFor(m => m.Name)
+        <label class="full-with-form"><span>Email Address</span></label>
+        @Html.TextBoxFor(m => m.EmailId, new { @class = "full-with-form", placeholder = "Email Id*" })
+        @Html.ValidationMessageFor(m => m.EmailId)
+        <label class="full-with-form"><span>Phone Number</span></label>
+        @Html.TextBoxFor(m => m.ContactNo, new { @class = "full-with-form", placeholder = "Contact No*" })
+        @Html.ValidationMessageFor(m => m.ContactNo)
+        <label class="full-with-form"><span>Subject</span></label>
+        @Html.TextBoxFor(m => m.Subject, new { @class = "full-with-form", placeholder = "Subject*" })
+        @Html.ValidationMessageFor(m => m.Subject)
+        <label class="full-with-form"><span>Message</span></label>
+        @Html.TextAreaFor(m => m.Description, new { @class = "full-with-form  mt_30", placeholder = "Message*" })
+        @Html.ValidationMessageFor(m => m.Description)
+        <button class="btn mt_30" type="submit">Send Message</button>
+    }
+    <div id="contact_results"></div>
+</div>

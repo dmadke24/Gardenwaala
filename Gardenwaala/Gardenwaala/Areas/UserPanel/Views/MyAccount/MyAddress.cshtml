@@ -1,0 +1,121 @@
+﻿@using GardenViewModel
+@model UserViewModel
+<section class="py-5 account-page bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="osahan-account-page-left overflow-hidden shadow-sm rounded bg-white h-100">
+                    <div class="p-4">
+                        <div class="osahan-user text-center">
+                            <div class="osahan-user-media">
+                                <img class="mb-3 rounded-pill shadow-sm mt-1" src="img/user/1.jpg" alt="gurdeep singh osahan">
+                                <div class="osahan-user-media-body">
+                                    <h6 class="mb-2 font-weight-bold">@Model.Name</h6>
+                                    <p class="mb-1">+91 @Model.ContactNo</p>
+                                    <p>@Model.Email</p>
+                                    <p class="mb-0 font-weight-bold"><a class="btn btn-outline-info btn-sm" data-toggle="modal" data-target="#edit-profile-modal" href="#"><i class="icofont-ui-edit"></i> EDIT</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="nav nav-tabs flex-column border-0" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link " href="@Url.Action("MyProfile","MyAccount")" role="tab" aria-controls="my-profile" aria-selected="true"><i class="icofont-ui-user"></i> My Profile</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="@Url.Action("MyAddress","MyAccount")" role="tab" aria-controls="my-address" aria-selected="false"><i class="icofont-location-pin"></i> My Address</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("WishList","MyAccount")" role="tab" aria-controls="wish-list" aria-selected="false"><i class="icofont-heart"></i> Wish List</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("MyOrders","MyAccount")" role="tab" aria-controls="order-list" aria-selected="false"><i class="icofont-list"></i> Order List</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("ChangePassword","MyAccount")" role="tab" aria-controls="order-status" aria-selected="false"><i class="icofont-file-document"></i> Change Password</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html"><i class="icofont-logout"></i> Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="osahan-account-page-right rounded shadow-sm bg-white p-4 h-100">
+                    <div class="tab-content" id="myTabContent">
+                        <div  id="my-address" role="tabpanel" aria-labelledby="my-address-tab">
+                            <h4 class="text-dark mt-0 mb-4">My Address</h4>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="bg-white card addresses-item mb-3 shadow-sm">
+                                        <div class="gold-members p-4">
+                                            <div class="media">
+                                                <div class="mr-4"><i class="icofont-ui-home icofont-3x"></i></div>
+                                                <div class="media-body">
+                                                    <span class="badge badge-danger">Default - Home</span>
+                                                    <h6 class="mb-3 mt-1 text-dark">@Model.Name</h6>
+                                                    <p>
+                                                        @Model.Address
+                                                    </p>
+                                                    <p class="text-secondary">Phone: <span class="text-dark">@Model.ContactNo</span></p>
+                                                    <hr>
+                                                    <p class="mb-0 text-black"><a class="text-success mr-3" data-toggle="modal" data-target="#add-address-modal" href="#"><i class="icofont-ui-edit"></i> EDIT</a> <a class="text-danger" data-toggle="modal" data-target="#delete-address-modal" href="#"><i class="icofont-ui-delete"></i> DELETE</a></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="bg-white card addresses-item mb-3 shadow-sm">
+                                        <div class="gold-members p-4">
+                                            <div class="media">
+                                                <div class="mr-4"><i class="icofont-briefcase icofont-3x"></i></div>
+                                                <div class="media-body">
+                                                    <span class="badge badge-secondary">Address 2</span>
+                                                    <h6 class="mb-3 mt-1 text-dark">Askbootstrap</h6>
+                                                    <p>
+                                                        MT, Model Town Rd, Pritm Nagar, Model Town, Ludhiana, Punjab 141002, India
+                                                    </p>
+                                                    <p class="text-secondary">Phone: <span class="text-dark">8872306061</span></p>
+                                                    <hr>
+                                                    <p class="mb-0 text-black"><a class="text-success mr-3" data-toggle="modal" data-target="#add-address-modal" href="#"><i class="icofont-ui-edit"></i> EDIT</a> <a class="text-danger" data-toggle="modal" data-target="#delete-address-modal" href="#"><i class="icofont-ui-delete"></i> DELETE</a></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="bg-white card addresses-item mb-3 shadow-sm">
+                                        <div class="gold-members p-4">
+                                            <div class="media">
+                                                <div class="mr-4"><i class="icofont-location-pin icofont-3x"></i></div>
+                                                <div class="media-body">
+                                                    <span class="badge badge-secondary">Other</span>
+                                                    <h6 class="mb-3 mt-1 text-dark">Askbootstrap</h6>
+                                                    <p>
+                                                        HHG, Model Town Rd, Pritm Nagar, Model Town, Ludhiana, Punjab 141002, India
+                                                    </p>
+                                                    <p class="text-secondary">Phone: <span class="text-dark">8872306061</span></p>
+                                                    <hr>
+                                                    <p class="mb-0 text-black"><a class="text-success mr-3" data-toggle="modal" data-target="#add-address-modal" href="#"><i class="icofont-ui-edit"></i> EDIT</a> <a class="text-danger" data-toggle="modal" data-target="#delete-address-modal" href="#"><i class="icofont-ui-delete"></i> DELETE</a></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 pb-4">
+                                    <a data-toggle="modal" data-target="#add-address-modal" href="#">
+                                        <div class="bg-light border rounded  mb-3  shadow-sm text-center h-100 d-flex align-items-center">
+                                            <h6 class="text-center m-0 w-100"><i class="icofont-plus-circle icofont-3x mb-5"></i><br><br>Add New Address</h6>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Footer -->

@@ -1,0 +1,12 @@
+D:\NewProjects\Gardenwaala\DAL\bin\Debug\DAL.dll.config
+D:\NewProjects\Gardenwaala\DAL\bin\Debug\DAL.dll
+D:\NewProjects\Gardenwaala\DAL\bin\Debug\DAL.pdb
+D:\NewProjects\Gardenwaala\DAL\bin\Debug\EntityFramework.dll
+D:\NewProjects\Gardenwaala\DAL\bin\Debug\EntityFramework.SqlServer.dll
+D:\NewProjects\Gardenwaala\DAL\bin\Debug\EntityFramework.xml
+D:\NewProjects\Gardenwaala\DAL\bin\Debug\EntityFramework.SqlServer.xml
+D:\NewProjects\Gardenwaala\DAL\obj\Debug\DAL.csprojAssemblyReference.cache
+D:\NewProjects\Gardenwaala\DAL\obj\Debug\DAL.csproj.CoreCompileInputs.cache
+D:\NewProjects\Gardenwaala\DAL\obj\Debug\DAL.csproj.CopyComplete
+D:\NewProjects\Gardenwaala\DAL\obj\Debug\DAL.dll
+D:\NewProjects\Gardenwaala\DAL\obj\Debug\DAL.pdb

@@ -1,0 +1,152 @@
+﻿@{
+    ViewBag.Heading = "SMS Template";
+    ViewBag.CurrentMenu = "smst";
+
+    string delTitle = "";
+    string delMsg = "";
+    string delClass = "";
+    if (TempData["delStatus"] != null)
+    {
+        if (Convert.ToBoolean(TempData["delStatus"]) == true)
+        {
+            delTitle = "Success";
+            delMsg = "Record Deleted Successfully";
+            delClass = "success";
+        }
+        else
+        {
+            delTitle = "Error";
+            delMsg = "Can't Delete Record";
+            delClass = "danger";
+        }
+    }
+}
+
+<div class="page-header">
+    <h1>
+        SMS Template
+    </h1>
+</div><!-- /.page-header -->
+@if (TempData["delStatus"] != null)
+{
+    <div class="alert alert-@delClass" id="divDel">
+        <strong>
+            <i class="ace-icon fa fa-times"></i>
+            @delTitle!
+        </strong>
+        @delMsg
+    </div>
+}
+<div class="row">
+    <div class="col-xs-12">
+        @Html.Partial("_TopTemplateMenu")
+
+
+        <!-- PAGE CONTENT BEGINS -->
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="table-header">
+                    <div class="row">
+                        <div class="col-xs-8">
+                            <span id="head">Result For "SMS Template List"</span>
+                        </div>
+                        <div class="col-xs-4">
+                            <div class="pull-right">
+                                <a class="btn icon-btn btn-danger" href="@Url.Action("Create")"><span class="glyphicon btn-glyphicon glyphicon-plus img-circle text-danger"></span>New SMS Template</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- div.table-responsive -->
+                <!-- div.dataTables_borderWrap -->
+                <div>
+                    <table id="tbl" class="table table-striped table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Description</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div><!-- /.col -->
+</div><!-- /.row -->
+<!-- <![endif]-->
+<!--[if IE]>
+<![endif]-->
+<!-- inline scripts related to this page -->
+@section LoadDataTable{
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Areas/Admin/assets/js/UserAdmin.js"></script>
+    <script>
+        $(document).ready(function () {
+            var oTable=$('#tbl').DataTable({
+                "pageLength":@(TempData.Peek("PageSize")!=null?TempData.Peek("PageSize"):5),
+                "lengthMenu": [5, 10, 15, 20],
+                "processing": true,
+                "serverSide": true,
+                "filter": true,
+                "orderMulti": false,
+                rowReorder: {
+                    selector: 'td:nth-child(1)'
+                },
+                "responsive": true,
+                "ajax": {
+                    "url": "@Url.Action("LoadData")",
+                    "type": "post",
+                    "dataType": "json"
+                },
+                "columnDefs": [
+
+                     { "width": "27%", "targets": 0 },
+                     { "width": "60%", "targets": 1 ,'orderable': false,},
+                     { "width": "13%", "targets": 2 }
+
+                ],
+                "columns": [
+                    { "data": "Title", "name": "Title" },
+                    { "data": "Description", "name": "Description" },
+                    {
+                        "data": "SMSTemplateId", 'orderable': false, "render": function (data) {
+                            return '<a title="Edit" href="@Url.Action("Edit")/' + data + '" class="green"><i class="ace-icon fa fa-pencil bigger-130"></i></a>   <a title="Delete" href="@Url.Action("Delete")/' + data + '" class="red" onclick="return confirm(\'Are you Sure to Delete?\')"><i class="ace-icon fa fa-trash-o bigger-130"></i></a>'
+                        }
+                    }
+                ],
+                "order": [[0, 'asc']],
+                initComplete: function () {
+                    $('#tbl_filter input').unbind();
+                    $('#tbl_filter input').bind('keyup', function (e) {
+                        if (e.keyCode == 13 || !this.value) {
+                            oTable.search(this.value).draw();
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        jQuery(function ($) {
+            $('#sidebar2').insertBefore('.page-content');
+
+            $('.navbar-toggle[data-target="#sidebar2"]').insertAfter('#menu-toggler');
+
+
+            $(document).on('settings.ace.two_menu', function (e, event_name, event_val) {
+                if (event_name == 'sidebar_fixed') {
+                    if ($('#sidebar').hasClass('sidebar-fixed')) {
+                        $('#sidebar2').addClass('sidebar-fixed');
+                        $('#navbar').addClass('h-navbar');
+                    }
+                    else {
+                        $('#sidebar2').removeClass('sidebar-fixed')
+                        $('#navbar').removeClass('h-navbar');
+                    }
+                }
+            }).triggerHandler('settings.ace.two_menu', ['sidebar_fixed', $('#sidebar').hasClass('sidebar-fixed')]);
+        })
+    </script>
+}

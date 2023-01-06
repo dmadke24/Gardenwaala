@@ -1,0 +1,177 @@
+﻿@model GardenViewModel.EnquiryViewModel
+
+@{
+
+    ViewBag.Heading = "Enquiry";
+    string action;
+    ViewBag.CurrentMenu = "cenq";
+
+    if (Model == null)
+    {
+        ViewBag.Title = "Create";
+        action = "Create";
+        ViewBag.Breadcrumbs = "New Enquiry";
+    }
+    else
+    {
+        ViewBag.Title = "Edit";
+        action = "Edit";
+        ViewBag.Breadcrumbs = "Edit Enquiry";
+    }
+
+}
+<link href="~/Areas/Admin/assets/css/bootstrap-datepicker3.min.css" rel="stylesheet" />
+<style>
+    .datepicker-dropdown::after, .datepicker-dropdown::before {
+        position: relative !important;
+    }
+</style>
+<div class="page-header">
+    <h1>
+        @action
+        <small>
+            <i class="ace-icon fa fa-angle-double-right"></i>
+            Enquiry
+        </small>
+    </h1>
+</div><!-- /.page-header -->
+@Html.ValidationSummary(true, "Error", new { @class = "alert alert-danger" })
+<div class="row">
+    <div class="col-xs-12">
+        <!-- PAGE CONTENT BEGINS -->
+        @using (Html.BeginForm(action, "CRMEnquiry", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+
+            if (action == "Edit")
+            {
+                @Html.HiddenFor(m => m.EnquiryId)
+            }
+            else
+            {
+                @Html.Hidden("EnquiryId", 0)
+            }
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Name, new { @class = "col-sm-3 control-label no-padding-right" })
+
+                <div class="col-sm-5">
+                    @Html.TextBoxFor(m => m.Name, new { @class = "col-xs-10 col-sm-5 width-100" })
+                </div>
+                <div class="col-sm-4">
+
+                    @Html.ValidationMessageFor(m => m.Name, "", new { @class = "col-xs-12 col-sm-6" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.EmailId, new { @class = "col-sm-3 control-label no-padding-right" })
+
+                <div class="col-sm-5">
+                    @Html.TextBoxFor(m => m.EmailId, new { @class = "col-xs-10 col-sm-5 width-100" })
+                </div>
+                <div class="col-sm-4">
+                    @Html.ValidationMessageFor(m => m.EmailId, "", new { @class = "col-xs-12 col-sm-6" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.ContactNo, new { @class = "col-sm-3 control-label no-padding-right" })
+
+                <div class="col-sm-5">
+                    @Html.TextBoxFor(m => m.ContactNo, new { @class = "col-xs-10 col-sm-5 width-100" })
+                </div>
+                <div class="col-sm-4">
+                    @Html.ValidationMessageFor(m => m.ContactNo, "", new { @class = "col-xs-12 col-sm-6" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.AlternatContactNo, new { @class = "col-sm-3 control-label no-padding-right" })
+
+                <div class="col-sm-5">
+                    @Html.TextBoxFor(m => m.AlternatContactNo, new { @class = "col-xs-10 col-sm-5 width-100" })
+                </div>
+                <div class="col-sm-4">
+                    @Html.ValidationMessageFor(m => m.AlternatContactNo, "", new { @class = "col-xs-12 col-sm-6" })
+                </div>
+            </div>
+            
+            <div class="form-group">
+                @Html.LabelFor(m => m.Subject, new { @class = "col-sm-3 control-label no-padding-right" })
+
+                <div class="col-sm-5">
+                    @Html.TextBoxFor(m => m.Subject, new { @class = "col-xs-10 col-sm-5 width-100" })
+                </div>
+                <div class="col-sm-4">
+                    @Html.ValidationMessageFor(m => m.Subject, "", new { @class = "col-xs-12 col-sm-6" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Description, new { @class = "col-sm-3 control-label no-padding-right" })
+
+                <div class="col-sm-5">
+                    @Html.TextAreaFor(m => m.Description, new { @class = "col-xs-10 col-sm-5 width-100" })
+                </div>
+                <div class="col-sm-4">
+                    @Html.ValidationMessageFor(m => m.Description, "", new { @class = "col-xs-12 col-sm-6" })
+                </div>
+            </div>
+            <div class="space-4"></div>
+            <div class="clearfix form-actions">
+                <div class="col-md-offset-3 col-md-9">
+                    <button class="btn btn-info" type="submit">
+                        <i class="ace-icon fa fa-check bigger-110"></i>
+                        Submit
+                    </button>
+                    &nbsp; &nbsp; &nbsp;
+                    <button class="btn" type="reset">
+                        <i class="ace-icon fa fa-undo bigger-110"></i>
+                        Reset
+                    </button>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+@section Validation{
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Areas/Admin/assets/js/moment.min.js"></script>
+    <script src="~/Areas/Admin/assets/js/bootstrap-datepicker.min.js"></script>
+    <script src="~/Areas/Admin/assets/js/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript">
+        jQuery(function ($) {
+            //datepicker plugin
+            //link
+            $('.date-picker').datepicker({
+                autoclose: true,
+                todayHighlight: true
+
+            })
+
+            //show datepicker when clicking on the icon
+            .next().on(ace.click_event, function () {
+                $(this).prev().focus();
+            });
+
+            //Date-Time Picker
+            $('#FollowupDt').datetimepicker({
+                minDate: new Date(),
+                format: 'YYYY-MM-DD hh:mm A',//use this option to display seconds
+                icons: {
+                    time: 'fa fa-clock-o',
+                    date: 'fa fa-calendar',
+                    up: 'fa fa-chevron-up',
+                    down: 'fa fa-chevron-down',
+                    previous: 'fa fa-chevron-left',
+                    next: 'fa fa-chevron-right',
+                    today: 'fa fa-arrows ',
+                    clear: 'fa fa-trash',
+                    close: 'fa fa-times'
+                }
+            }).next().on(ace.click_event, function () {
+                $(this).prev().focus();
+            });
+            $('#FollowupDt').val('');
+        });
+    </script>
+}
+

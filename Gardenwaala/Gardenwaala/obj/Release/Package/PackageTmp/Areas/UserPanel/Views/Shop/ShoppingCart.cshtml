@@ -1,0 +1,211 @@
+﻿@using GardenViewModel
+@model OrderViewModel
+@{
+    IEnumerable<TempCartViewModel> lstCart = new List<TempCartViewModel>();
+    if (Session["cart"] != null)
+    {
+        lstCart = Session["cart"] as IEnumerable<TempCartViewModel>;
+    }
+    double total = 0;
+
+    foreach (var cartItem in lstCart)
+    {
+
+        total += (cartItem.Price * cartItem.Quantity);
+
+    }
+}
+
+<div class="main-nav shadow-sm">
+    @Html.Action("HeaderMenu", "Home")
+</div>
+</div>
+<section class="checkout-body py-5 bg-light">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-8">
+                @using (Html.BeginForm("Billing", "Shop"))
+                {
+                    <div class="checkout-body-left">
+                        <div class="accordion checkout-step" id="accordionExample">
+                            <div class="bg-white rounded shadow-sm mb-3 overflow-hidden">
+                                @*<div class="card-header bg-white" id="headingOne">
+                                        <h2 class="mb-0">
+                                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                <i class="icofont-simple-down float-right mt-1"></i>
+                                                1.  Phone Number Verification
+                                            </button>
+                                        </h2>
+                                    </div>*@
+                                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                    <div class="card-body">
+                                        <p>We need your phone number so that we can update you about your order.</p>
+                                        <form>
+                                            <div class="form-row align-items-center">
+                                                <div class="col-auto">
+                                                    <label class="sr-only">phone number</label>
+                                                    <div class="input-group mb-2">
+                                                        <div class="input-group-prepend">
+                                                            <div class="input-group-text"><i class="icofont-smart-phone"></i></div>
+                                                        </div>
+                                                        <input type="text" class="form-control" placeholder="Enter phone number">
+                                                    </div>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <button type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" class="btn btn-primary mb-2 collapsed">NEXT</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-white rounded shadow-sm mb-3 overflow-hidden">
+                                <div class="card-header bg-white" id="headingTwo">
+                                    <h2 class="mb-0">
+                                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                            <i class="icofont-simple-down float-right mt-1"></i>
+                                            2. Delivery Address
+                                        </button>
+                                    </h2>
+                                </div>
+                                <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="bg-white card addresses-item mb-0  shadow-sm">
+                                                    <div class="gold-members p-3">
+                                                        <div class="media">
+                                                            <div class="media-body">
+
+                                                                <div class="form-row">
+                                                                    <div class="form-group col-md-6">
+                                                                        <label>
+                                                                            <input type="radio" checked="checked" value="E" name="IsBillExistingAddress" data-id="payment-existing">
+                                                                            I want to use an existing address
+                                                                        </label>
+                                                                    </div>
+                                                                    <div class="form-group col-md-6">
+                                                                        <label>
+                                                                            <input type="radio" value="N" name="IsBillExistingAddress" data-id="payment-new">
+                                                                            I want to use a new address
+                                                                        </label>
+                                                                    </div>
+                                                                    <div class="form-group col-md-12 " id="shipping-existing">
+                                                                        <label for="inputPassword4">Billing Address</label>
+                                                                        <div class="input-group">
+                                                                            <input type="text" class="col-sm-12" id="BillingAddress" name="BillingAddress" value="@ViewBag.UserAddr" readonly="readonly" />
+                                                                        </div>
+                                                                    </div>
+                                                                    <div id="shipping-new" class="form-row">
+
+                                                                        <div class="form-group col-md-12">
+                                                                            <label for="inputPassword4">Ship Name</label>
+                                                                            <div class="input-group">
+                                                                                @Html.TextBoxFor(m => m.BillName, new { @class = "form-control", placeholder = "Name" })
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group col-md-12">
+                                                                            <label for="inputPassword4">Ship Address</label>
+                                                                            <div class="input-group">
+                                                                                @Html.TextBoxFor(m => m.BillAddress, new { @class = "form-control", placeholder = "Address" })
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group col-md-12">
+                                                                            <label for="inputPassword4">Ship Area</label>
+                                                                            <div class="input-group">
+                                                                                @Html.TextBoxFor(m => m.BillArea, new { @class = "form-control", placeholder = "Area" })
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group col-md-12">
+                                                                            <label for="inputPassword4">Ship Pincode</label>
+                                                                            <div class="input-group">
+                                                                                @Html.TextBoxFor(m => m.BillPinCode, new { @class = "form-control", placeholder = "Pincode" })
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-white rounded shadow-sm mb-3 overflow-hidden">
+                                <div class="card-header bg-white" id="headingThree">
+                                    <h2 class="mb-0">
+                                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                            <i class="icofont-simple-down float-right mt-1"></i>
+                                            3. Review Order
+                                        </button>
+                                    </h2>
+                                </div>
+                                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                                    @Html.Action("ReviewOrder")
+                                </div>
+                            </div>
+                            <div class="bg-white rounded shadow-sm overflow-hidden">
+                                <div class="card-header bg-white" id="headingfour">
+                                    <h2 class="mb-0">
+                                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapsefour" aria-expanded="true" aria-controls="collapsefour">
+                                            <i class="icofont-simple-down float-right mt-1"></i> 4. Make Payment
+                                        </button>
+                                    </h2>
+                                </div>
+                                <div id="collapsefour" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                    <div class="card-body osahan-payment">
+                                        <div class="row">
+                                            <div class="col-sm-4 pr-0">
+                                                <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                                                    <a class="nav-link active" id="v-pills-cash-tab" data-toggle="pill" href="#v-pills-cash" role="tab" aria-controls="v-pills-cash" aria-selected="false"><i class="icofont-money"></i> Pay on Delivery</a>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-8 pl-0">
+                                                <div class="tab-content h-100" id="v-pills-tabContent">
+                                                    <div class="tab-pane fade  show active" id="v-pills-cash" role="tabpanel" aria-labelledby="v-pills-cash-tab">
+                                                        <h6 class="mb-3 mt-0 mb-3">Cash</h6>
+                                                        <p>Please keep exact change handy to help us serve you better</p>
+                                                        <hr>
+                                                        <button type="submit" class="btn btn-primary btn-block btn-lg">
+                                                            PAY ₹ @total
+                                                            <i class="icofont-long-arrow-right"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="col-md-4">
+                @Html.Action("CartSummery")
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Footer -->
+@section ContentViewScript{
+    <script>
+        (function ($) {
+            $('#shipping-new').hide();
+            //Shipping Address
+            $('input[name=\'IsBillExistingAddress\']').on('change', function () {
+                if (this.value == 'N') {
+                    $('#shipping-existing').hide();
+                    $('#shipping-new').show();
+                } else {
+                    $('#shipping-existing').show();
+                    $('#shipping-new').hide();
+                }
+            });
+        })(jQuery);
+    </script>
+}

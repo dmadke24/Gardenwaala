@@ -1,0 +1,181 @@
+﻿@model EpamphletViewModel
+@{
+    ViewBag.Heading = "Epamphlet";
+    string action;
+    ViewBag.CurrentMenu = "ep";
+    string imgFile = "";
+    if (Model == null)
+    {
+        ViewBag.Title = "Create";
+        action = "Create";
+        ViewBag.Breadcrumbs = "New Epamphlet";
+    }
+    else
+    {
+        ViewBag.Title = "Edit";
+        action = "Edit";
+        ViewBag.Breadcrumbs = "Edit Epamphlet";
+        imgFile = "/Areas/Admin/UploadImg/Images/EpamphletImg/" + Model.Image;
+    }
+}
+<div class="page-header">
+    <h1>
+        @action
+        <small>
+            <i class="ace-icon fa fa-angle-double-right"></i>
+            Epamphlet
+        </small>
+    </h1>
+</div><!-- /.page-header -->
+<div class="ace-settings-container" id="ace-settings-container">
+    <div class="btn btn-app btn-xs btn-warning ace-settings-btn" id="ace-settings-btn">
+        <i class="ace-icon fa fa-question-circle bigger-130"></i>
+    </div>
+
+    <div class="ace-settings-box clearfix" id="ace-settings-box">
+        <h3>Help</h3>
+        <p>
+            In this section, you can add the most 3 images which represent your business. These Epamphlet images will appear on your website.
+        </p>
+    </div><!-- help-box -->
+</div>
+@Html.ValidationSummary(true, "Error", new { @class = "alert alert-danger" })
+<div class="box-b order-new">
+    <div class="row">
+        <div class="col-xs-12">
+            <!-- PAGE CONTENT BEGINS -->
+            @using (Html.BeginForm(action, "Epamphlet", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+
+                if (action == "Edit")
+                {
+                    @Html.HiddenFor(e => e.EpamphletId)
+                    @Html.HiddenFor(e => e.ImageFile)
+                }
+                else
+                {
+                    @Html.Hidden("EpamphletId", 0)
+                    @Html.Hidden("UserId", 0)
+                }
+                <div class="form-group">
+                    @Html.LabelFor(e => e.Subject, new { @class = "col-sm-3 control-label no-padding-right" })
+                    <div class="col-sm-5">
+                        @Html.TextBoxFor(e => e.Subject, new { @class = "col-xs-10 col-sm-5 width-100" })
+                    </div>
+                    <div class="col-sm-4">
+                        @Html.ValidationMessageFor(e => e.Subject, "", new { @class = "col-xs-12 col-sm-6" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(e => e.Message, new { @class = "col-sm-3 control-label no-padding-right" })
+                    <div class="col-sm-5">
+                        @Html.TextAreaFor(e => e.Message, new { @class = "col-xs-10 col-sm-5 width-100" })
+                    </div>
+                    <div class="col-sm-4">
+                        @Html.ValidationMessageFor(e => e.Message, "", new { @class = "col-xs-12 col-sm-6" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(e => e.Link, new { @class = "col-sm-3 control-label no-padding-right" })
+                    <div class="col-sm-5">
+                        @Html.TextBoxFor(e => e.Link, new { @class = "col-xs-10 col-sm-5 width-100" })
+                    </div>
+                    <div class="col-sm-4">
+                        @Html.ValidationMessageFor(e => e.Link, "", new { @class = "col-xs-12 col-sm-6" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(e => e.ImageFile, new { @class = "col-sm-3 control-label no-padding-right" })
+                    <div class="col-sm-5">
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                @if (action == "Create")
+                                {
+                                    <input type="file" id="ImageFile" name="ImageFile" data-val="true" data-val-filesize="Upload file upto 2 mb" data-val-required="Upload file" data-val-extension="Invalid File Type" data-val-extension-extension="png,jpg,jpeg,gif" />
+                                }
+                                else
+                                {
+                                    <input type="file" id="ImageFile" name="ImageFile" data-val="true" data-val-filesize="Upload file upto 2 mb" data-val-extension="Invalid File Type" data-val-extension-extension="png,jpg,jpeg,gif" />
+                                }
+                            </div>
+                        </div>
+                        @if (action == "Edit")
+                        {
+                            <img src="@imgFile" width="100" />
+                        }
+                    </div>
+                    <div class="col-sm-4">
+                        @Html.ValidationMessageFor(e => e.ImageFile, "", new { @class = "col-xs-12 col-sm-6" })
+                    </div>
+                </div>
+                <div class="space-4"></div>
+                <div class="clearfix form-actions">
+                    <div class="col-md-offset-3 col-md-9">
+                        <button class="btn btn-info" type="submit">
+                            <i class="ace-icon fa fa-check bigger-110"></i>
+                            Submit
+                        </button>
+                        &nbsp; &nbsp; &nbsp;
+                        <button class="btn" type="reset">
+                            <i class="ace-icon fa fa-undo bigger-110"></i>
+                            Reset
+                        </button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@section Validation{
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Areas/Admin/AdminDesign/js/chosen.jquery.min.js"></script>
+    <script type="text/javascript">
+        $.validator.unobtrusive.adapters.addBool("filesize");
+        $.validator.addMethod("filesize", function (value, element, params) {
+            var files = $(element).prop('files');
+            size = files[0].size;
+            return (size <= 2097152);
+        });
+        $(document).ready(function () {
+            //Drip file
+            $('#ImageFile').ace_file_input({
+                style: 'well',
+                btn_choose: 'Drop Image here or click to choose, Upload Image upto 2MB',
+                btn_change: null,
+                no_icon: 'ace-icon fa fa-cloud-upload',
+                droppable: true,
+                thumbnail: 'large',
+                preview_error: function (filename, error_code) {
+                }
+
+            }).on('change', function () {
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        jQuery(function ($) {
+            $('#sidebar2').insertBefore('.page-content');
+
+            $('.navbar-toggle[data-target="#sidebar2"]').insertAfter('#menu-toggler');
+
+
+            $(document).on('settings.ace.two_menu', function (e, event_name, event_val) {
+                if (event_name == 'sidebar_fixed') {
+                    if ($('#sidebar').hasClass('sidebar-fixed')) {
+                        $('#sidebar2').addClass('sidebar-fixed');
+                        $('#navbar').addClass('h-navbar');
+                    }
+                    else {
+                        $('#sidebar2').removeClass('sidebar-fixed')
+                        $('#navbar').removeClass('h-navbar');
+                    }
+                }
+            }).triggerHandler('settings.ace.two_menu', ['sidebar_fixed', $('#sidebar').hasClass('sidebar-fixed')]);
+        })
+    </script>
+}
+}
+

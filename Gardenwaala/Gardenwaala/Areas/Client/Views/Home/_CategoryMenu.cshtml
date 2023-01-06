@@ -1,0 +1,16 @@
+﻿@using GardenViewModel
+@model IEnumerable<CategoryViewModel>
+<div class="row">
+    @foreach (CategoryViewModel cat in Model)
+    {
+        <div class="col-xs-6 col-md-2 mt_30">
+            <div id="subbanner1" class="sub-hover">
+                <div class="bannertext">
+                    <h6 class="text-center">@cat.CategoryName</h6>
+                </div>
+                <a href="@Url.Action("ProductListCategory", "Shop", new { pid = @cat.CategoryId})"><img src="~/Areas/Admin/UploadImg/CategoryImg/@cat.Image" alt="@cat.CategoryName" class="img-responsive"></a>
+
+            </div>
+        </div>
+    }
+</div>

@@ -1,0 +1,133 @@
+﻿@using GardenViewModel;
+@model IEnumerable<CategoryViewModel>
+<header id="header">
+    <!-- Start Navigation -->
+    <nav class="navbar navbar-default navbar-fixed white bootsnav">
+        <!-- Start Top Search -->
+        <div class="top-search">
+            <div class="container">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                    <input type="text" class="form-control" placeholder="Search">
+                    <span class="input-group-addon close-search"><i class="fa fa-times"></i></span>
+                </div>
+            </div>
+        </div>
+        <!-- End Top Search -->
+        <div class="container">
+            <!-- Start Atribute Navigation -->
+            <div class="attr-nav">
+                <ul id="cart-dropdown">
+                    <li class="dropdown" id="cartItems" name="cartItems">
+                        @Html.Action("Cart","Shop")
+                    </li>
+                    <li class="search"><a href="#"><i class="fa fa-search"></i></a></li>
+                    <li class="side-menu"><a href="#"><i class="fa fa-bars"></i></a></li>
+                </ul>
+            </div>
+            <!-- End Atribute Navigation -->
+            <!-- Start Header Navigation -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu"> <i class="fa fa-bars"></i> </button>
+                <a class="navbar-brand" href="@Url.Action("Index","Home")"> <img src="~/Areas/Client/Assets/images/logo white.png" class="logo logo-display" alt=""> <img src="~/Areas/Client/Assets/images/logo.png" class="logo logo-scrolled" alt=""> </a>
+            </div>
+            <!-- End Header Navigation -->
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="navbar-menu">
+                <ul class="nav navbar-nav navbar-left pull-right" data-in="fadeInDown" data-out="fadeOutUp">
+                    <li class="active"><a href="@Url.Action("Index","Home")">Home</a></li>
+                    <li class="dropdown megamenu-fw">
+                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">Plants</a>
+                        <ul class="dropdown-menu megamenu-content" role="menu">
+                            <li>
+                                <div class="row">
+                                    <div class="col-menu col-md-3">
+                                        <h4 class="sub_title title mtb_10">Indoor Plants</h4>
+                                        <div class="content">
+                                            @Html.Action("SubCategory", "Home", new { cid = 20210004 })
+                                        </div>
+                                    </div>
+                                    <!-- end col-3 -->
+                                    <div class="col-menu col-md-3">
+                                        <h4 class="sub_title title mtb_10">Plant On Rent</h4>
+                                        <div class="content">
+                                            @Html.Action("SubCategory", "Home", new { cid = 20210005 })
+
+                                        </div>
+                                    </div>
+                                    <!-- end col-3 -->
+                                    <div class="col-menu col-md-3">
+                                        <h4 class="sub_title title mtb_10">Outdoor Plants</h4>
+                                        <div class="content">
+                                            @Html.Action("SubCategory", "Home", new { cid = 20210007 })
+
+
+                                        </div>
+                                    </div>
+                                    <div class="col-menu col-md-3">
+                                        <h4 class="sub_title title mtb_10">Combo Packs</h4>
+                                        <div class="content">
+                                            @Html.Action("SubCategory", "Home", new { cid = 20210008 })
+
+                                        </div>
+                                    </div>
+                                    <!-- end col-3 -->
+                                </div>
+                                <!-- end row -->
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a href="@Url.Action("ProductListCategory", "Shop", new { pid = 20210006})">Pots & Planters</a></li>
+                    <li class="dropdown">
+                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">Gardening</a>
+                        <ul class="dropdown-menu">
+                            <li> <a href="@Url.Action("ProductListCategory", "Shop", new { pid = 20210009})">Garden Service</a></li>
+                            <li> <a href="@Url.Action("ProductListCategory", "Shop", new { pid =  20210010})">Garden Materials</a></li>
+                            <li> <a href="@Url.Action("ProductListCategory", "Shop", new { pid = 20210012})">Garden Tools</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">Seeds & Bulbs</a>
+                        <ul class="dropdown-menu">
+                            <li> <a href="@Url.Action("ProductList", "Shop", new { pid = 20210054})">Vegetable Seeds</a></li>
+                            <li> <a href="@Url.Action("ProductList", "Shop", new { pid =  20210055})">Seasonal Flower seeds</a></li>
+                            <li> <a href="@Url.Action("ProductList", "Shop", new { pid = 20210057})">Native Plant Seeds</a></li>
+                            <li> <a href="@Url.Action("ProductList", "Shop", new { pid = 20210059})">Bulbs</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="@Url.Action("ProductListCategory", "Shop", new { pid = 20210013})">Cactus & Succulent</a></li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- Start Side Menu -->
+        <div class="side">
+            <a href="#" class="close-side"><i class="fa fa-times"></i></a>
+            <div class="widget">
+                <h6 class="title">My Account</h6>
+                <ul class="link">
+                    <li><a href="@Url.Action("MyAccount","MyAccount")">My Account</a></li>
+                    @*<li><a href="category_page.html">Order History</a></li>*@
+                    @*<li><a href="wishlist.html">My Wishlist</a></li>*@
+                    <li><a href="@Url.Action("ShoppingCart","Shop")">Checkout</a></li>
+                    <li><a href="@Url.Action("ContactUs","Home")">Contact Us</a></li>
+                </ul>
+                <hr class="mtb_10">
+                <ul class="link">
+                    @if (!User.Identity.IsAuthenticated)
+                    {
+                        <li><a href="@Url.Action("Login","MyAccount")"><i class="fa fa-lock left" aria-hidden="true"></i>Login</a></li>
+                        <li><a href="@Url.Action("Register","MyAccount")"><i class="fa fa-user left" aria-hidden="true"></i>Create an Account</a></li>
+                    }
+                    else
+                    {
+                        <li><a href="@Url.Action("Signout", "MyAccount")"><i class="fa fa-lock left" aria-hidden="true"></i>Sign Out</a></li>
+                    }
+
+                </ul>
+            </div>
+        </div>
+        <!-- End Side Menu -->
+    </nav>
+    <!-- End Navigation -->
+</header>

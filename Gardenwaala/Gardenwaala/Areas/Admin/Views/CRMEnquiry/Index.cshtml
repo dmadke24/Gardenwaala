@@ -1,0 +1,655 @@
+﻿@{
+
+
+    ViewBag.Heading = "Enquiry";
+    ViewBag.SubHeading = "Enquiry List";
+    ViewBag.CurrentMenu = "cenq";
+
+    string delTitle = "";
+    string delMsg = "";
+    string delClass = "";
+    if (TempData["delStatus"] != null)
+    {
+        if (Convert.ToBoolean(TempData["delStatus"]) == true)
+        {
+            delTitle = "Success";
+            delMsg = "Record Deleted Successfully";
+            delClass = "success";
+        }
+        else
+        {
+            delTitle = "Error";
+            delMsg = "Can't Delete Record";
+            delClass = "danger";
+        }
+    }
+    if (TempData["emailStatus"] != null)
+    {
+        if (Convert.ToBoolean(TempData["emailStatus"]) == true)
+        {
+            delTitle = "Success";
+            delMsg = "Email Sent Successfully";
+            delClass = "success";
+        }
+        else
+        {
+            delTitle = "Error";
+            delMsg = "Error in sending Email, Please try again";
+            delClass = "danger";
+        }
+    }
+}
+<style type="text/css">
+    td.details-control {
+        cursor: pointer;
+    }
+</style>
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.4.2/css/buttons.dataTables.min.css" />
+<link href="~/Areas/Admin/AdminDesign/css/bootstrap-wysihtml5.css" rel="stylesheet" />
+<div class="page-header">
+    <h1>
+        Enquiry
+    </h1>
+</div><!-- /.page-header -->
+@if (TempData["delStatus"] != null)
+{
+    <div class="alert alert-@delClass" id="divDel">
+        <strong>
+            <i class="ace-icon fa fa-times"></i>
+            @delTitle!
+        </strong>
+        @delMsg
+    </div>
+}
+@if (TempData["emailStatus"] != null)
+{
+    <div class="alert alert-@delClass" id="divDel">
+        <strong>
+            <i class="ace-icon fa fa-times"></i>
+            @delTitle!
+        </strong>
+        @delMsg
+    </div>
+}
+<div class="row">
+    <div class="col-xs-12">
+        <!-- PAGE CONTENT BEGINS -->
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="row">
+                    <div id="buttons" class="col-xs-4">
+                        <span id="ajaxMsg" style="display:none"></span>
+                    </div>
+                    <div class="col-xs-8">
+                        @using (Html.BeginForm("Upload", "CRMEnquiry", FormMethod.Post, new { id = "frmStatus", name = "frmStatus", enctype = "multipart/form-data" }))
+                        {
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <input type="file" name="csvFile" id="csvFile" data-val="true" data-val-required="Select File" data-val-extension="Upload csv File" data-val-extension-extension="csv" />
+                                </div>
+                                <div class="col-sm-1">
+                                    <input type="submit" value="Upload" id="btnGo" class="btn btn-border-three btn-xs" />
+                                </div>
+                                <div class="col-sm-3">
+                                    @Html.ValidationMessage("csvFile")
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+                <div class="row">
+                    <div id="buttons" class="col-xs-12"></div>
+                </div>
+                <div class="table-header">
+                    <div class="row">
+                        <div class="col-xs-8">
+                            <span id="head">Result For "Enquiry List"</span>
+                            <div class="btn-group" id="divStatus" style="margin-top:10px">
+                                <button type="button" id="btnSMS" class="btn btn-xs btn-white btn-danger">
+                                    <i class="ace-icon fa fa-comment-o bigger-125 orange"></i>
+                                    <span class="bigger-110">Send SMS</span>
+                                </button>
+                                <button type="button" id="btnEmail" class="btn btn-xs btn-white btn-danger">
+                                    <i class="ace-icon fa fa-envelope-o bigger-125 orange"></i>
+                                    <span class="bigger-110">Send Email</span>
+                                </button>
+                                <button type="button" id="btnDel" class="btn btn-xs btn-white btn-danger">
+                                    <i class="ace-icon fa fa-trash-o bigger-125 orange"></i>
+                                    <span class="bigger-110">Delete</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
+                            <div class="pull-right">
+                                <a class="btn icon-btn btn-danger" href="@Url.Action("Create")"><span class="glyphicon btn-glyphicon glyphicon-plus img-circle text-danger"></span>New Enquiry</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- div.table-responsive -->
+                <!-- div.dataTables_borderWrap -->
+                <div>
+                    <table id="tbl" class="table table-striped table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th><input type="checkbox" id="SelectAll" /></th>
+                                <th>Date</th>
+                                <th>Name</th>
+                                <th>Email Id</th>
+                                <th>Contact No</th>
+                                <th>Subject</th>
+                                <th>Message</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div><!-- /.row -->
+<!-- /.col -->
+<!-- <![endif]-->
+<!--[if IE]>
+<![endif]-->
+<!-- inline scripts related to this page -->
+@section LoadDataTable{
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Areas/Admin/assets/js/UserAdmin.js"></script>
+    <script src="~/Areas/Admin/AdminDesign/js/chosen.jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.4.2/js/dataTables.buttons.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js"></script>
+    <script src="//cdn.datatables.net/buttons/1.4.2/js/buttons.html5.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script>
+    <script src="~/Areas/Admin/AdminDesign/js/wysihtml5-0.3.0.js"></script>
+    <script src="~/Areas/Admin/AdminDesign/js/bootstrap-wysihtml5.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script>
+        function ShowMsg(){ // on Begin Function of AJAX Request
+            $('#ajaxMsg').show();
+            $('#ajaxMsg').html('<i class="ace-icon fa fa-spinner fa-spin orange bigger-125"></i>  Please Wait.... Sending');
+            if ( $('#myModal').hasClass('in') ) {
+                $('#myModal').modal('hide');
+            }
+            if ( $('#smsModal').hasClass('in') ) {
+                $('#smsModal').modal('hide');
+            }
+            if ( $('#emailModal').hasClass('in') ) {
+                $('#emailModal').modal('hide');
+            }
+            if ( $('#subUserModal').hasClass('in') ) {
+                $('#subUserModal').modal('hide');
+            }
+        }
+        function HideMsg(data){ //on Success Function of AJAX request
+            if(data.status==true)
+            {
+                $('#ajaxMsg').hide();
+                $('#divStatus').hide();
+                $('#head').show();
+                if(data.from=='t')
+                    $('#tbl').DataTable().ajax.reload();
+            }
+            else
+            {
+                $('#ajaxMsg').show();
+
+                var fromTxt='';
+                if(data.from=='f')
+                    fromTxt='Feedback';
+                else if(data.from=='e')
+                    fromTxt='Email';
+                else if(data.from=='s')
+                {
+                    fromTxt='SMS';
+                    $('#btnSelect').find('span').html('Select All Enquiries');
+                    $('#BulkContact').val('');
+                    $('#SmsMessage').val('');
+                }
+                else if(data.from=='t')
+                    fromTxt='Enquiries';
+                $('#ajaxMsg').html('<span style="color:#d40f0f">Error in sending a ' + fromTxt + '!</span>');
+            }
+        }
+    </script>
+    <script>
+        function format ( d ) {
+            if(d.Feedback)
+                return '<b>Message:</b>&nbsp;'+d.Description+'<br/><b>Feedback:</b>&nbsp;'+d.Feedback;
+            else
+                return '<b>Message:</b> '+d.Description;
+        }
+        $(document).ready(function () {
+
+            var oTable=$('#tbl').DataTable({
+                "pageLength":@(TempData.Peek("PageSize")!=null?TempData.Peek("PageSize"):25),
+                "lengthMenu": [25, 50, 100],
+                "processing": true,
+                "serverSide": true,
+                "filter": true,
+                "orderMulti": false,
+                rowReorder: {
+                    selector: 'td:nth-child(1)'
+                },
+                "responsive": true,
+                "ajax": {
+                    "url": "@Url.Action("LoadData")",
+                    "type": "post",
+                    "dataType": "json"
+                },
+                "columnDefs": [
+                    {
+                        "width": "1%", "targets": 0, 'searchable': false, 'orderable': false, 'className': 'flat',
+                        'render': function (data, type, full, meta) {
+                            return '<input type="checkbox" name="Ids" id="Ids" value="' + data + '"/>';
+                        }
+                    },
+                     { "width": "9%", "targets": 1,
+                         'render':function(data, type, full, meta){
+                             return data + '<br/>' + full.EnqDisplayTm;
+                         }
+                     },
+
+                     { "width": "13%", "targets": 2,'searchable': false},
+                     { "width": "13%", "targets": 3,'searchable': false, 'orderable': false },
+                    { "width": "9%", "targets": 4 ,'searchable': false, 'orderable': false,
+                        'render':function(data, type, full, meta){
+                            var str=data;
+                            if(full.AlternatContactNo)
+                                str= data + '<br/>'+ full.AlternatContactNo;
+                            return str;
+                        }
+                    },
+                    { "width": "18%", "targets": 5 ,'searchable': false, 'orderable': false,
+                        'render':function(data){
+                            return data + ' <b>...more</b>';
+                        }
+                    },
+                     { "visible":false, "targets": 6 },
+                     { "width": "10%", "targets": 7 ,'searchable': false, 'orderable': false},
+
+                ],
+                "columns": [
+
+                    { "data": "EnquiryId", "name": "EnquiryId",},
+                    { "data": "EnqDisplayDt", "name": "EnqDt" },
+                    { "data": "Name", "name": "Name" },
+                    { "data": "EmailId", "name": "EmailId" },
+                    { "data": "ContactNo", "name": "ContactNo" },
+                    { "data": "Subject", "name": "Subject","class": "details-control","orderable":false},
+                    { "data": "Description", "name": "Description" },
+                    {
+                        "data": "EnquiryId", 'orderable': false, "render": function (data,type,full,meta) {
+                            str= '<a title="Edit" href="@Url.Action("Edit")/' + data + '" class="green"><i class="ace-icon fa fa-pencil bigger-130"></i></a> <a title="Delete" href="@Url.Action("Delete")/' + data + '" class="red" onclick="return confirm(\'Are you Sure to Delete?\')"><i class="ace-icon fa fa-trash-o bigger-130"></i></a>';
+
+                            return str;
+                        }
+                    },
+                ],
+                "order": [[1, 'desc']],
+                initComplete: function () {
+                    $('#tbl_filter input').unbind();
+                    $('#tbl_filter input').bind('keyup', function (e) {
+                        if (e.keyCode == 13 || !this.value) {
+                            oTable.search(this.value).draw();
+                        }
+                    });
+                }
+            });
+            var detailRows = [];
+
+            $('#tbl tbody').on( 'click', 'tr td.details-control', function () {
+                var tr = $(this).closest('tr');
+                var row = oTable.row( tr );
+                var idx = $.inArray( tr.attr('id'), detailRows );
+
+                if ( row.child.isShown() ) {
+                    tr.removeClass( 'details' );
+                    row.child.hide();
+                    detailRows.splice( idx, 1 );
+                }
+                else {
+                    tr.addClass( 'details' );
+                    row.child( format( row.data() ) ).show();
+                    if ( idx === -1 ) {
+                        detailRows.push( tr.attr('id') );
+                    }
+                }
+            } );
+            $('#tbl').on('click','a#btnFeedback',function(){ //dynamic event
+                var d = oTable.row($(this).parents("tr")).data();
+                $('#Email').val(d.EmailId);
+                $('#Subject').val(d.Subject);
+                $('#EnquiryId').val(d.EnquiryId);
+                $("#myModal").modal();
+            });
+
+            $('#Attachment').ace_file_input({
+                no_file:'No File ...',
+                btn_choose:'Choose',
+                btn_change:'Change',
+                droppable:false,
+                onchange:null,
+                thumbnail:true
+            });
+            var buttons = new $.fn.dataTable.Buttons(oTable, {
+                buttons: [
+                    {
+                        extend: 'excelHtml5',
+                        exportOptions: {
+                            columns: [3,4,5,7,8,9]
+                        },
+                        title:'Customer Details',
+                        messageBottom: null
+                    },
+                    {
+                        extend: 'pdfHtml5',
+                        exportOptions: {
+                            columns: [3,4,5,7,8,9]
+                        },
+                        title:'Customer Details',
+                        messageBottom: 'By Innovatiq'
+                    }
+                ]
+            }).container().appendTo($('#buttons'));
+
+            $('#btnSMS').click(function(){
+                if($('#btnSelect').find('span').html()=='Clear Selection'){
+                    $('#smsAll').val(true);
+                    $('#BulkContact').val('To All Enquiries');
+                }
+                else{
+                    $('#smsAll').val(false);
+                    var contactList=new Array();
+                    oTable.rows().every(function(){
+                        var data=this.data();
+                        var node=this.node();
+                        var flag= $(node).find('input').prop('checked');
+                        if(flag)
+                            contactList.push(data.ContactNo)
+                    });
+                    $('#BulkContact').val(contactList);
+                }
+                $("#smsModal").modal();
+
+            });
+
+            $('#btnEmail').click(function(){
+                if($('#btnSelect').find('span').html()=='Clear Selection'){
+                    $('#emailAll').val(true);
+                    $('#BulkEmailId').val('To All Enquiries');
+
+                }
+                else{
+                    $('#emailAll').val(false);
+                    var emailList=new Array();
+                    oTable.rows().every(function(){
+                        var data=this.data();
+                        var node=this.node();
+                        var flag= $(node).find('input').prop('checked');
+                        if(flag && data.EmailId)
+                            emailList.push(data.EmailId)
+                    });
+                    $('#BulkEmailId').val(emailList);
+                }
+                $("#emailModal").modal();
+
+            });
+
+            //for customers, enquiry and Lead
+            $('#btnSelect').click(function () {
+                if ($(this).find('span').html() == 'Select All Enquiries') {
+                    $('input#Ids').each(function () {
+                        this.checked = true;
+                    });
+                    $(this).find('span').html('Clear Selection');
+                }
+                else {
+                    $(this).find('span').html('Select All Enquiries');
+                    $('input#Ids').each(function () {
+                        this.checked = false;
+                    });
+                    $(this).find('span').html('Select All Enquiries');
+                    $('#SelectAll').prop('checked', false);
+                }
+            });
+
+
+            $('#btnDel').click(function(){
+                var ans = confirm("Delete Enquiries?");
+                if (ans == false)
+                    return;
+                var Ids = [];
+                $('input#Ids:checked').each(function () {
+                    Ids.push($(this).val());
+                });
+
+                $.ajax({
+                    type:'post',
+                    url:'@Url.Action("DeleteAll")',
+                    data:{Ids:Ids},
+                    success:function(data){
+                        $('#ajaxMsg').show();
+                        $('#ajaxMsg').html('<i class="ace-icon fa fa-spinner fa-spin orange bigger-125"></i>  Please Wait.... Deleting');
+                        if(data==true)
+                        {
+                            $('#tbl').DataTable().ajax.reload();
+                            $('#ajaxMsg').hide();
+                        }
+                        else
+                            $('#ajaxMsg').html('Error in deleting records! Please try again');
+
+                        $('#divStatus').hide();
+                        $('#head').show();
+                    }
+
+                });
+            });
+
+            $('#btnMove').click(function(){
+                var ans = confirm("Move to My Customers?");
+                if (ans == false)
+                    return;
+                var Ids = [];
+                $('input#Ids:checked').each(function () {
+                    Ids.push($(this).val());
+                });
+
+                $.ajax({
+                    type:'post',
+                    url:'@Url.Action("MoveToCust")',
+                    data:{Ids:Ids},
+                    success:function(data){
+                        $('#ajaxMsg').show();
+                        $('#ajaxMsg').html('<i class="ace-icon fa fa-spinner fa-spin orange bigger-125"></i>  Please Wait.... Transferring');
+                        if(data==true)
+                        {
+                            $('#tbl').DataTable().ajax.reload();
+                            $('#ajaxMsg').hide();
+                        }
+                        else
+                            $('#ajaxMsg').html('Error in Transferring records! Please try again');
+
+                        $('#divStatus').hide();
+                        $('#head').show();
+                    }
+
+                });
+            });
+
+            $('#btnTransfer').click(function(){
+                var idList=new Array();
+                oTable.rows().every(function(){
+                    var data=this.data();
+                    var node=this.node();
+                    var flag= $(node).find('input').prop('checked');
+                    if(flag && data.EnquiryId)
+                        idList.push(data.EnquiryId)
+                });
+                $('#EnquiryIds').val(idList);
+                $("#subUserModal").modal();
+            });
+
+            $('#EmailMessage').wysihtml5();
+            $('#Feedback').wysihtml5();
+
+            $('#csvFile').ace_file_input({
+                no_file:'No File ...',
+                btn_choose:'Choose',
+                btn_change:'Change',
+                droppable:false,
+                onchange:null,
+                thumbnail:false, //| true | large
+                whitelist:'csv'
+                //blacklist:'exe|php'
+                //onchange:''
+                //
+            });
+        });
+    </script>
+
+    <!-- Feedback Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content of Feedback-->
+            <div class="modal-content">
+                @using (Ajax.BeginForm("SendFeedback", "CRMEnquiry", new AjaxOptions() { HttpMethod = "Post", OnBegin = "ShowMsg", OnSuccess = "HideMsg" }))
+                {
+                    <input type="hidden" value="" name="EnquiryId" id="EnquiryId" />
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4><span class="glyphicon glyphicon-envelope"></span> Feedback</h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="form-group">
+                            <label for="Email"> Email</label>
+                            <input type="text" class="form-control" id="Email" name="Email" readonly="readonly" data-val="true" data-val-required="Email is Blank" />
+                            @Html.ValidationMessage("Email")
+                        </div>
+                        <div class="form-group">
+                            <label for="ContactNo"> Subject </label>
+                            <input type="text" class="form-control" id="Subject" name="Subject" readonly="readonly" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="feedback"> Feedback</label>
+                            <textarea name="Feedback" id="Feedback" class="form-control" data-val="true" data-val-required="Feedback is Blank"></textarea>
+                            @Html.ValidationMessage("Feedback")
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-default btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+                        <button type="submit" class="btn btn-default btn-success"><span class="glyphicon glyphicon-off"></span> Submit</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <!-- SMS Modal -->
+    <div class="modal fade" id="smsModal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content SMS-->
+            <div class="modal-content">
+                @using (Ajax.BeginForm("SendSMS", "CRMEnquiry", new AjaxOptions() { HttpMethod = "Post", OnBegin = "ShowMsg", OnSuccess = "HideMsg" }))
+                {
+                    <input type="hidden" value="false" name="SmsAll" id="smsAll" />
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4><span class="glyphicon glyphicon-envelope"></span>Send SMS</h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="form-group">
+                            <label for="Contact"> Contact No.</label>
+                            <textarea class="form-control" id="BulkContact" name="BulkContact" readonly="readonly" data-val="true" data-val-required="Contact No. are Blank"></textarea>
+                            @Html.ValidationMessage("BulkContact")
+                        </div>
+                        <div class="form-group">
+                            <label for="feedback"> Message</label>
+                            <textarea name="SmsMessage" id="SmsMessage" rows="5" class="form-control" data-val="true" data-val-required="Message is Blank"></textarea>
+                            @Html.ValidationMessage("SmsMessage")
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-default btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+                        <button type="submit" class="btn btn-default btn-success"><span class="glyphicon glyphicon-off"></span> Submit</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <!-- Email Modal -->
+    <div class="modal fade" id="emailModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content Email-->
+            <div class="modal-content">
+                @using (Html.BeginForm("SendEmail", "CRMEnquiry", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    <input type="hidden" value="false" name="EmailAll" id="emailAll" />
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4><span class="glyphicon glyphicon-envelope"></span> Send Email</h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="form-group">
+                            <label for="EmailId"> Email</label>
+                            <textarea class="form-control" id="BulkEmailId" name="BulkEmailId" readonly="readonly" data-val="true" data-val-required="Email IDs are Blank"></textarea>
+                            @Html.ValidationMessage("BulkEmailId")
+                        </div>
+                        <div class="form-group">
+                            <label for="ContactNo"> Subject </label>
+                            <input type="text" class="form-control" id="EmailSubject" name="EmailSubject" data-val="true" data-val-required="Subject is Blank" />
+                            @Html.ValidationMessage("EmailSubject")
+                        </div>
+
+                        <div class="form-group">
+                            <label for="Message"> Message</label>
+                            <textarea name="EmailMessage" id="EmailMessage" class="form-control" data-val="true" data-val-required="Message is Blank"></textarea>
+                            @Html.ValidationMessage("EmailMessage")
+                        </div>
+                        <div class="form-group">
+                            <label for="Attachment"> Attachment </label>
+                            <input type="file" id="Attachment" name="Attachment" />
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-default btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+                        <button type="submit" class="btn btn-default btn-success"><span class="glyphicon glyphicon-off"></span> Submit</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <!--SubUser Executive Modal-->
+    <div class="modal fade" id="subUserModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content of Feedback-->
+            <div class="modal-content">
+                @using (Ajax.BeginForm("Transfer", "CRMEnquiry", new AjaxOptions() { HttpMethod = "Post", OnBegin = "ShowMsg", OnSuccess = "HideMsg" }))
+                {
+                    <input type="hidden" value="" name="EnquiryIds" id="EnquiryIds" />
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4>Transfer to Sub-User</h4>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-default btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+                        <button type="submit" class="btn btn-default btn-success"><span class="glyphicon glyphicon-off"></span> Submit</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+}

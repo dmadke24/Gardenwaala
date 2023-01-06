@@ -1,0 +1,16 @@
+﻿@using GardenViewModel
+@model IEnumerable<ProductViewModel>
+
+<ul class="menu-col">
+    @if (Model != null)
+    {
+        foreach (ProductViewModel pdt in Model)
+        {
+            if (pdt != null)
+            {
+                <li><a href="@Url.Action("ProductDetail", "Shop", new { pid = @pdt.ProductId })">@pdt.Name</a></li>
+            }
+        }
+        <li><a href="@Url.Action("ProductList", "Shop", new { pid =  @Model.First().CategoryId})">More...</a></li>
+    }
+</ul>

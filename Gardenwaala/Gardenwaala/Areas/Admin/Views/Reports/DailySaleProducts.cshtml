@@ -1,0 +1,92 @@
+﻿@{
+    ViewBag.Heading = "Daily Sale Products Details";
+    ViewBag.CurrentMenu = "salerpt";
+}
+
+<link href="~/Areas/Admin/assets/css/bootstrap-datepicker3.min.css" rel="stylesheet" />
+<style>
+    .datepicker-dropdown::after, .datepicker-dropdown::before {
+        position: relative !important;
+    }
+</style>
+<div class="page-header">
+    <h1>
+        Product Sale Details Date Wise
+    </h1>
+</div><!-- /.page-header -->
+<div id="divLoader" style="display:none;"> <img src="~/assets/images/ajax-loader.gif" alt="Loader" /> </div>
+@Html.ValidationSummary(true, "Error", new { @class = "alert alert-danger" })
+<div class="box-b order-new">
+    <div class="row">
+        <div class="col-xs-12">
+            <!-- PAGE CONTENT BEGINS -->
+
+            <div class="col-md-12 col-sm-12 middle_block">
+                <div class="row padding_class">
+                    @using (Html.BeginForm("DailySaleProducts", "Reports", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        <div class="col-sm-3 sub_block_report">
+                            <div>
+                                <label for="MenuItem">Start Date</label>
+                                <div class="input-group">
+                                    @Html.TextBox("startDt", "", new { @class = "form-control date-picker", data_date_format = "yyyy-mm-dd", @required = "required" })
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-calendar bigger-110"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 sub_block_report">
+                            <div>
+                                <label for="MenuItem">End Date</label>
+                                <div class="input-group">
+                                    @Html.TextBox("endDt", "", new { @class = "form-control date-picker", data_date_format = "yyyy-mm-dd", @required="required" })
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-calendar bigger-110"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 sub_block_report" style="margin-top:20px;float:right">
+                            &nbsp;
+                        </div>
+                        <div class="col-sm-3 sub_block_report" style="margin-top:20px;float:right">
+                            <button id="btnDownload" type="submit" class="btn btn-danger btn-block"><i class="ace-icon fa fa-floppy-o"></i> Download</button>
+                        </div>
+
+                    }
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    @section Validation{
+        <script src="~/Scripts/jquery.validate.min.js"></script>
+        <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+        <script src="~/Areas/Admin/assets/js/moment.min.js"></script>
+        <script src="~/Areas/Admin/assets/js/bootstrap-datepicker.min.js"></script>
+        <script src="~/Areas/Admin/assets/js/bootstrap-datetimepicker.min.js"></script>
+        <script>
+            $("#btnDownload").on('Click', function () {
+                var startDt = $("#startDt").val();
+                var endDt = $("#endDt").val();
+
+                if (startDt == "" || endDt == "") {
+                    alert("Select Start and End Date.");
+                    return false;
+                }
+            });
+
+            $(document).ready(function () {
+                $('.date-picker').datepicker({
+                    autoclose: true,
+                    todayHighlight: true
+                })
+                   //show datepicker when clicking on the icon
+                   .next().on(ace.click_event, function () {
+                       $(this).prev().focus();
+                   });
+            });
+        </script>
+    }

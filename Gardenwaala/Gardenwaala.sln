@@ -1,0 +1,61 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.1209
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gardenwaala", "Gardenwaala\Gardenwaala.csproj", "{87BB2112-1F26-43DF-8084-FE070E11743C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "..\DAL\DAL.csproj", "{925CCF39-A9D4-41C7-B312-2F82152E6F12}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GardenViewModel", "..\GardenViewModel\GardenViewModel.csproj", "{C2842205-3ECF-4DB6-8885-6D6D2CB8B8A0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BAL", "..\BAL\BAL.csproj", "{192FCEA8-5137-4701-8AA6-3871821BF276}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomValidation", "..\CustomValidation\CustomValidation.csproj", "{CF9FCAE8-17C5-4366-89F6-469EA9D1F268}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GardenWaalaAPI", "..\GardenWaalaAPI\GardenWaalaAPI.csproj", "{0A9C37A1-A461-43EB-935A-A6328A11E287}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GardenAPIViewModel", "..\GarderAIVIewModel\GardenAPIViewModel.csproj", "{0D0388FB-A2F0-4CCD-BD23-ABB6FB6B8D19}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{87BB2112-1F26-43DF-8084-FE070E11743C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87BB2112-1F26-43DF-8084-FE070E11743C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87BB2112-1F26-43DF-8084-FE070E11743C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87BB2112-1F26-43DF-8084-FE070E11743C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{925CCF39-A9D4-41C7-B312-2F82152E6F12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{925CCF39-A9D4-41C7-B312-2F82152E6F12}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{925CCF39-A9D4-41C7-B312-2F82152E6F12}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{925CCF39-A9D4-41C7-B312-2F82152E6F12}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2842205-3ECF-4DB6-8885-6D6D2CB8B8A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2842205-3ECF-4DB6-8885-6D6D2CB8B8A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2842205-3ECF-4DB6-8885-6D6D2CB8B8A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2842205-3ECF-4DB6-8885-6D6D2CB8B8A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{192FCEA8-5137-4701-8AA6-3871821BF276}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{192FCEA8-5137-4701-8AA6-3871821BF276}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{192FCEA8-5137-4701-8AA6-3871821BF276}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{192FCEA8-5137-4701-8AA6-3871821BF276}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF9FCAE8-17C5-4366-89F6-469EA9D1F268}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF9FCAE8-17C5-4366-89F6-469EA9D1F268}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF9FCAE8-17C5-4366-89F6-469EA9D1F268}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF9FCAE8-17C5-4366-89F6-469EA9D1F268}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A9C37A1-A461-43EB-935A-A6328A11E287}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A9C37A1-A461-43EB-935A-A6328A11E287}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A9C37A1-A461-43EB-935A-A6328A11E287}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A9C37A1-A461-43EB-935A-A6328A11E287}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D0388FB-A2F0-4CCD-BD23-ABB6FB6B8D19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D0388FB-A2F0-4CCD-BD23-ABB6FB6B8D19}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D0388FB-A2F0-4CCD-BD23-ABB6FB6B8D19}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D0388FB-A2F0-4CCD-BD23-ABB6FB6B8D19}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DA18351A-29C7-4F3F-9504-D6B402B658EC}
+	EndGlobalSection
+EndGlobal

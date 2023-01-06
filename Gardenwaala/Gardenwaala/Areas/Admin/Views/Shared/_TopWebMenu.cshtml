@@ -1,0 +1,52 @@
+﻿@{
+    string currMenu = ViewBag.CurrentMenu;
+    
+}
+<div class="invisible">
+    <button data-target="#sidebar2" data-toggle="collapse" type="button" class="pull-left navbar-toggle collapsed">
+        <span class="sr-only">Website Menu</span>
+        <i class="ace-icon fa fa-dashboard white bigger-125"></i>
+    </button>
+    <div id="sidebar2" class="sidebar h-sidebar navbar-collapse collapse ace-save-state">
+        <ul class="nav nav-list">
+            <li class="hover @(currMenu=="cap"?"active open":string.Empty)">
+                <a class="top-menu" href="@Url.Action("Index","MenuCaption")">
+                    <p class="counter_horizontal">1</p>
+                    <span class="menu-text"> Rename Menu </span>
+                </a>
+                <b class="arrow"></b>
+            </li>
+            <li class="hover @(currMenu=="mnu"?"active open":string.Empty)">
+                <a class="top-menu" href="@Url.Action("Index","Menu")">
+                    <p class="counter_horizontal">2</p>
+                    <span class="menu-text">Menu</span>
+                </a>
+                <b class="arrow"></b>
+            </li>
+            <li class="hover @(currMenu=="mnuc"?"active open":string.Empty)">
+                <a class="top-menu" href="@Url.Action("Index","MenuContent")">
+                    <p class="counter_horizontal">3</p>
+                    <span class="menu-text"> Menu Content </span>
+                </a>
+                <b class="arrow"></b>
+            </li>
+            @if (CurrentUser.Features.Contains("Sub Menu"))
+            {
+                <li class="hover @(currMenu=="smnu"?"active open":string.Empty)">
+                    <a class="top-menu" href="@Url.Action("Index","SubMenu")">
+                        <p class="counter_horizontal">4</p>
+                        <span class="menu-text"> Sub-Menu </span>
+                    </a>
+                    <b class="arrow"></b>
+                </li>
+                <li class="hover  @(currMenu=="submnuc"?"active open":string.Empty)">
+                    <a class="top-menu" href="@Url.Action("Index","SubMenuContent")">
+                        <p class="counter_horizontal">5</p>
+                        <span class="menu-text"> Sub-Menu Content </span>
+                    </a>
+                    <b class="arrow"></b>
+                </li>
+            }
+        </ul><!-- /.nav-list -->
+    </div><!-- .sidebar -->
+</div>

@@ -1,0 +1,29 @@
+﻿@using GardenViewModel
+@model IEnumerable<ProductViewModel>
+<section class="product-list pbc-5 pb-4 pt-5 bg-light">
+    <div class="container">
+        <h6 class="mt-1 mb-0 float-right"><a href="#">View All Items</a></h6>
+        <h4 class="mt-0 mb-3 text-dark font-weight-normel">Best Selling Items</h4>
+        <div class="row">
+            @foreach (ProductViewModel pmnu in Model)
+            {
+                <div class="col-6 col-md-3">
+                    <div class="card list-item bg-white rounded overflow-hidden position-relative shadow-sm">
+                        <span class="like-icon"><a href="#"> <i class="icofont icofont-heart"></i></a></span>
+                        <a href="@Url.Action("ProductDetail", "Shop", new { Pid = @pmnu.ProductId})">
+                            <span class="badge badge-danger">NEW</span>
+                            <img src="~/Areas/Admin/UploadImg/ProductImg/@pmnu.Image1" class="card-img-top" alt="@pmnu.Name">
+                        </a>
+                        <div class="card-body">
+                            <h6 class="card-title mb-1">@pmnu.Name</h6>
+                            <div class="stars-rating">
+                                <i class="icofont icofont-star active"></i><i class="icofont icofont-star active"></i><i class="icofont icofont-star active"></i><i class="icofont icofont-star active"></i><i class="icofont icofont-star"></i> <span>613</span>
+                            </div>
+                            <p class="mb-0 text-dark">₹ @pmnu.OfferPrice <span class="text-black-50"><del>₹ @pmnu.Price </del></span></p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>

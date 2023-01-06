@@ -1,0 +1,114 @@
+﻿@using GardenViewModel;
+@model IEnumerable<CategoryViewModel>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-white pt-0 pb-0">
+    <div class="container">
+        <a class="navbar-brand" href="@Url.Action("Index","Home")">
+            <img src="~/Areas/Client/Assets/images/logo white.png" alt="Gardenwaala">
+        </a>
+        <a class="toggle" href="#">
+            <span></span>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto main-nav-left">
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("Index","Home")"><i class="icofont-ui-home"></i></a>
+                </li>
+                <li class="nav-item dropdown mega-drop-main">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Plants
+                    </a>
+                    <div class="dropdown-menu mega-drop  shadow-sm border-0" aria-labelledby="navbarDropdown">
+                        <div class="row ml-0 mr-0">
+                            <div class="col-lg-2 col-md-2">
+                                <div class="mega-list">
+                                    <a class="mega-title" href="#">Indoor Plants</a>
+                                    @Html.Action("SubCategory", "Home", new { cid = 20210004 })
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-2">
+                                <div class="mega-list">
+                                    <a class="mega-title" href="#">Plants on Rent</a>
+                                    @Html.Action("SubCategory", "Home", new { cid = 20210005 })
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-2">
+                                <div class="mega-list">
+                                    <a class="mega-title" href="#">Outdoor Plants</a>
+                                    @Html.Action("SubCategory", "Home", new { cid = 20210007 })
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-2">
+                                <div class="mega-list">
+                                    <a class="mega-title" href="#">Combo Packs</a>
+                                    @Html.Action("SubCategory", "Home", new { cid = 20210008 })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("ProductListCategory", "Shop", new { pid = 20210006})">Pots & Planters</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Gardening
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right shadow-sm border-0">
+                        <a class="dropdown-item" href="@Url.Action("ProductList", "Shop", new { pid = 20210009})">Garden Service</a>
+                        <a class="dropdown-item" href="@Url.Action("ProductList", "Shop", new { pid =  20210010})">Garden Materials</a>
+                        <a class="dropdown-item" href="@Url.Action("ProductList", "Shop", new { pid = 20210012})">Garden Tools</a>
+                    </div>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Seeds & Bulb
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right shadow-sm border-0">
+                        <a class="dropdown-item" href="@Url.Action("ProductList", "Shop", new { pid = 20210054})">Vegetable Seeds</a>
+                        <a class="dropdown-item" href="@Url.Action("ProductList", "Shop", new { pid =  20210055})">Seasonal Flower seeds</a>
+                        <a class="dropdown-item" href="@Url.Action("ProductList", "Shop", new { pid = 20210057})">Native Plant Seeds</a>
+                        <a class="dropdown-item" href="@Url.Action("ProductList", "Shop", new { pid = 20210059})">Bulbs</a>
+                    </div>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0 top-search">
+                <button class="btn-link" type="submit"><i class="icofont-search"></i></button>
+                <input class="form-control mr-sm-2" type="search"
+                       placeholder="Search for products, brands and more" aria-label="Search">
+            </form>
+            <ul class="navbar-nav ml-auto profile-nav-right">
+                @if (!User.Identity.IsAuthenticated)
+                {
+                    <li class="nav-item">
+                        <a href="#" data-target="#login" data-toggle="modal" class="nav-link ml-0">
+                            <i class="icofont-ui-user"></i> Login/Sign Up
+                        </a>
+                    </li>
+                }
+                else
+                {
+                    <li class="nav-item">
+                        <a href="@Url.Action("MyProfile","MyAccount")" class="nav-link ml-0">
+                            <i class="icofont-ui-user"></i> My Account
+                        </a>
+                    </li>
+                }
+                <li class="nav-item cart-nav">
+                    <a data-toggle="offcanvas" id="cartDet" class="nav-link" href="javascript:void(0);">
+                        <i class="icofont-basket"></i> Cart
+                        <span class="badge badge-danger" id="cartItemsCnt"></span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

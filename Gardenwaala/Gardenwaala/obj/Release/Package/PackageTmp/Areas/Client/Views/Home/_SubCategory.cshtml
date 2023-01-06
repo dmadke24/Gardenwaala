@@ -1,0 +1,15 @@
+﻿@using GardenViewModel
+@model IEnumerable<SubCategoryViewModel>
+<ul class="menu-col">
+
+    @if (Model != null)
+    {
+        foreach (SubCategoryViewModel sctype in Model)
+        {
+            if (sctype != null)
+            {
+                <li><a href="@Url.Action("ProductList", "Shop", new { pid =  @sctype.SubCategoryId})">@sctype.SubCategoryName</a></li>
+            }
+        }
+    }
+    </ul>

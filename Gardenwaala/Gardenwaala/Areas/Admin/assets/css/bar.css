@@ -1,0 +1,39 @@
+#data-table {
+	display: none;
+}
+/*
+.bar span {
+	background: #fefefe url(../images/info-bg.png) 0 100% repeat-x;
+}
+*/
+.bar span {
+	background: rgba(0, 0, 0, 0);
+}
+.fig0, .fig4, .fig8,.fig10{
+	background: #87B87F; /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(#87B87F); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(#87B87F); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(#87B87F); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(#87B87F); /* Standard syntax */
+}
+.fig1, .fig5, .fig9 {
+	background: #6FB3E0; /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(#6FB3E0); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(#6FB3E0); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(#6FB3E0); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(#6FB3E0); /* Standard syntax */
+}
+.fig2, .fig6,.fig11 {
+	background: #FFB752; /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(#FFB752); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(#FFB752); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(#FFB752); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(#FFB752); /* Standard syntax */
+}
+.fig3, .fig7 {
+	background: #D64825; /* Not support gradients */
+  background: -webkit-linear-gradient(left, #D64825 , #882F18); /* For Safari */
+  background: -o-linear-gradient(right, #D64825 , #882F18); /* For Opera */
+  background: -moz-linear-gradient(right, #D64825 , #882F18); /* For Firefox */
+  background: linear-gradient(to right, #D64825 , #882F18); /* Standard */
+}

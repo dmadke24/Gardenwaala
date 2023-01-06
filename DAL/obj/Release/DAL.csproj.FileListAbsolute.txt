@@ -1,0 +1,11 @@
+D:\NewProjects\Gardenwaala\DAL\bin\Release\DAL.dll.config
+D:\NewProjects\Gardenwaala\DAL\bin\Release\DAL.dll
+D:\NewProjects\Gardenwaala\DAL\bin\Release\DAL.pdb
+D:\NewProjects\Gardenwaala\DAL\bin\Release\EntityFramework.dll
+D:\NewProjects\Gardenwaala\DAL\bin\Release\EntityFramework.SqlServer.dll
+D:\NewProjects\Gardenwaala\DAL\bin\Release\EntityFramework.xml
+D:\NewProjects\Gardenwaala\DAL\bin\Release\EntityFramework.SqlServer.xml
+D:\NewProjects\Gardenwaala\DAL\obj\Release\DAL.csproj.CoreCompileInputs.cache
+D:\NewProjects\Gardenwaala\DAL\obj\Release\DAL.csproj.CopyComplete
+D:\NewProjects\Gardenwaala\DAL\obj\Release\DAL.dll
+D:\NewProjects\Gardenwaala\DAL\obj\Release\DAL.pdb

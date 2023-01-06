@@ -1,0 +1,123 @@
+﻿@model FAQViewModel
+
+@{
+    ViewBag.Heading = "FAQ";
+    string action;
+    ViewBag.CurrentMenu = "faq";
+
+    if (Model == null)
+    {
+        ViewBag.Title = "Create";
+        action = "Create";
+        ViewBag.Breadcrumbs = "New Faq";
+    }
+    else
+    {
+        ViewBag.Title = "Edit";
+        action = "Edit";
+        ViewBag.Breadcrumbs = "Edit Faq";
+    }
+
+}
+
+<div class="page-header">
+    <h1>
+        @action
+        <small>
+            <i class="ace-icon fa fa-angle-double-right"></i>
+            FAQ
+        </small>
+    </h1>
+</div><!-- /.page-header -->
+<div class="ace-settings-container" id="ace-settings-container">
+    <div class="btn btn-app btn-xs btn-warning ace-settings-btn" id="ace-settings-btn">
+        <i class="ace-icon fa fa-question-circle bigger-130"></i>
+    </div>
+
+    <div class="ace-settings-box clearfix" id="ace-settings-box">
+        <h3>Help</h3>
+        <p>Frequently asked questions (FAQ) and Answers are filled in this section, all supposed to be commonly asked Questions & Answers about your Business, Products, Services etc.</p>
+        <ul class="help_list">
+            <li>Fill the necessary details. </li>
+        </ul>
+
+    </div><!-- help-box -->
+</div>
+@Html.ValidationSummary(true, "Error", new { @class = "alert alert-danger" })
+<div class="row">
+    <div class="col-xs-12">
+        <!-- PAGE CONTENT BEGINS -->
+        @using (Html.BeginForm(action, "Faq", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+
+            if (action == "Edit")
+            {
+                @Html.HiddenFor(m => m.FaqId)
+            }
+            else
+            {
+                @Html.Hidden("FaqId", 0)
+            }
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Question, new { @class = "col-sm-3 control-label no-padding-right" })
+
+                <div class="col-sm-5">
+                    @Html.TextBoxFor(m => m.Question, new { @class = "col-xs-10 col-sm-5 width-100" })
+                </div>
+                <div class="col-sm-4">
+
+                    @Html.ValidationMessageFor(m => m.Question, "", new { @class = "col-xs-12 col-sm-6" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Answer, new { @class = "col-sm-3 control-label no-padding-right" })
+
+                <div class="col-sm-5">
+                    @Html.TextAreaFor(m => m.Answer, new { @class = "col-xs-10 col-sm-5 width-100", rows = "5" })
+                </div>
+                <div class="col-sm-4">
+                    @Html.ValidationMessageFor(m => m.Answer, "", new { @class = "col-xs-12 col-sm-6" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Status, new { @class = "col-sm-3 control-label no-padding-right" })
+
+                <div class="col-sm-5">
+                    <div class="radio">
+                        <label>
+                            @Html.RadioButtonFor(m => m.Status, "true", new { @class = "ace", @checked = "checked" })
+                            <span class="lbl"> Active</span>
+                        </label>
+                        <label>
+                            @Html.RadioButtonFor(m => m.Status, "false", new { @class = "ace" })
+                            <span class="lbl"> Inactive</span>
+                        </label>
+                    </div>
+                    <div class="radio">
+                    </div>
+                </div>
+            </div>
+            <div class="space-4"></div>
+            <div class="clearfix form-actions">
+                <div class="col-md-offset-3 col-md-9">
+                    <button class="btn btn-info" type="submit">
+                        <i class="ace-icon fa fa-check bigger-110"></i>
+                        Submit
+                    </button>
+                    &nbsp; &nbsp; &nbsp;
+                    <button class="btn" type="reset">
+                        <i class="ace-icon fa fa-undo bigger-110"></i>
+                        Reset
+                    </button>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+@section Validation{
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+}

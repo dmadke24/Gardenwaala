@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="77bd885d816e4994bf5b1cf972d57507" Name="Diagram1" ZoomLevel="74">
+        <EntityTypeShape EntityType="GardenDBModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="2.875" />
+        <EntityTypeShape EntityType="GardenDBModel.Area" Width="1.5" PointX="17.5" PointY="3" />
+        <EntityTypeShape EntityType="GardenDBModel.Banner" Width="1.5" PointX="2.75" PointY="2.875" />
+        <EntityTypeShape EntityType="GardenDBModel.Career" Width="1.5" PointX="0.75" PointY="13.875" />
+        <EntityTypeShape EntityType="GardenDBModel.Category" Width="1.5" PointX="3.75" PointY="14.25" />
+        <EntityTypeShape EntityType="GardenDBModel.City" Width="1.5" PointX="15.25" PointY="3" />
+        <EntityTypeShape EntityType="GardenDBModel.Country" Width="1.5" PointX="10.75" PointY="3.25" />
+        <EntityTypeShape EntityType="GardenDBModel.DiscountCoupon" Width="1.5" PointX="6" PointY="13.875" />
+        <EntityTypeShape EntityType="GardenDBModel.Enquiry" Width="1.5" PointX="12.75" PointY="6.875" />
+        <EntityTypeShape EntityType="GardenDBModel.Epamphlet" Width="1.5" PointX="12.75" PointY="10.875" />
+        <EntityTypeShape EntityType="GardenDBModel.FAQ" Width="1.5" PointX="12.75" PointY="13.875" />
+        <EntityTypeShape EntityType="GardenDBModel.InvoiceDetail" Width="1.5" PointX="10.5" PointY="15.375" />
+        <EntityTypeShape EntityType="GardenDBModel.Invoice" Width="1.5" PointX="8.25" PointY="14.75" />
+        <EntityTypeShape EntityType="GardenDBModel.Job" Width="1.5" PointX="14.75" PointY="6.875" />
+        <EntityTypeShape EntityType="GardenDBModel.OrderDetail" Width="1.5" PointX="10.5" PointY="9.25" />
+        <EntityTypeShape EntityType="GardenDBModel.Order" Width="1.5" PointX="8.25" PointY="7.125" />
+        <EntityTypeShape EntityType="GardenDBModel.OTP" Width="1.5" PointX="14.75" PointY="10.875" />
+        <EntityTypeShape EntityType="GardenDBModel.Product" Width="1.5" PointX="8.25" PointY="0.75" />
+        <EntityTypeShape EntityType="GardenDBModel.RecentUpdate" Width="1.5" PointX="5.25" PointY="7.375" />
+        <EntityTypeShape EntityType="GardenDBModel.Role" Width="1.5" PointX="0.75" PointY="6.625" />
+        <EntityTypeShape EntityType="GardenDBModel.State" Width="1.5" PointX="13" PointY="3.125" />
+        <EntityTypeShape EntityType="GardenDBModel.SubCategory" Width="1.5" PointX="6" PointY="4.375" />
+        <EntityTypeShape EntityType="GardenDBModel.Tax" Width="1.5" PointX="14.75" PointY="13.875" />
+        <EntityTypeShape EntityType="GardenDBModel.TempCart" Width="1.5" PointX="5.25" PointY="19" />
+        <EntityTypeShape EntityType="GardenDBModel.Testimonial" Width="1.5" PointX="12.75" PointY="16.875" />
+        <EntityTypeShape EntityType="GardenDBModel.User" Width="1.5" PointX="3" PointY="8.25" />
+        <EntityTypeShape EntityType="GardenDBModel.UserType" Width="1.5" PointX="0.75" PointY="9.625" />
+        <EntityTypeShape EntityType="GardenDBModel.Visitor" Width="1.5" PointX="14.75" PointY="16.875" />
+        <EntityTypeShape EntityType="GardenDBModel.GetBillDetail" Width="1.5" PointX="0.75" PointY="18.875" />
+        <EntityTypeShape EntityType="GardenDBModel.GetOrderDetail" Width="1.5" PointX="16.75" PointY="6.875" />
+        <EntityTypeShape EntityType="GardenDBModel.GetSaleProduct" Width="1.5" PointX="16.75" PointY="10.875" />
+        <EntityTypeShape EntityType="GardenDBModel.GetUserDetail" Width="1.5" PointX="16.75" PointY="13.875" />
+        <AssociationConnector Association="GardenDBModel.FK_dbo_Areas_dbo_Cities_CityId" />
+        <AssociationConnector Association="GardenDBModel.FK_dbo_DiscountCoupons_FoodType" />
+        <AssociationConnector Association="GardenDBModel.FK_FoodMenus_FoodTypes" />
+        <AssociationConnector Association="GardenDBModel.FK_FoodSubTypes_FoodTypes" />
+        <AssociationConnector Association="GardenDBModel.FK_dbo_Cities_dbo_States_StateId" />
+        <AssociationConnector Association="GardenDBModel.FK_dbo_States_dbo_Countries_CountryId" />
+        <AssociationConnector Association="GardenDBModel.FK_dbo_Invoices_dbo_DiscountCoupons_CouponId" />
+        <AssociationConnector Association="GardenDBModel.FK_dbo_Orders_dbo_DiscountCoupons_CouponId" />
+        <AssociationConnector Association="GardenDBModel.FK_dbo_InvoiceDetails_dbo_Invoices_InvoiceId" />
+        <AssociationConnector Association="GardenDBModel.FK_OrderDetails_FoodMenu" />
+        <AssociationConnector Association="GardenDBModel.FK_OrderDetails_Orders" />
+        <AssociationConnector Association="GardenDBModel.FK_dbo_Orders_dbo_Users_User_UserId" />
+        <AssociationConnector Association="GardenDBModel.FK_FoodMenus_FoodSubTypes" />
+        <AssociationConnector Association="GardenDBModel.FK_dbo_RecentUpdates_dbo_Users_User_UserId" />
+        <AssociationConnector Association="GardenDBModel.FK_Users_Role" />
+        <AssociationConnector Association="GardenDBModel.FK_TempCart_User" />
+        <AssociationConnector Association="GardenDBModel.FK_Users_Usertype" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

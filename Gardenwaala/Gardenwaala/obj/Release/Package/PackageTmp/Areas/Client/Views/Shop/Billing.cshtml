@@ -1,0 +1,295 @@
+﻿@using GardenViewModel
+@model OrderViewModel
+@{
+    IEnumerable<TempCartViewModel> lstCart = new List<TempCartViewModel>();
+    if (Session["cart"] != null)
+    {
+        lstCart = Session["cart"] as IEnumerable<TempCartViewModel>;
+    }
+    double total= 0;
+    }
+<div class="breadcrumb">
+    <h1>Checkout Page</h1>
+    <ul>F
+        <li><a href="index.html">Home</a></li>
+        <li class="active">Checkout Page</li>
+    </ul>
+</div>
+<div class="container">
+    <div class="row ">
+        <div id="column-left" class="col-sm-4 col-md-4 col-lg-3 hidden-xs">
+            <div class="left-special left-sidebar-widget mb_50">
+                <div class="heading-part mb_20 ">
+                    <h2 class="sub_title pull-left">Top Products</h2>
+                </div>
+                @Html.Action("BestSeller", "MyAccount")
+            </div>
+        </div>
+        <div class="col-sm-8 col-md-8 col-lg-9 mb_30">
+            <div class="col-sm-8 col-md-8 col-lg-9 mb_30">
+                @Html.ValidationSummary()
+            </div>
+            <div class="panel-group" id="accordion">
+                @using (Html.BeginForm("Billing", "Shop"))
+                {
+                    <div class="panel panel-default ">
+                        <div class="panel-heading">
+                            <h4 class="panel-title"> <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">Step 1: Billing Details <i class="fa fa-caret-down"></i></a> </h4>
+                        </div>
+                        <div id="collapseTwo" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" checked="checked" value="E" name="IsBillExistingAddress" data-id="payment-existing">
+                                        I want to use an existing address
+                                    </label>
+                                </div>
+                                <div id="payment-existing">
+                                    <input type="text" class="col-sm-12" id="BillingAddress" name="BillingAddress" value="@ViewBag.UserAddr" readonly="readonly" />
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" value="N" name="IsBillExistingAddress" data-id="payment-new">
+                                        I want to use a new address
+                                    </label>
+                                </div>
+                                <br>
+                                <div id="payment-new">
+                                    <div class="form-group required">
+                                        <label for="input-payment-firstname" class="col-sm-2 control-label">Name </label>
+                                        <div class="col-sm-10">
+                                            @Html.TextBoxFor(m => m.BillName, new { @class = "form-control", placeholder = "Name" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group required">
+                                        <label for="input-payment-address-1" class="col-sm-2 control-label">Address </label>
+                                        <div class="col-sm-10">
+                                            @Html.TextAreaFor(m => m.BillAddress, new { @class = "form-control", placeholder = "Billing Address" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group required">
+                                        <label for="input-payment-city" class="col-sm-2 control-label">Area</label>
+                                        <div class="col-sm-10">
+                                            @Html.TextBoxFor(m => m.BillArea, new { @class = "form-control", placeholder = "Area" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="input-payment-postcode" class="col-sm-2 control-label">Pin Code</label>
+                                        <div class="col-sm-10">
+                                            @Html.TextBoxFor(m => m.BillPinCode, new { @class = "form-control", placeholder = "Pin Code" })
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="input-payment-postcode" class="col-sm-2 control-label">Phone</label>
+                                        <div class="col-sm-10">
+                                            @Html.TextBoxFor(m => m.BillPhone, new { @class = "form-control", placeholder = "Contact No." })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="buttons clearfix">
+                                    <div class="pull-right">
+                                        <input type="button" class="btn" data-loading-text="Loading..." id="button-payment-address" value="Continue">
+                                    </div>
+                                </div>
+                                @*</form>*@
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default ">
+                        <div class="panel-heading">
+                            <h4 class="panel-title"> <a id="anchorDeliveryAdd" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">Step 2: Delivery Details <i class="fa fa-caret-down"></i></a> </h4>
+                        </div>
+                        <div id="collapseThree" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                @*<form class="form-horizontal">*@
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" checked="checked" value="existing" name="shipping_address">
+                                        I want to use an existing address
+                                    </label>
+                                </div>
+                                <div id="shipping-existing">
+                                    <input type="text" class="col-sm-12" id="ShippingAddress" name="ShippingAddress" value="@ViewBag.UserAddr" readonly="readonly" />
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" value="new" name="shipping_address">
+                                        I want to use a new address
+                                    </label>
+                                </div>
+                                <br>
+                                <div id="shipping-new">
+                                    <div class="form-group required">
+                                        <label for="input-payment-firstname" class="col-sm-2 control-label">Name </label>
+                                        <div class="col-sm-10">
+                                            @Html.TextBoxFor(m => m.ShipName, new { @class = "form-control", placeholder = "Name" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group required">
+                                        <label for="input-payment-address-1" class="col-sm-2 control-label">Address </label>
+                                        <div class="col-sm-10">
+                                            @Html.TextAreaFor(m => m.ShipAddress, new { @class = "form-control", placeholder = "Billing Address" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group required">
+                                        <label for="input-payment-city" class="col-sm-2 control-label">Area</label>
+                                        <div class="col-sm-10">
+                                            @Html.TextBoxFor(m => m.ShipArea, new { @class = "form-control", placeholder = "Area" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="input-payment-postcode" class="col-sm-2 control-label">Pin Code</label>
+                                        <div class="col-sm-10">
+                                            @Html.TextBoxFor(m => m.ShipPinCode, new { @class = "form-control", placeholder = "Pin Code" })
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="input-payment-postcode" class="col-sm-2 control-label">Phone</label>
+                                        <div class="col-sm-10">
+                                            @Html.TextBoxFor(m => m.ShipPhone, new { @class = "form-control", placeholder = "Contact No." })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="buttons clearfix">
+                                    <div class="pull-right">
+                                        <input type="button" class="btn" data-loading-text="Loading..." id="button-shipping-address" value="Continue">
+                                    </div>
+                                </div>
+                                @*</form>*@
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-default ">
+                        <div class="panel-heading">
+                            <h4 class="panel-title"> <a id="anchorPaymentMethod" data-toggle="collapse" data-parent="#accordion" href="#collapsefive">Step 3: Payment Method <i class="fa fa-caret-down"></i></a> </h4>
+                        </div>
+                        <div id="collapsefive" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <p>Please select the preferred payment method to use on this order.</p>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" checked="checked" value="cod" name="payment_method">
+                                        Cash On Delivery
+                                    </label>
+                                </div>
+                                <p><strong>Add Comments About Your Order</strong></p>
+                                <p>
+                                    @Html.TextAreaFor(m => m.PayRemark, new { @class = "form-control" })
+                                    @*<textarea class="form-control" rows="8" name="comment"></textarea>*@
+                                </p>
+                                <div class="buttons">
+                                    <div class="pull-right mt_20">
+                                        I have read and agree to the <a class="agree" href="#"><b>Terms &amp; Conditions</b></a>
+                                        @Html.CheckBoxFor(m => m.IsTermsAndCondition)
+                                        &nbsp;
+                                        <input type="button" class="btn" data-loading-text="Loading..." id="button-payment-method" value="Continue">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default ">
+                        <div class="panel-heading">
+                            <h4 class="panel-title"> <a id="anchorConfirmOrder" data-toggle="collapse" data-parent="#accordion" href="#collapsesix">Step 4: Confirm Order <i class="fa fa-caret-down"></i></a> </h4>
+                        </div>
+                        <div id="collapsesix" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                @if (lstCart.Count() > 0)
+                                {
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <td class="text-left">Product Name</td>
+                                                    <td class="text-right">Quantity</td>
+                                                    <td class="text-right">Unit Price</td>
+                                                    <td class="text-right">Total</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var cartItem in lstCart)
+                                                {
+                                                    <tr>
+                                                        <td class="text-left">@cartItem.ProdName</td>
+                                                        <td class="text-right">@cartItem.Quantity</td>
+                                                        <td class="text-right"><i class="fa fa-rupee"></i> @cartItem.Price.ToString("0.00")</td>
+                                                        <td class="text-right"><i class="fa fa-rupee"></i> @(cartItem.Price * cartItem.Quantity).00</td>
+                                                    </tr>
+                                                    total += (cartItem.Price * cartItem.Quantity);
+
+                                                }
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <td class="text-right" colspan="4"><strong>Sub-Total:</strong></td>
+                                                    <td class="text-right"><i class="fa fa-rupee"></i> @total.ToString("0.00")</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-right" colspan="4"><strong>Flat Shipping Rate:</strong></td>
+                                                    <td class="text-right"><i class="fa fa-rupee"></i> 0.00</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-right" colspan="4"><strong>Total:</strong></td>
+                                                    <td class="text-right"><i class="fa fa-rupee"></i> @total.ToString("0.00")</td>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div><span>Cart is Empty!</span></div>
+                                }
+                                <div class="buttons">
+                                    <div class="pull-right">
+                                        <input type="submit" data-loading-text="Loading..." class="btn" id="button-confirm" value="Confirm Order">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+@section ContentViewScript{
+    <script>
+        $(document).ready(function () {
+            //Payment Address
+            $('input[name=\'IsBillExistingAddress\']').on('change', function () {
+                if (this.value == 'N') {
+                    $('#payment-existing').hide();
+                    $('#payment-new').show();
+                } else {
+                    $('#payment-existing').show();
+                    $('#payment-new').hide();
+                }
+            });
+
+            //Shipping Address
+            $('input[name=\'shipping_address\']').on('change', function () {
+                if (this.value == 'new') {
+                    $('#shipping-existing').hide();
+                    $('#shipping-new').show();
+                } else {
+                    $('#shipping-existing').show();
+                    $('#shipping-new').hide();
+                }
+            });
+
+            $('#button-payment-address').click(function () {
+                $('#anchorDeliveryAdd').click();
+            });
+            $('#button-shipping-address').click(function () {
+                $('#anchorPaymentMethod').click();
+            });
+            $('#button-payment-method').click(function () {
+                $('#anchorConfirmOrder').click();
+            });
+        });
+    </script>
+}

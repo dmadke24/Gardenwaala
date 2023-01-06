@@ -1,0 +1,37 @@
+﻿@using GardenViewModel
+@model IEnumerable<ProductViewModel>
+<section class="product-list pbc-5 pb-4 pt-5 bg-light">
+    <div class="container">
+        <h6 class="mt-1 mb-0 float-right"><a href="#">View All Items</a></h6>
+        <h4 class="mt-0 mb-3 text-dark">Top Savers Today</h4>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="owl-carousel owl-carousel-category owl-theme">
+                    @foreach (ProductViewModel pmnu in Model)
+                    {
+                        <div class="item">
+                            <div class="card list-item bg-white rounded overflow-hidden position-relative shadow-sm">
+                                <span class="like-icon"><a href="#"> <i class="icofont icofont-heart"></i></a></span>
+                                <a href="@Url.Action("ProductDetail", "Shop", new { Pid = @pmnu.ProductId})">
+                                    <span class="badge badge-danger">NEW</span>
+                                    <img src="~/Areas/Admin/UploadImg/ProductImg/@pmnu.Image1" class="card-img-top" alt="...">
+                                </a>
+                                <div class="card-body">
+                                    <h6 class="card-title mb-1">@pmnu.Name</h6>
+                                    <div class="stars-rating">
+                                        <i class="icofont icofont-star active"></i><i class="icofont icofont-star active"></i><i class="icofont icofont-star active"></i><i class="icofont icofont-star active"></i><i class="icofont icofont-star"></i>
+                                        <span>613</span>
+                                    </div>
+                                    <p class="mb-0 text-dark">
+                                        ₹ @pmnu.Price <span class="text-black-50"><del>₹ @pmnu.OfferPrice </del></span>
+                                        <span class="bg-danger  rounded-sm pl-1 ml-1 pr-1 text-white small"> 50% OFF</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

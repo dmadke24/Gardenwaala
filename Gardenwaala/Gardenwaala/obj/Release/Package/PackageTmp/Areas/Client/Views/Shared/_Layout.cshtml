@@ -1,0 +1,186 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Gardenwaala - By Aadnya Agro</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="distribution" content="global">
+    <meta name="revisit-after" content="2 Days">
+    <meta name="robots" content="ALL">
+    <meta name="rating" content="8 YEARS">
+    <meta name="Language" content="en-us">
+    <meta name="GOOGLEBOT" content="NOARCHIVE">
+    <!-- =====  MOBILE SPECIFICATION  ===== -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="viewport" content="width=device-width">
+    <!-- =====  CSS  ===== -->
+    <link href="~/Areas/Client/Assets/use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="~/Areas/Client/Assets/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="~/Areas/Client/Assets/css/bootsnav.css">
+    <link rel="stylesheet" type="text/css" href="~/Areas/Client/Assets/css/menu.css">
+    <link rel="stylesheet" type="text/css" href="~/Areas/Client/Assets/css/animate.css">
+    <link rel="stylesheet" type="text/css" href="~/Areas/Client/Assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="~/Areas/Client/Assets/css/magnific-popup.css">
+    <link rel="stylesheet" type="text/css" href="~/Areas/Client/Assets/css/owl.carousel.css">
+    <link rel="shortcut icon" href="~/Areas/Client/Assets/images/favicon.png">
+</head>
+<body>
+    <!-- =====  LODER  ===== -->
+    <div class="loder"></div>
+    <div class="wrapper">
+        <!-- =====  HEADER START  ===== -->
+        @Html.Action("HeaderMenu", "Home")
+        <div class="social_icon flaoting_icon">
+            <ul class="floating_icon_left">
+                <li><a href="https://www.facebook.com/gardenwaala" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                <li><a href="https://goo.gl/maps/559xQAtka4YLjFEj8" target="_blank"><i class="fa fa-google"></i></a></li>
+                <li><a href="https://www.instagram.com/gardenwaala/?hl=en" target="_blank"><i class="fa fa-instagram"></i></a></li>
+            </ul>
+        </div>
+        <!-- =====  HEADER END  ===== -->
+        @RenderBody()
+        <!-- =====  FOOTER START  ===== -->
+        <div class="footer mt_80 ptb_80">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3 footer-block">
+                        <div class="content_footercms_right">
+                            <div class="footer-contact">
+                                <h6 class="footer-title ptb_20">Contact Us</h6>
+                                <ul>
+                                    <li>Address: Sr.No 47, Sunita nagar, <br />Wadgaon sheri, Pune - 411014</li>
+                                    <li>+91 8669999696</li>
+                                    <li>support@gardenwaala.com</li>
+                                </ul>
+                                <div class="social_icon">
+                                    <ul>
+                                        @*<li><a href="https://www.facebook.com/gardenwaala" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-google"></i></a></li>
+                                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                                <li><a href="#"><i class="fa fa-rss"></i></a></li>*@
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2 footer-block">
+                        <h6 class="footer-title ptb_20">Categories</h6>
+                        <ul>
+                            <li><a href="@Url.Action("ProductListCategory", "Shop", new { pid = 20210004})">Indoor plants</a></li>
+                            <li><a href="@Url.Action("ProductListCategory", "Shop", new { pid = 20210005})">Plant on Rent</a></li>
+                            <li><a href="@Url.Action("ProductListCategory", "Shop", new { pid = 20210007})">Outdoor Plants</a></li>
+                            <li><a href="@Url.Action("ProductListCategory", "Shop", new { pid = 20210008})">Combo Pack</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-2 footer-block">
+                        <h6 class="footer-title ptb_20">Information</h6>
+                        <ul>
+                            <li><a href="@Url.Action("ContactUs","Home")">Contact Us</a></li>
+                            <li><a href="@Url.Action("AboutUs","Home")">About Us</a></li>
+                            <li><a href="@Url.Action("Career","Home")">Career</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-2 footer-block">
+                        <h6 class="footer-title ptb_20">My Account</h6>
+                        <ul>
+                            <li><a href="@Url.Action("MyAccount","MyAccount")">My Account</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3">
+                        <h6 class="ptb_20">SIGN UP OUR NEWSLETTER</h6>
+                        <p class="mt_10 mb_20">Be sure to follow our blog and sign up for all of our mailing updates!</p>
+                        @Html.Action("Newsletter", "Home")
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom ptb_20">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="copyright-part">Copyright @DateTime.Now.Year- &copy; Gardenwaala.com. All rights reserved.</div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="payment-icon text-right">
+                            @*<ul>
+                                    <li><i class="fa fa-cc-paypal"></i></li>
+                                    <li><i class="fa fa-cc-stripe"></i></li>
+                                    <li><i class="fa fa-cc-visa"></i></li>
+                                    <li><i class="fa fa-cc-discover"></i></li>
+                                    <li><i class="fa fa-cc-mastercard"></i></li>
+                                    <li><i class="fa fa-cc-amex"></i></li>
+                                </ul>*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- =====  FOOTER END  ===== -->
+    </div>
+    <a id="scrollup">Scroll</a>
+    <script src="~/Areas/Client/Assets/js/jQuery_v3.1.1.min.js"></script>
+    <script src="~/Areas/Client/Assets/js/owl.carousel.min.js"></script>
+    <script src="~/Areas/Client/Assets/js/bootsnav.js"></script>
+    <script src="~/Areas/Client/Assets/js/bootstrap.min.js"></script>
+    <script src="~/Areas/Client/Assets/js/jquery.magnific-popup.js"></script>
+    <script src="~/Areas/Client/Assets/js/jquery.firstVisitPopup.js"></script>
+    <script src="~/Areas/Client/Assets/js/custom.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script>
+        function ShowNewsMsg(data) {
+            if (data.status == true) {
+                $('#ajaxResult').html('<div class="alert alert-success alert-dismissible fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>           <strong>Success! </strong>' + data.msg + '</div>');
+                $('#Email').val('');
+                alert("Thank you!");
+            }
+            else {
+                $('#ajaxResult').html('<div class="alert alert-danger alert-dismissible fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>           <strong>Fail! </strong>' + data.msg + '</div>');
+            }
+        }
+
+    </script>
+    @RenderSection("Register", false)
+    @RenderSection("ContentViewScript", false)
+
+    <script>
+       @*$(document).ready(function () {
+           $('#cartItems').html('');
+               $.ajax({
+                   url: '@Url.Action("GetMyCart","Shop")',
+                   type: 'GET',
+                   success: function (result, status, xhr) {
+                       console.log(result);
+                       var CartContainer = $('#cartItems');
+                       var cartStr = "";
+                       var total;
+                       cartStr += '<a href="#" class="dropdown-toggle" data-toggle="dropdown">'
+                           + '<i class="fa fa-shopping-bag" ></i>'
+                           + '<span class="badge">' + result.length+'</span></a>'
+                           + '<ul class="dropdown-menu cart-list">';
+                            CartContainer.html(cartStr);
+                            if (result.Status == true) {
+                           for (i = 0; i < result.length; i++) {
+                               cartStr+='<li>'
+                                        +'<a href="#" class="photo"><img src="~/Areas/Client/Assets/images/product/product1.jpg" class="cart-thumb" alt="" /></a>'
+                                   + '<h6><a href="#">' + result[i].ProdName+'</a></h6>'
+                                   + '<p>' + result[i].ProdName+' x - <span class="price">Rs. ' + result[i].Price+'</span></p>'
+                                   + '</li>'
+                               CartContainer.append(cartStr);
+                               total += (result[i].Price * result[i].Quantity);
+                           }
+                       }
+                       cartStr += '<li class="total"> <span class="pull-right"><strong>Total</strong>: Rs. ' + total + '</span> <a href="@Url.Action("Billing","Shop")" class="btn btn-default btn-cart">Cart</a> </li></ul>';
+                       CartContainer.append(cartStr);
+                }
+
+               });
+           });*@
+
+    </script>
+</body>
+</html>

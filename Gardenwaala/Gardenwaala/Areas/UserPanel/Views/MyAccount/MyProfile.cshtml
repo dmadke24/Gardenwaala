@@ -1,0 +1,123 @@
+﻿@using GardenViewModel
+@model UserViewModel
+<div class="main-nav shadow-sm">
+    @Html.Action("HeaderMenu", "Home")
+</div>
+</div>
+<section class="py-5 account-page bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="osahan-account-page-left overflow-hidden shadow-sm rounded bg-white h-100">
+                    <div class="p-4">
+                        <div class="osahan-user text-center">
+                            <div class="osahan-user-media">
+                                <img class="mb-3 rounded-pill shadow-sm mt-1" src="img/user/1.jpg" alt="gurdeep singh osahan">
+                                <div class="osahan-user-media-body">
+                                    <h6 class="mb-2 font-weight-bold">@Model.Name</h6>
+                                    <p class="mb-1">+91 @Model.ContactNo</p>
+                                    <p>@Model.Email</p>
+                                    <p class="mb-0 font-weight-bold"><a class="btn btn-outline-info btn-sm" data-toggle="modal" data-target="#edit-profile-modal" href="#"><i class="icofont-ui-edit"></i> EDIT</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="nav nav-tabs flex-column border-0" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="@Url.Action("MyProfile","MyAccount")" role="tab" aria-controls="my-profile" aria-selected="true"><i class="icofont-ui-user"></i> My Profile</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("MyAddress","MyAccount")" role="tab" aria-controls="my-address" aria-selected="false"><i class="icofont-location-pin"></i> My Address</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("WishList","MyAccount")" role="tab" aria-controls="wish-list" aria-selected="false"><i class="icofont-heart"></i> Wish List</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("MyOrders","MyAccount")" role="tab" aria-controls="order-list" aria-selected="false"><i class="icofont-list"></i> Order List</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("ChangePassword","MyAccount")" role="tab" aria-controls="order-status" aria-selected="false"><i class="icofont-file-document"></i> Change Password</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("Signout","MyAccount")"><i class="icofont-logout"></i> Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="osahan-account-page-right rounded shadow-sm bg-white p-4 h-100">
+                    <div class="tab-content" id="myTabContent">
+                        <div id="my-profile" role="tabpanel" aria-labelledby="my-profile-tab">
+                            <h4 class="text-dark mt-0 mb-4">My Profile</h4>
+                            <p>From your My Account Dashboard you have the ability to view a snapshot of your recent account activity and update your account information. Select a link below to view or edit information.</p>
+                            <form>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label class="control-label">Name <span class="required">*</span></label>
+                                            @Html.TextBoxFor(p => p.Name, new { @class = "form-control border-form-control" })
+                                            @Html.ValidationMessageFor(p => p.Name)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="control-label">Phone <span class="required">*</span></label>
+                                            @Html.TextBoxFor(p => p.ContactNo, new { @class = "form-control border-form-control" })
+                                            @Html.ValidationMessageFor(p => p.ContactNo)
+
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="control-label">Email Address <span class="required">*</span></label>
+                                            @Html.TextBoxFor(p => p.Email, new { @class = "form-control border-form-control" })
+                                            @Html.ValidationMessageFor(p => p.Email)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label class="control-label">State <span class="required">*</span></label>
+                                            <input class="form-control border-form-control " value="Maharashtra" disabled="">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label class="control-label">City <span class="required">*</span></label>
+                                            <input class="form-control border-form-control " value="Pune" disabled="">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label class="control-label">Zip Code <span class="required">*</span></label>
+                                            <input class="form-control border-form-control" value="411014" disabled="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label class="control-label">Address <span class="required">*</span></label>
+                                            @Html.TextAreaFor(p => p.Address, new { @class = "form-control border-form-control" })
+                                            @Html.ValidationMessageFor(p => p.Address)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12 text-right">
+                                        <button type="button" class="btn btn-outline-danger"> Cancel </button>
+                                        <button type="button" class="btn btn-primary"> Save Changes </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Footer -->

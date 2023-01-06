@@ -1,0 +1,27 @@
+﻿@using GardenViewModel
+@model IEnumerable<ProductViewModel>
+<div id="left-special" class="owl-carousel">
+    <ul class="row ">
+        @foreach (ProductViewModel pmnu in Model)
+        {
+            <li class="item product-layout-left mb_20">
+                <div class="product-list col-xs-4">
+                    <div class="product-thumb">
+                        <div class="image product-imageblock"> <a href="@Url.Action("ProductDetail", "Shop", new { Pid = @pmnu.ProductId})"> <img class="img-responsive" src="~/Areas/Admin/UploadImg/ProductImg/@pmnu.Image1" alt="@pmnu.Name" title="@pmnu.Name"> <img class="img-responsive" alt="@pmnu.Name" title="@pmnu.Name" src="~/Areas/Admin/UploadImg/ProductImg/@pmnu.Image2"> </a> </div>
+                    </div>
+                </div>
+                <div class="col-xs-8">
+                    <div class="caption product-detail">
+                        <h6 class="product-name"><a href="@Url.Action("ProductDetail", "Shop", new { Pid = @pmnu.ProductId})">@pmnu.Name</a></h6>
+                        <div class="rating"> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i class="fa fa-star fa-stack-1x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i class="fa fa-star fa-stack-1x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i class="fa fa-star fa-stack-1x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i class="fa fa-star fa-stack-1x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i class="fa fa-star fa-stack-x"></i></span> </div>
+                        <span class="price">
+                            <span class="price small garden-price"><i class="fa fa-rupee"></i> @pmnu.Price.ToString("0.00") </span><span class="amount small">
+                                <span class="currencySymbol"><i class="fa fa-rupee"></i> </span> @pmnu.OfferPrice.Value.ToString("0.00")
+                            </span>
+                        </span>
+                    </div>
+                </div>
+            </li>
+        }
+    </ul>
+</div>

@@ -1,0 +1,50 @@
+﻿@using GardenViewModel
+@model IEnumerable<OrderListViewModel>
+<div class="main-nav shadow-sm">
+    @Html.Action("HeaderMenu", "Home")
+</div>
+</div>
+<section class="py-5 account-page bg-light">
+    <div class="container">
+        <div class="row">
+            @Html.Action("MyAccountLeftMenu")
+            <div class="col-md-9">
+                <div class="osahan-account-page-right rounded shadow-sm bg-white p-4 h-100">
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="order-list" role="tabpanel" aria-labelledby="order-list-tab">
+                            <h4 class="text-dark mt-0 mb-4">Order List</h4>
+                            <div class="order-list-tabel-main table-responsive">
+                                <table class="datatabel table table-striped table-bordered order-list-tabel" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Order #</th>
+                                            <th>Date Purchased</th>
+                                            <th>Status</th>
+                                            <th>Total</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (OrderListViewModel odt in Model)
+                                        {
+                                            <tr>
+                                                <td>#@odt.OrderId</td>
+                                                <td>@odt.OrderDt</td>
+                                                <td><span class="badge badge-danger">@odt.OrderStatus</span></td>
+                                                <td>@odt.GrandTotal.ToString("0.00")</td>
+                                                <td><a href="@Url.Action("OrderDetail", "MyAccount", new { oid = @odt.OrderId })" data-original-title="View Detail" class="btn btn-info btn-sm"><i class="icofont-eye-alt"></i></a></td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Footer -->
+<link href="~/Areas/UserPanel/vendor/datatables/datatables.css" rel="stylesheet" />
+<script src="~/Areas/UserPanel/vendor/datatables/datatables.min.js"></script>

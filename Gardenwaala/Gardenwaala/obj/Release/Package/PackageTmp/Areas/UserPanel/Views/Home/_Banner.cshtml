@@ -1,0 +1,19 @@
+﻿@using GardenViewModel
+@model IEnumerable<BannerViewModel>
+<div class="py-0">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 px-0">
+                <header>
+                    <div id="owl-carousel-one" class="owl-carousel">
+                        @foreach (BannerViewModel ban in Model)
+                        {
+                            <div class="item"><img class="img-fluid mx-auto" src="~/Areas/Admin/UploadImg/BannerImg/@ban.Image"></div>
+                        }
+                    </div>
+                </header>
+            </div>
+        </div>
+    </div>
+</div>
+

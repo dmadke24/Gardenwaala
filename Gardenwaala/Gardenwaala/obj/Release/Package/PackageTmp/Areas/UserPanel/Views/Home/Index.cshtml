@@ -1,0 +1,50 @@
+﻿<div class="bg-light">
+    <div class="header-top border-bottom bg-white">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <ul class="list-inline float-right mb-0">
+                        <li class="list-inline-item border-right border-left py-1 pr-2 mr-2 pl-2">
+                            <a href=""><i class="icofont icofont-iphone"></i> +91 8669 9996 96</a>
+                        </li>
+                        <li class="list-inline-item border-right py-1 pr-2 mr-2">
+                            <a href="contact-us.html"><i class="icofont icofont-headphone-alt"></i> Contact Us</a>
+                        </li>
+                        <li class="list-inline-item">
+                            <span>Download App</span> &nbsp;
+                            <a href="#"><i class="icofont icofont-brand-apple"></i></a>
+                            <a href="#"><i class="icofont icofont-brand-android-robot"></i></a>
+                        </li>
+                    </ul>
+                    <p class="mb-0 py-1">
+                        FREE CASH ON DELIVERY &amp; SHIPPING AVAILABLE OVER <span class="text-danger font-weight-bold">₹499</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main-nav shadow-sm sticky" style="z-index:999">
+        @Html.Action("HeaderMenu", "Home")
+    </div>
+    <!-- =====  BANNER STRAT  ===== -->
+    @Html.Action("Banner")
+    <!-- =====  BANNER END  ===== -->
+    @Html.Action("CategoryMenu")
+    
+</div>
+
+@Html.Action("BestSeller")
+
+<section class="offer-product py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-6">
+                <div class="offers-block"><a href="#"><img class="img-fluid" src="~/Areas/UserPanel/img/ad/1.png" alt=""></a></div>
+            </div>
+            <div class="col-6">
+                <div class="offers-block"><a href="#"><img class="img-fluid" src="~/Areas/UserPanel/img/ad/2.png" alt=""></a></div>
+            </div>
+        </div>
+    </div>
+</section>
+@Html.Action("HomeSliderProd")

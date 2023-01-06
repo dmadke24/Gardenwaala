@@ -1,0 +1,764 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="GardenDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="__MigrationHistory">
+    <Key>
+      <PropertyRef Name="MigrationId" />
+      <PropertyRef Name="ContextKey" />
+    </Key>
+    <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+    <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+    <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Areas">
+    <Key>
+      <PropertyRef Name="AreaId" />
+    </Key>
+    <Property Name="AreaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="CityId" Type="int" Nullable="false" />
+    <Property Name="Status" Type="bit" Nullable="false" />
+    <Property Name="Pincode" Type="varchar" MaxLength="6" />
+  </EntityType>
+  <EntityType Name="Banners">
+    <Key>
+      <PropertyRef Name="BannerId" />
+    </Key>
+    <Property Name="BannerId" Type="int" Nullable="false" />
+    <Property Name="Image" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="100" />
+    <Property Name="Status" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Careers">
+    <Key>
+      <PropertyRef Name="JobTitleId" />
+    </Key>
+    <Property Name="JobTitleId" Type="int" Nullable="false" />
+    <Property Name="Position" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="Experience" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Requirements" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="Location" Type="nvarchar" MaxLength="50" />
+    <Property Name="City" Type="nvarchar" MaxLength="50" />
+    <Property Name="CreatedDt" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="Status" Type="bit" Nullable="false" />
+    <Property Name="Qualification" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Department" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Package" Type="nvarchar" MaxLength="50" />
+    <Property Name="KeySkills" Type="nvarchar(max)" />
+    <Property Name="Openings" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="CategoryId" />
+    </Key>
+    <Property Name="CategoryId" Type="int" Nullable="false" />
+    <Property Name="CategoryName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Image" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Status" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Cities">
+    <Key>
+      <PropertyRef Name="CityId" />
+    </Key>
+    <Property Name="CityId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StateId" Type="int" Nullable="false" />
+    <Property Name="CityName" Type="nvarchar" MaxLength="40" Nullable="false" />
+    <Property Name="Status" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Countries">
+    <Key>
+      <PropertyRef Name="CountryId" />
+    </Key>
+    <Property Name="CountryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CName" Type="nvarchar" MaxLength="15" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DiscountCoupons">
+    <Key>
+      <PropertyRef Name="CouponId" />
+    </Key>
+    <Property Name="CouponId" Type="int" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="ValidFrom" Type="datetime" Nullable="false" />
+    <Property Name="ValidTo" Type="datetime" Nullable="false" />
+    <Property Name="DiscountPercent" Type="real" Nullable="false" />
+    <Property Name="CategoryId" Type="int" />
+    <Property Name="Image" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Enquiries">
+    <Key>
+      <PropertyRef Name="EnquiryId" />
+    </Key>
+    <Property Name="EnquiryId" Type="int" Nullable="false" />
+    <Property Name="EnqDt" Type="datetime" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="60" Nullable="false" />
+    <Property Name="EmailId" Type="nvarchar" MaxLength="150" />
+    <Property Name="ContactNo" Type="nvarchar" MaxLength="13" Nullable="false" />
+    <Property Name="AlternatContactNo" Type="nvarchar" MaxLength="13" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="IsReplied" Type="bit" Nullable="false" />
+    <Property Name="Feedback" Type="nvarchar(max)" />
+    <Property Name="Subject" Type="nvarchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Epamphlets">
+    <Key>
+      <PropertyRef Name="EpamphletId" />
+    </Key>
+    <Property Name="EpamphletId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Subject" Type="nvarchar(max)" />
+    <Property Name="Message" Type="nvarchar(max)" />
+    <Property Name="Link" Type="nvarchar(max)" />
+    <Property Name="Image" Type="nvarchar(max)" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FAQs">
+    <Key>
+      <PropertyRef Name="FaqId" />
+    </Key>
+    <Property Name="FaqId" Type="int" Nullable="false" />
+    <Property Name="Question" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Answer" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Status" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="InvoiceDetails">
+    <Key>
+      <PropertyRef Name="InvoiceDetailId" />
+    </Key>
+    <Property Name="InvoiceDetailId" Type="bigint" Nullable="false" />
+    <Property Name="Particulars" Type="nvarchar" MaxLength="200" />
+    <Property Name="Price" Type="real" Nullable="false" />
+    <Property Name="Qty" Type="int" Nullable="false" />
+    <Property Name="InvoiceId" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Invoices">
+    <Key>
+      <PropertyRef Name="InvoiceId" />
+    </Key>
+    <Property Name="InvoiceId" Type="bigint" Nullable="false" />
+    <Property Name="InvoiveDt" Type="datetime" Nullable="false" />
+    <Property Name="Amount" Type="real" Nullable="false" />
+    <Property Name="TaxAmount" Type="real" Nullable="false" />
+    <Property Name="DiscountAmount" Type="real" Nullable="false" />
+    <Property Name="IsPaid" Type="bit" Nullable="false" />
+    <Property Name="PayMode" Type="tinyint" Nullable="false" />
+    <Property Name="ReceivedAmt" Type="real" Nullable="false" />
+    <Property Name="CustomerId" Type="bigint" Nullable="false" />
+    <Property Name="CouponId" Type="int" />
+    <Property Name="BillNo" Type="bigint" />
+  </EntityType>
+  <EntityType Name="Jobs">
+    <Key>
+      <PropertyRef Name="JobId" />
+    </Key>
+    <Property Name="JobId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="Experience" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="Qualification" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="Skill" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="Status" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="OrderDetails">
+    <Key>
+      <PropertyRef Name="OrderDetId" />
+    </Key>
+    <Property Name="OrderDetId" Type="bigint" Nullable="false" />
+    <Property Name="Price" Type="real" Nullable="false" />
+    <Property Name="Qty" Type="real" Nullable="false" />
+    <Property Name="OrderId" Type="bigint" Nullable="false" />
+    <Property Name="ProductId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Orders">
+    <Key>
+      <PropertyRef Name="OrderId" />
+    </Key>
+    <Property Name="OrderId" Type="bigint" Nullable="false" />
+    <Property Name="OrderDt" Type="datetime" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="ShipName" Type="nvarchar" MaxLength="100" />
+    <Property Name="ShipAddress" Type="nvarchar(max)" />
+    <Property Name="ShipCity" Type="nvarchar" MaxLength="50" />
+    <Property Name="ShipArea" Type="nvarchar" MaxLength="100" />
+    <Property Name="ShipPinCode" Type="nvarchar" MaxLength="10" />
+    <Property Name="ShipPhone" Type="nvarchar" MaxLength="13" />
+    <Property Name="BillName" Type="nvarchar" MaxLength="100" />
+    <Property Name="BillAddress" Type="nvarchar(max)" />
+    <Property Name="BillCity" Type="nvarchar" MaxLength="50" />
+    <Property Name="BillArea" Type="nvarchar" MaxLength="100" />
+    <Property Name="BillPinCode" Type="nvarchar" MaxLength="10" />
+    <Property Name="BillPhone" Type="nvarchar" MaxLength="13" />
+    <Property Name="PayMode" Type="tinyint" Nullable="false" />
+    <Property Name="PayRemark" Type="nvarchar(max)" />
+    <Property Name="CouponId" Type="int" />
+    <Property Name="DeliveryCharges" Type="real" Nullable="false" />
+    <Property Name="DiscountAmt" Type="real" Nullable="false" />
+    <Property Name="TotalAmt" Type="real" Nullable="false" />
+    <Property Name="TaxAmt" Type="real" Nullable="false" />
+    <Property Name="PaymentStatus" Type="bit" Nullable="false" />
+    <Property Name="User_UserId" Type="int" />
+    <Property Name="OrderStatus" Type="varchar" MaxLength="20" />
+    <Property Name="PaymentId" Type="varchar" MaxLength="500" />
+    <Property Name="PaymentDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="OTPs">
+    <Key>
+      <PropertyRef Name="OTPId" />
+    </Key>
+    <Property Name="OTPId" Type="int" Nullable="false" />
+    <Property Name="Code" Type="int" Nullable="false" />
+    <Property Name="MobileNo" Type="nvarchar" MaxLength="13" Nullable="false" />
+    <Property Name="SentTime" Type="datetime" Nullable="false" />
+    <Property Name="IsVerified" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Products">
+    <Key>
+      <PropertyRef Name="ProductId" />
+    </Key>
+    <Property Name="ProductId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="Price" Type="real" Nullable="false" />
+    <Property Name="OfferPrice" Type="real" />
+    <Property Name="NoOfPieces" Type="nvarchar" MaxLength="25" />
+    <Property Name="NetWeight" Type="nvarchar" MaxLength="50" />
+    <Property Name="CategoryId" Type="int" Nullable="false" />
+    <Property Name="SubCategoryId" Type="int" Nullable="false" />
+    <Property Name="Image1" Type="nvarchar" MaxLength="50" />
+    <Property Name="Image2" Type="nvarchar" MaxLength="50" />
+    <Property Name="Image3" Type="varchar" MaxLength="50" />
+    <Property Name="Status" Type="bit" Nullable="false" />
+    <Property Name="Priority" Type="tinyint" Nullable="false" />
+    <Property Name="HomeSlide" Type="bit" Nullable="false" />
+    <Property Name="BestSeller" Type="bit" Nullable="false" />
+    <Property Name="GrossWeight" Type="varchar" MaxLength="50" />
+    <Property Name="Height" Type="varchar" MaxLength="25" />
+    <Property Name="Size" Type="varchar" MaxLength="25" />
+    <Property Name="Stock" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RecentUpdates">
+    <Key>
+      <PropertyRef Name="UpdateId" />
+    </Key>
+    <Property Name="UpdateId" Type="int" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="UpdateDt" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Image" Type="nvarchar" MaxLength="50" />
+    <Property Name="Image1" Type="nvarchar" MaxLength="50" />
+    <Property Name="Image2" Type="nvarchar" MaxLength="50" />
+    <Property Name="Link" Type="nvarchar" MaxLength="200" />
+    <Property Name="ScheduleDt" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="Status" Type="bit" Nullable="false" />
+    <Property Name="User_UserId" Type="int" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="RoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="4" Nullable="false" />
+    <Property Name="Status" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="States">
+    <Key>
+      <PropertyRef Name="StateId" />
+    </Key>
+    <Property Name="StateId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SName" Type="nvarchar" MaxLength="15" Nullable="false" />
+    <Property Name="CountryId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SubCategory">
+    <Key>
+      <PropertyRef Name="SubCategoryId" />
+    </Key>
+    <Property Name="SubCategoryId" Type="int" Nullable="false" />
+    <Property Name="SubCategoryName" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="Image" Type="varchar" MaxLength="100" />
+    <Property Name="CategoryId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Taxes">
+    <Key>
+      <PropertyRef Name="TaxId" />
+    </Key>
+    <Property Name="TaxId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CGST" Type="real" Nullable="false" />
+    <Property Name="SGST" Type="real" Nullable="false" />
+    <Property Name="VAT" Type="real" />
+    <Property Name="ServiceTax" Type="real" />
+  </EntityType>
+  <EntityType Name="TempCart">
+    <Key>
+      <PropertyRef Name="TempId" />
+    </Key>
+    <Property Name="TempId" Type="int" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="ProductId" Type="int" Nullable="false" />
+    <Property Name="Price" Type="float" Nullable="false" />
+    <Property Name="Quantity" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Testimonials">
+    <Key>
+      <PropertyRef Name="TestimonialId" />
+    </Key>
+    <Property Name="TestimonialId" Type="int" Nullable="false" />
+    <Property Name="TestimonialDt" Type="datetime2" Precision="7" />
+    <Property Name="CName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Image" Type="nvarchar" MaxLength="50" />
+    <Property Name="Profession" Type="nvarchar" MaxLength="50" />
+    <Property Name="Organization" Type="nvarchar" MaxLength="50" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="Status" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="Gender" Type="nvarchar" MaxLength="1" />
+    <Property Name="Address" Type="nvarchar(max)" />
+    <Property Name="ContactNo" Type="nvarchar" MaxLength="13" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" MaxLength="60" Nullable="false" />
+    <Property Name="CreatedDt" Type="datetime" Nullable="false" />
+    <Property Name="LastLogin" Type="datetime2" Precision="7" />
+    <Property Name="Image" Type="nvarchar" MaxLength="50" />
+    <Property Name="Status" Type="bit" Nullable="false" />
+    <Property Name="UserTypeId" Type="int" Nullable="false" />
+    <Property Name="RoleId" Type="int" />
+  </EntityType>
+  <EntityType Name="UserType">
+    <Key>
+      <PropertyRef Name="UserTypeId" />
+    </Key>
+    <Property Name="UserTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="5" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Visitors">
+    <Key>
+      <PropertyRef Name="VisitorId" />
+    </Key>
+    <Property Name="VisitorId" Type="bigint" Nullable="false" />
+    <Property Name="IpAddress" Type="nvarchar" MaxLength="40" Nullable="false" />
+    <Property Name="VisitDt" Type="datetime" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'GardenDB.dbo.GetBillDetail' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="GetBillDetail">
+    <Key>
+      <PropertyRef Name="Price" />
+      <PropertyRef Name="OrderId" />
+      <PropertyRef Name="ProductId" />
+      <PropertyRef Name="OrderDt" />
+      <PropertyRef Name="DeliveryCharges" />
+      <PropertyRef Name="DiscountAmt" />
+      <PropertyRef Name="TotalAmt" />
+      <PropertyRef Name="Name" />
+      <PropertyRef Name="Qty" />
+    </Key>
+    <Property Name="Price" Type="real" Nullable="false" />
+    <Property Name="OrderId" Type="bigint" Nullable="false" />
+    <Property Name="ProductId" Type="int" Nullable="false" />
+    <Property Name="OrderDt" Type="datetime" Nullable="false" />
+    <Property Name="DeliveryCharges" Type="real" Nullable="false" />
+    <Property Name="DiscountAmt" Type="real" Nullable="false" />
+    <Property Name="TotalAmt" Type="real" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Qty" Type="real" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'GardenDB.dbo.GetOrderDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="GetOrderDetails">
+    <Key>
+      <PropertyRef Name="OrderDt" />
+      <PropertyRef Name="TotalAmount" />
+      <PropertyRef Name="DeliveryCharges" />
+      <PropertyRef Name="DiscountAmt" />
+      <PropertyRef Name="FinalAmount" />
+      <PropertyRef Name="PayMode" />
+    </Key>
+    <Property Name="OrderDt" Type="datetime" Nullable="false" />
+    <Property Name="TotalAmount" Type="real" Nullable="false" />
+    <Property Name="DeliveryCharges" Type="real" Nullable="false" />
+    <Property Name="DiscountAmt" Type="real" Nullable="false" />
+    <Property Name="FinalAmount" Type="real" Nullable="false" />
+    <Property Name="PayMode" Type="tinyint" Nullable="false" />
+    <Property Name="PayRemark" Type="nvarchar(max)" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'GardenDB.dbo.GetSaleProducts' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="GetSaleProducts">
+    <Key>
+      <PropertyRef Name="Name" />
+      <PropertyRef Name="OrderDt" />
+      <PropertyRef Name="Qty" />
+    </Key>
+    <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="OrderDt" Type="datetime" Nullable="false" />
+    <Property Name="Qty" Type="real" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'GardenDB.dbo.GetUserDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="GetUserDetails">
+    <Key>
+      <PropertyRef Name="Name" />
+      <PropertyRef Name="Email" />
+      <PropertyRef Name="ContactNo" />
+      <PropertyRef Name="CreatedDt" />
+    </Key>
+    <Property Name="Name" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="Gender" Type="nvarchar" MaxLength="1" />
+    <Property Name="Address" Type="nvarchar(max)" />
+    <Property Name="ContactNo" Type="nvarchar" MaxLength="13" Nullable="false" />
+    <Property Name="CreatedDt" Type="datetime" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_dbo_Areas_dbo_Cities_CityId">
+    <End Role="Cities" Type="Self.Cities" Multiplicity="1" />
+    <End Role="Areas" Type="Self.Areas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cities">
+        <PropertyRef Name="CityId" />
+      </Principal>
+      <Dependent Role="Areas">
+        <PropertyRef Name="CityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Cities_dbo_States_StateId">
+    <End Role="States" Type="Self.States" Multiplicity="1" />
+    <End Role="Cities" Type="Self.Cities" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="States">
+        <PropertyRef Name="StateId" />
+      </Principal>
+      <Dependent Role="Cities">
+        <PropertyRef Name="StateId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_DiscountCoupons_FoodType">
+    <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+    <End Role="DiscountCoupons" Type="Self.DiscountCoupons" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="CategoryId" />
+      </Principal>
+      <Dependent Role="DiscountCoupons">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_InvoiceDetails_dbo_Invoices_InvoiceId">
+    <End Role="Invoices" Type="Self.Invoices" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="InvoiceDetails" Type="Self.InvoiceDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Invoices">
+        <PropertyRef Name="InvoiceId" />
+      </Principal>
+      <Dependent Role="InvoiceDetails">
+        <PropertyRef Name="InvoiceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Invoices_dbo_DiscountCoupons_CouponId">
+    <End Role="DiscountCoupons" Type="Self.DiscountCoupons" Multiplicity="0..1" />
+    <End Role="Invoices" Type="Self.Invoices" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DiscountCoupons">
+        <PropertyRef Name="CouponId" />
+      </Principal>
+      <Dependent Role="Invoices">
+        <PropertyRef Name="CouponId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Orders_dbo_DiscountCoupons_CouponId">
+    <End Role="DiscountCoupons" Type="Self.DiscountCoupons" Multiplicity="0..1" />
+    <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DiscountCoupons">
+        <PropertyRef Name="CouponId" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="CouponId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Orders_dbo_Users_User_UserId">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="User_UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_RecentUpdates_dbo_Users_User_UserId">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="RecentUpdates" Type="Self.RecentUpdates" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="RecentUpdates">
+        <PropertyRef Name="User_UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_States_dbo_Countries_CountryId">
+    <End Role="Countries" Type="Self.Countries" Multiplicity="1" />
+    <End Role="States" Type="Self.States" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Countries">
+        <PropertyRef Name="CountryId" />
+      </Principal>
+      <Dependent Role="States">
+        <PropertyRef Name="CountryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FoodMenus_FoodSubTypes">
+    <End Role="SubCategory" Type="Self.SubCategory" Multiplicity="1" />
+    <End Role="Products" Type="Self.Products" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SubCategory">
+        <PropertyRef Name="SubCategoryId" />
+      </Principal>
+      <Dependent Role="Products">
+        <PropertyRef Name="SubCategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FoodMenus_FoodTypes">
+    <End Role="Category" Type="Self.Category" Multiplicity="1" />
+    <End Role="Products" Type="Self.Products" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="CategoryId" />
+      </Principal>
+      <Dependent Role="Products">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FoodSubTypes_FoodTypes">
+    <End Role="Category" Type="Self.Category" Multiplicity="1" />
+    <End Role="SubCategory" Type="Self.SubCategory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="CategoryId" />
+      </Principal>
+      <Dependent Role="SubCategory">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderDetails_FoodMenu">
+    <End Role="Products" Type="Self.Products" Multiplicity="1" />
+    <End Role="OrderDetails" Type="Self.OrderDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="ProductId" />
+      </Principal>
+      <Dependent Role="OrderDetails">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderDetails_Orders">
+    <End Role="Orders" Type="Self.Orders" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="OrderDetails" Type="Self.OrderDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Orders">
+        <PropertyRef Name="OrderId" />
+      </Principal>
+      <Dependent Role="OrderDetails">
+        <PropertyRef Name="OrderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TempCart_User">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="TempCart" Type="Self.TempCart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="TempCart">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Users_Role">
+    <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+    <End Role="Users" Type="Self.Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="RoleId" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Users_Usertype">
+    <End Role="UserType" Type="Self.UserType" Multiplicity="1" />
+    <End Role="Users" Type="Self.Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserType">
+        <PropertyRef Name="UserTypeId" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="UserTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="GardenDBModelStoreContainer">
+    <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Areas" EntityType="Self.Areas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Banners" EntityType="Self.Banners" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Careers" EntityType="Self.Careers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Cities" EntityType="Self.Cities" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Countries" EntityType="Self.Countries" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DiscountCoupons" EntityType="Self.DiscountCoupons" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Enquiries" EntityType="Self.Enquiries" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Epamphlets" EntityType="Self.Epamphlets" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FAQs" EntityType="Self.FAQs" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="InvoiceDetails" EntityType="Self.InvoiceDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Invoices" EntityType="Self.Invoices" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Jobs" EntityType="Self.Jobs" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OrderDetails" EntityType="Self.OrderDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OTPs" EntityType="Self.OTPs" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RecentUpdates" EntityType="Self.RecentUpdates" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="States" EntityType="Self.States" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SubCategory" EntityType="Self.SubCategory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Taxes" EntityType="Self.Taxes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TempCart" EntityType="Self.TempCart" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Testimonials" EntityType="Self.Testimonials" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserType" EntityType="Self.UserType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Visitors" EntityType="Self.Visitors" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="GetBillDetail" EntityType="Self.GetBillDetail" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [GetBillDetail].[Price] AS [Price], 
+    [GetBillDetail].[OrderId] AS [OrderId], 
+    [GetBillDetail].[ProductId] AS [ProductId], 
+    [GetBillDetail].[OrderDt] AS [OrderDt], 
+    [GetBillDetail].[DeliveryCharges] AS [DeliveryCharges], 
+    [GetBillDetail].[DiscountAmt] AS [DiscountAmt], 
+    [GetBillDetail].[TotalAmt] AS [TotalAmt], 
+    [GetBillDetail].[Name] AS [Name], 
+    [GetBillDetail].[Qty] AS [Qty]
+    FROM [dbo].[GetBillDetail] AS [GetBillDetail]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="GetOrderDetails" EntityType="Self.GetOrderDetails" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [GetOrderDetails].[OrderDt] AS [OrderDt], 
+    [GetOrderDetails].[TotalAmount] AS [TotalAmount], 
+    [GetOrderDetails].[DeliveryCharges] AS [DeliveryCharges], 
+    [GetOrderDetails].[DiscountAmt] AS [DiscountAmt], 
+    [GetOrderDetails].[FinalAmount] AS [FinalAmount], 
+    [GetOrderDetails].[PayMode] AS [PayMode], 
+    [GetOrderDetails].[PayRemark] AS [PayRemark]
+    FROM [dbo].[GetOrderDetails] AS [GetOrderDetails]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="GetSaleProducts" EntityType="Self.GetSaleProducts" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [GetSaleProducts].[Name] AS [Name], 
+    [GetSaleProducts].[OrderDt] AS [OrderDt], 
+    [GetSaleProducts].[Qty] AS [Qty]
+    FROM [dbo].[GetSaleProducts] AS [GetSaleProducts]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="GetUserDetails" EntityType="Self.GetUserDetails" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [GetUserDetails].[Name] AS [Name], 
+    [GetUserDetails].[Email] AS [Email], 
+    [GetUserDetails].[Gender] AS [Gender], 
+    [GetUserDetails].[Address] AS [Address], 
+    [GetUserDetails].[ContactNo] AS [ContactNo], 
+    [GetUserDetails].[CreatedDt] AS [CreatedDt]
+    FROM [dbo].[GetUserDetails] AS [GetUserDetails]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_dbo_Areas_dbo_Cities_CityId" Association="Self.FK_dbo_Areas_dbo_Cities_CityId">
+      <End Role="Cities" EntitySet="Cities" />
+      <End Role="Areas" EntitySet="Areas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Cities_dbo_States_StateId" Association="Self.FK_dbo_Cities_dbo_States_StateId">
+      <End Role="States" EntitySet="States" />
+      <End Role="Cities" EntitySet="Cities" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_DiscountCoupons_FoodType" Association="Self.FK_dbo_DiscountCoupons_FoodType">
+      <End Role="Category" EntitySet="Category" />
+      <End Role="DiscountCoupons" EntitySet="DiscountCoupons" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_InvoiceDetails_dbo_Invoices_InvoiceId" Association="Self.FK_dbo_InvoiceDetails_dbo_Invoices_InvoiceId">
+      <End Role="Invoices" EntitySet="Invoices" />
+      <End Role="InvoiceDetails" EntitySet="InvoiceDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Invoices_dbo_DiscountCoupons_CouponId" Association="Self.FK_dbo_Invoices_dbo_DiscountCoupons_CouponId">
+      <End Role="DiscountCoupons" EntitySet="DiscountCoupons" />
+      <End Role="Invoices" EntitySet="Invoices" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Orders_dbo_DiscountCoupons_CouponId" Association="Self.FK_dbo_Orders_dbo_DiscountCoupons_CouponId">
+      <End Role="DiscountCoupons" EntitySet="DiscountCoupons" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Orders_dbo_Users_User_UserId" Association="Self.FK_dbo_Orders_dbo_Users_User_UserId">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_RecentUpdates_dbo_Users_User_UserId" Association="Self.FK_dbo_RecentUpdates_dbo_Users_User_UserId">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="RecentUpdates" EntitySet="RecentUpdates" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_States_dbo_Countries_CountryId" Association="Self.FK_dbo_States_dbo_Countries_CountryId">
+      <End Role="Countries" EntitySet="Countries" />
+      <End Role="States" EntitySet="States" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FoodMenus_FoodSubTypes" Association="Self.FK_FoodMenus_FoodSubTypes">
+      <End Role="SubCategory" EntitySet="SubCategory" />
+      <End Role="Products" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FoodMenus_FoodTypes" Association="Self.FK_FoodMenus_FoodTypes">
+      <End Role="Category" EntitySet="Category" />
+      <End Role="Products" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FoodSubTypes_FoodTypes" Association="Self.FK_FoodSubTypes_FoodTypes">
+      <End Role="Category" EntitySet="Category" />
+      <End Role="SubCategory" EntitySet="SubCategory" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderDetails_FoodMenu" Association="Self.FK_OrderDetails_FoodMenu">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="OrderDetails" EntitySet="OrderDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderDetails_Orders" Association="Self.FK_OrderDetails_Orders">
+      <End Role="Orders" EntitySet="Orders" />
+      <End Role="OrderDetails" EntitySet="OrderDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TempCart_User" Association="Self.FK_TempCart_User">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="TempCart" EntitySet="TempCart" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Users_Role" Association="Self.FK_Users_Role">
+      <End Role="Role" EntitySet="Role" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Users_Usertype" Association="Self.FK_Users_Usertype">
+      <End Role="UserType" EntitySet="UserType" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

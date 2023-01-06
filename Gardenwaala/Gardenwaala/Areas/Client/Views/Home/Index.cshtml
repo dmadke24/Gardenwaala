@@ -1,0 +1,154 @@
+﻿
+<!-- =====  BANNER STRAT  ===== -->
+@Html.Action("Banner")
+<!-- =====  BANNER END  ===== -->
+<!-- =====  SUB BANNER  STRAT ===== -->
+<div class="cms_banner">
+    @Html.Action("CategoryMenu")
+</div>
+<!-- =====  SUB BANNER END  ===== -->
+<!-- =====  SPECIAL START  ===== -->
+@Html.Action("BestSeller")
+<!-- =====  BLOG START===== -->
+<!-- =====  CONTAINER START  ===== -->
+<!-- =====  CONTAINER END  ===== -->
+<!-- =====  SERVICES START  ===== -->
+<div class="container">
+    <div class="row text-center mt_10">
+        <div class="services col-md-4 col-sm-6 mt_10">
+            <div class="icon-top"><a href="#"><i class="icon ion-android-happy"></i></a></div>
+            <h4 class="sub_title mtb_10">Big Savings</h4>
+            <p>We have cheapest price which save your money</p>
+        </div>
+        <div class="services col-md-4 col-sm-6 mt_30">
+            <div class="icon-top"><a href="#"><i class="icon ion-android-subway"></i></a></div>
+            <h4 class="sub_title mtb_10">Free Shipping</h4>
+            <p>Free shipping to our nearest area</p>
+        </div>
+        <div class="services col-md-4 col-sm-6 mt_30">
+            <div class="icon-top"><a href="#"><i class="icon ion-android-call"></i></a></div>
+            <h4 class="sub_title mtb_10">24/7 Support</h4>
+            <p>We provide 24/7 support.</p>
+        </div>
+    </div>
+</div>
+<!-- =====  SERVICES END  ===== -->
+<!-- =====  CLIENT START  ===== -->
+@Html.Action("Testimonial")
+<!-- =====  CLIENT END  ===== -->
+
+@*<div class="container">
+    <div id="Blog">
+        <div class="heading-part text-center mb_40 mt_80">
+            <h2 class="main_title">The Latest News</h2>
+        </div>
+        <div class="blog-contain box">
+            <div class="blog owl-carousel">
+                <div class="item">
+                    <div class="box-holder">
+                        <div class="thumb post-img"><a href="#"> <img src="~/Areas/Client/Assets/images/blog/blog_img_01.jpg" alt="Batota"> </a> </div>
+                        <div class="post-info">
+                            <h3 class="mb_10"> <a class="sub_title" href="single_blog.html">Fashions fade, style is eternal</a> </h3>
+                            <p class="mb_20">Aliquam egestas pellentesque est. Etiam aorci Nulla id enim feugiat ligula corper scelerisque.</p>
+                            <hr>
+                            <div class="details mt_20">
+                                <div class="date pull-left"> <i class="fa fa-calendar" aria-hidden="true"></i>2018-08-03</div>
+                                <div class="more pull-right"> <a href="single_blog.html">Read more <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="box-holder">
+                        <div class="thumb post-img"><a href="#"> <img src="~/Areas/Client/Assets/images/blog/blog_img_02.jpg" alt="Batota"> </a></div>
+                        <div class="post-info">
+                            <h3 class="mb_10"> <a class="sub_title" href="single_blog.html">Fashions fade, style is eternal</a> </h3>
+                            <p class="mb_20">Aliquam egestas pellentesque est. Etiam aorci Nulla id enim feugiat ligula corper scelerisque.</p>
+                            <hr>
+                            <div class="details mt_20">
+                                <div class="date pull-left"> <i class="fa fa-calendar" aria-hidden="true"></i>2009-08-13</div>
+                                <div class="more pull-right"> <a href="single_blog.html">Read more <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="box-holder">
+                        <div class="thumb post-img"><a href="#"> <img src="~/Areas/Client/Assets/images/blog/blog_img_03.jpg" alt="Batota"> </a></div>
+                        <div class="post-info">
+                            <h3 class="mb_10"> <a class="sub_title" href="single_blog.html">Fashions fade, style is eternal</a> </h3>
+                            <p class="mb_20">Aliquam egestas pellentesque est. Etiam aorci Nulla id enim feugiat ligula corper scelerisque.</p>
+                            <hr>
+                            <div class="details mt_20">
+                                <div class="date pull-left"> <i class="fa fa-calendar" aria-hidden="true"></i>2025-11-07</div>
+                                <div class="more pull-right"> <a href="single_blog.html">Read more <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="box-holder">
+                        <div class="thumb post-img"><a href="#"> <img src="~/Areas/Client/Assets/images/blog/blog_img_04.jpg" alt="Batota"> </a></div>
+                        <div class="post-info">
+                            <h3 class="mb_10"> <a class="sub_title" href="single_blog.html">Fashions fade, style is eternal</a> </h3>
+                            <p class="mb_20">Aliquam egestas pellentesque est. Etiam aorci Nulla id enim feugiat ligula corper scelerisque.</p>
+                            <hr>
+                            <div class="details mt_20">
+                                <div class="date pull-left"> <i class="fa fa-calendar" aria-hidden="true"></i>2009-05-03</div>
+                                <div class="more pull-right"> <a href="single_blog.html">Read more <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="box-holder">
+                        <div class="thumb post-img"><a href="#"> <img src="~/Areas/Client/Assets/images/blog/blog_img_05.jpg" alt="Batota"> </a></div>
+                        <div class="post-info">
+                            <h3 class="mb_10"> <a class="sub_title" href="single_blog.html">Fashions fade, style is eternal</a> </h3>
+                            <p class="mb_20">Aliquam egestas pellentesque est. Etiam aorci Nulla id enim feugiat ligula corper scelerisque.</p>
+                            <hr>
+                            <div class="details mt_20">
+                                <div class="date pull-left"> <i class="fa fa-calendar" aria-hidden="true"></i>2013-07-03</div>
+                                <div class="more pull-right"> <a href="single_blog.html">Read more <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="box-holder">
+                        <div class="thumb post-img"><a href="#"> <img src="~/Areas/Client/Assets/images/blog/blog_img_06.jpg" alt="Batota"> </a></div>
+                        <div class="post-info">
+                            <h3 class="mb_10"> <a class="sub_title" href="single_blog.html">Fashions fade, style is eternal</a> </h3>
+                            <p class="mb_20">Aliquam egestas pellentesque est. Etiam aorci Nulla id enim feugiat ligula corper scelerisque.</p>
+                            <hr>
+                            <div class="details mt_20">
+                                <div class="date pull-left"> <i class="fa fa-calendar" aria-hidden="true"></i>2010-03-06</div>
+                                <div class="more pull-right"> <a href="single_blog.html">Read more <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>*@
+<!-- =====  BLOG END ===== -->
+<!-- =====  BRAND START  ===== -->
+@*<div class="container">
+    <div class="row">
+        <div class="col-sm-12 mt_80">
+            <div class="brand owl-carousel">
+                <div class="item text-center"> <a href="#"><img src="~/Areas/Client/Assets/images/brand/brand1.png" alt="Disney" class="img-responsive" /></a> </div>
+                <div class="item text-center"> <a href="#"><img src="~/Areas/Client/Assets/images/brand/brand2.png" alt="Dell" class="img-responsive" /></a> </div>
+                <div class="item text-center"> <a href="#"><img src="~/Areas/Client/Assets/images/brand/brand3.png" alt="Harley" class="img-responsive" /></a> </div>
+                <div class="item text-center"> <a href="#"><img src="~/Areas/Client/Assets/images/brand/brand4.png" alt="Canon" class="img-responsive" /></a> </div>
+                <div class="item text-center"> <a href="#"><img src="~/Areas/Client/Assets/images/brand/brand5.png" alt="Canon" class="img-responsive" /></a> </div>
+                <div class="item text-center"> <a href="#"><img src="~/Areas/Client/Assets/images/brand/brand6.png" alt="Canon" class="img-responsive" /></a> </div>
+                <div class="item text-center"> <a href="#"><img src="~/Areas/Client/Assets/images/brand/brand7.png" alt="Canon" class="img-responsive" /></a> </div>
+                <div class="item text-center"> <a href="#"><img src="~/Areas/Client/Assets/images/brand/brand8.png" alt="Canon" class="img-responsive" /></a> </div>
+                <div class="item text-center"> <a href="#"><img src="~/Areas/Client/Assets/images/brand/brand9.png" alt="Canon" class="img-responsive" /></a> </div>
+            </div>
+        </div>
+    </div>
+</div>*@
+<!-- =====  BRAND END  ===== --> 

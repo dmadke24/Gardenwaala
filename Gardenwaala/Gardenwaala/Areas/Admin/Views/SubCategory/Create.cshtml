@@ -1,0 +1,161 @@
+﻿@model SubCategoryViewModel
+@{
+    ViewBag.Heading = "Product Sub Category";
+    string action;
+    ViewBag.CurrentMenu = "scat";
+    string imgFile = "";
+
+    if (Model == null)
+    {
+        ViewBag.Title = "Create";
+        action = "Create";
+        ViewBag.Breadcrumbs = "New Product Sub Category";
+    }
+    else
+    {
+        ViewBag.Title = "Edit";
+        action = "Edit";
+        ViewBag.Breadcrumbs = "Edit Product Sub Category";
+        imgFile = "/Areas/Admin/UploadImg/SubCategoryImg/" + Model.Image;
+
+    }
+}
+<div class="page-header">
+    <h1>
+        @action
+        <small>
+            <i class="ace-icon fa fa-angle-double-right"></i>
+            Product Sub Category
+        </small>
+    </h1>
+</div><!-- /.page-header -->
+@Html.ValidationSummary(true, "Error", new { @class = "alert alert-danger" })
+<div class="row">
+    <div class="col-xs-12">
+        <!-- PAGE CONTENT BEGINS -->
+        @using (Html.BeginForm(action, "SubCategory", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+
+            if (action == "Edit")
+            {
+                @Html.HiddenFor(m => m.SubCategoryId)
+                @Html.HiddenFor(m => m.OldFile)
+
+            }
+            else
+            {
+                @Html.Hidden("SubCategoryId", 0)
+            }
+            <div class="form-group">
+                @Html.LabelFor(m => m.CategoryId, new { @class = "col-sm-3 control-label no-padding-right" })
+                <div class="col-sm-5">
+                    @Html.DropDownListFor(m => m.CategoryId, new SelectList(ViewBag.TypeList, "ID", "Text"), "Select Type", new { @class = "form-control" })
+                </div>
+                <div class="col-sm-4">
+                    @Html.ValidationMessageFor(m => m.CategoryId, "", new { @class = "col-xs-12 col-sm-6" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.SubCategoryName, new { @class = "col-sm-3 control-label no-padding-right" })
+
+                <div class="col-sm-5">
+                    @Html.TextBoxFor(m => m.SubCategoryName, new { @class = "col-xs-10 col-sm-5 width-100" })
+                </div>
+                <div class="col-sm-4">
+
+                    @Html.ValidationMessageFor(m => m.SubCategoryName, "", new { @class = "col-xs-12 col-sm-6" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.ImageFile, new { @class = "col-sm-3 control-label no-padding-right" })
+                <div class="col-sm-5">
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            @if (action == "Create")
+                            {
+                                <input type="file" class="MyImage" id="ImageFile" name="ImageFile" data-val="true" data-val-filesize="Upload file upto 2 mb" data-val-extension="Invalid File Type" data-val-extension-extension="png,jpg,jpeg,gif" />
+                            }
+                            else
+                            {
+                                <input type="file" class="MyImage" id="ImageFile" name="ImageFile" data-val="true" data-val-filesize="Upload file upto 2 mb" data-val-extension="Invalid File Type" data-val-extension-extension="png,jpg,jpeg,gif" />
+                            }
+                        </div>
+                    </div>
+                    @if (action == "Edit")
+                    {
+                        <img src="@imgFile" width="100" />
+                    }
+                </div>
+                <div class="col-sm-4">
+                    @Html.ValidationMessageFor(m => m.ImageFile, "", new { @class = "col-xs-12 col-sm-6" })
+                    <span id="imgFileErr1" style="display:block!important;color:red"></span>
+                </div>
+            </div>
+            <div class="space-4"></div>
+            <div class="clearfix form-actions">
+                <div class="col-md-offset-3 col-md-9">
+                    <button class="btn btn-info" type="submit">
+                        <i class="ace-icon fa fa-check bigger-110"></i>
+                        Submit
+                    </button>
+                    &nbsp; &nbsp; &nbsp;
+                    <button class="btn" type="reset">
+                        <i class="ace-icon fa fa-undo bigger-110"></i>
+                        Reset
+                    </button>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+@section Validation{
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Areas/Admin/AdminDesign/js/chosen.jquery.min.js"></script>
+    <script src="~/Areas/Admin/AdminDesign/js/chosen.jquery.min.js"></script>
+    <script>
+        $('form').on('submit', function (evt) {
+            var form = $('form');
+            form.validate();
+            var isValid = form.valid();
+            if (isValid == true) {
+                var files = $('#ImgFile1').prop('files');
+                var size = files[0].size;
+                if (size > 1048576) {
+                    $('#imgFileErr1').html('You can upload file upto 1MB');
+                    return false;
+                }
+            }
+            else
+                evt.preventDefault();
+        });
+        $('#ImgFile1').on('change', function () {
+            var files = $(this).prop('files');
+            size = files[0].size;
+            if (size > 1048576) {
+                $('#imgFileErr1').html('You can upload file upto 1MB');
+            }
+            else
+                $('#imgFileErr1').html('');
+        });
+
+        $(document).ready(function () {
+            $('.MyImage').ace_file_input({
+                style: 'well',
+                btn_choose: 'Drop Image here or click to choose, Upload Image upto 1MB',
+                btn_change: null,
+                no_icon: 'ace-icon fa fa-cloud-upload',
+                droppable: true,
+                thumbnail: 'large',
+                preview_error: function (filename, error_code) {
+                }
+
+            }).on('change', function () {
+            });
+
+            $('#Description').wysihtml5();
+        });
+    </script>
+}
+

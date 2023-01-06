@@ -1,0 +1,32 @@
+﻿@using GardenViewModel
+@model IEnumerable<ProductViewModel>
+<div class="product-layout  product-grid related-pro  owl-carousel mb_50 mt_10">
+    @foreach (ProductViewModel pmnu in Model)
+    {
+        <div class="item">
+            <div class="product-thumb">
+                <div class="image product-imageblock"> <a href="@Url.Action("ProductDetail", new { pid = pmnu.ProductId})"> <img data-name="product_image" src="~/Areas/Admin/UploadImg/ProductImg/@pmnu.Image1" alt="iPod Classic" title="@pmnu.Name" class="img-responsive"> <img src="~/Areas/Admin/UploadImg/ProductImg/@pmnu.Image2" alt="@pmnu.Name" title="@pmnu.Name" class="img-responsive"> </a> </div>
+                <div class="caption product-detail text-left">
+                    <h4 data-name="product_name" class="product-name mt_20"><a href="#" title="Casual Shirt With Ruffle Hem">@pmnu.Name</a></h4>
+                    <div class="rating"> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i class="fa fa-star fa-stack-1x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i class="fa fa-star fa-stack-1x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i class="fa fa-star fa-stack-1x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i class="fa fa-star fa-stack-1x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i class="fa fa-star fa-stack-x"></i></span> </div>
+                    <span class="price">
+                        <span class="price small garden-price"><i class="fa fa-rupee"></i> @pmnu.Price.ToString("0.00") </span>
+
+                        @if (pmnu.OfferPrice != null)
+                        {
+                            <span class="amount">
+                                <span class="currencySymbol"><i class="fa fa-rupee"></i> </span> @pmnu.OfferPrice.Value.ToString("0.00")
+                            </span>
+                        }
+                        else
+                        {
+                            <span class="amount">
+                                <span class="currencySymbol"></span> -
+                            </span>
+                        }
+                    </span>
+                </div>
+            </div>
+        </div>
+    }
+</div>

@@ -1,0 +1,66 @@
+﻿  <!-- =====  BANNER STRAT  ===== -->
+<div class="breadcrumb">
+    <h1>Contact Us</h1>
+</div>
+<!-- =====  BREADCRUMB END===== -->
+<!-- =====  CONTAINER START  ===== -->
+<div class="container">
+    <div class="row ">
+        <div class="col-sm-12">
+            <!-- map  -->
+            <div class="row">
+                <div class="col-xs-12 map mb_80">
+                    <div id="map">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d60508.81279865479!2d73.87482667481605!3d18.583017317285893!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2c1676d90158f%3A0xc4486b97036eb03c!2sAadnya%20Agro%20Services!5e0!3m2!1sen!2sin!4v1628880686321!5m2!1sen!2sin" width="1200" height="430" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                </div>
+            </div>
+            <!-- contact  -->
+            <div class="heading-part mb_80 ">
+                <h2 class="main_title">Leave a message!</h2>
+            </div>
+            <div class="row">
+                <div class="col-md-4 col-xs-12 contact">
+                    <div class="location mb_50">
+                        <h5 class="capitalize sub_title mb_20">Our Location</h5>
+                        <div class="address">
+                            Office address <br>
+                            Sr.No 47, Sunita nagar, Wadgaon sheri, <br />Pune - 411014.
+                        </div>
+                        <div class="call mt_10"><i class="fa fa-phone" aria-hidden="true"></i>+91 8669 9996 96</div>
+                    </div>
+
+                    <div class="Hello mb_50">
+                        <h5 class="capitalize sub_title mb_20">Say Hello</h5>
+                        <div class="email mt_10"><i class="fa fa-envelope" aria-hidden="true"></i><a href="mailto:support@gardenwaala.com" target="_top">support@gardenwaala.com</a></div>
+                    </div>
+                </div>
+                <div class="col-md-8 col-xs-12 contact-form mb_50">
+                    <!-- Contact FORM -->
+                    @Html.Action("ContactForm", "Home")
+                    <!-- END Contact FORM -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Register
+{
+    <script>
+        function ShowMsg(data) {
+            if (data.status == true) {
+                $('#ajaxResult').html('<div class="alert alert-success alert-dismissible fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>           <strong>Success! </strong>' + data.msg + '</div>');
+                $('#Name').val('');
+                $('#EmailId').val('');
+                $('#Subject').val('');
+                $('#ContactNo').val('');
+                $('#Message').val('');
+                alert("Thank you!");
+            }
+            else {
+                $('#ajaxResult').html('<div class="alert alert-danger alert-dismissible fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>           <strong>Fail! </strong>' + data.msg + '</div>');
+            }
+        }
+
+    </script>
+}

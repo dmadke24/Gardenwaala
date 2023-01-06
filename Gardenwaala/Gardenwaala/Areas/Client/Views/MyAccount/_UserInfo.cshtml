@@ -1,0 +1,64 @@
+﻿@using GardenViewModel
+@model UpdateUserViewModel
+@using (Html.BeginForm("UpdateProfile", "MyAccount", FormMethod.Post, new { @class = "main-form full" }))
+{
+    @*<form class="main-form full">*@
+    <div class="mb_20">
+        <div class="row">
+            <div class="col-xs-12 mb_20">
+                <div class="heading-part mb_20">
+                    <h3 class="main_title sub-heading">User Details</h3>
+                </div>
+                <hr>
+            </div>
+            <div class="col-sm-6">
+                <div class="input-box mb_20">
+                    <label for="re-enter-pass">Name</label>
+                    @Html.TextBoxFor(u => u.Name, new { @class = "", placeholder = "Name" })
+                    @Html.ValidationMessageFor(u => u.Name)
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="input-box mb_20">
+                    <label for="re-enter-pass">Email Id</label>
+                    @Html.TextBoxFor(u => u.Email, new { @class = "", placeholder = "Email Id", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(u => u.Email)
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="input-box mb_20">
+                    <label for="re-enter-pass">Contact No</label>
+                    @Html.TextBoxFor(u => u.ContactNo, new { @class = "", placeholder = "Contact No" })
+                    @Html.ValidationMessageFor(u => u.ContactNo)
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="input-box mb_20">
+                    <label>
+                        @Html.RadioButtonFor(m => m.Gender, "M", new { @class = "ace", @checked = "checked" })
+                        <span class="lbl"> Male</span>
+                    </label>
+                    <label>
+                        @Html.RadioButtonFor(m => m.Gender, "F", new { @class = "ace" })
+                        <span class="lbl"> Female</span>
+                    </label>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="input-box mb_20">
+                    <label for="re-enter-pass">Address</label>
+                    @Html.TextBoxFor(u => u.Address, new { @class = "", placeholder = "Address", @rows = 5, @cols = 10 })
+                    @Html.ValidationMessageFor(u => u.Address)
+                </div>
+            </div>
+            <div class="col-xs-12"> <input type="submit" class="btn btn-black pull-left" value="Update Profile"></div>
+        </div>
+    </div>
+}
+@section Register
+{
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    
+}

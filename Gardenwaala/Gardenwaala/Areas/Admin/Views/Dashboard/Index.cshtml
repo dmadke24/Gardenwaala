@@ -1,0 +1,269 @@
+﻿@{
+    ViewBag.Heading = "Dashboard";
+    ViewBag.CurrentMenu = "dbd";
+
+    string delTitle = "";
+    string delMsg = "";
+    string delClass = "";
+    if (TempData["delStatus"] != null)
+    {
+        if (Convert.ToBoolean(TempData["delStatus"]) == true)
+        {
+            delTitle = "Success";
+            delMsg = "Record Deleted Successfully";
+            delClass = "success";
+        }
+        else
+        {
+            delTitle = "Error";
+            delMsg = "Can't Delete Record";
+            delClass = "danger";
+        }
+    }
+}
+<style type="text/css">
+    td.details-control {
+        cursor: pointer;
+    }
+</style>
+<div class="page-header">
+    <h1>
+        DASHBOARD
+    </h1>
+</div><!-- /.page-header -->
+@if (TempData["delStatus"] != null)
+{
+    <div class="alert alert-@delClass" id="divDel">
+        <strong>
+            <i class="ace-icon fa fa-times"></i>
+            @delTitle!
+        </strong>
+        @delMsg
+    </div>
+}
+<div class="row">
+    <div class="col-xs-12">
+        <!-- PAGE CONTENT BEGINS -->
+        <div class="space-6"></div>
+        <!--Visitors details come here-->
+        <div class="col-xs-12 col-sm-12" id="visitorDetails">
+            <div class="widget-box">
+                <div class="widget-header widget-header-flat widget-header-small">
+                    <h5 class="widget-title">
+                        <i class="ace-icon fa fa-signal"></i>
+                        Traffic Sources
+                    </h5>
+                    <div class="widget-toolbar">
+                        <a href="#" data-action="collapse">
+                            <i class="ace-icon fa fa-chevron-up"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="widget-body">
+                    <div class="widget-main">
+                        <div class="clearfix">
+                            @Html.Action("DashboardCnt")
+
+                        </div>
+                    </div><!-- /.widget-main -->
+                </div><!-- /.widget-body -->
+            </div><!-- /.widget-box -->
+        </div>
+        <!-- PAGE CONTENT ENDS -->
+    </div><!-- /.col -->
+</div>
+<!-- inline scripts related to this page -->
+@section LoadDataTable{
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Areas/Admin/assets/js/UserAdmin.js"></script>
+    <script>
+        function format ( d ) {
+            var tbody='<table class="table table-bordered"><tr><th>Product</th><th>Price</th><th>Quantity</th></tr>';
+            var trow;
+            for(i=0; i<d.ProductList.length; i++){
+                trow='<tr><td>' + d.ProductList[i].ProductName + '</td><td>' + d.ProductList[i].Price + '</td><td>' + d.ProductList[i].Qty + '</td></tr>';
+                tbody=tbody+trow;
+            }
+            tbody = tbody + '</table>';
+            return tbody;
+        }
+        $(document).ready(function () {
+            var oTable=$('#tbl').DataTable({
+                "pageLength":@(TempData.Peek("PageSize")!=null?TempData.Peek("PageSize"):5),
+                "lengthMenu": [5, 10, 15, 20],
+                "processing": true,
+                "serverSide": true,
+                "filter": true,
+                "orderMulti": false,
+                "bDestroy": true,
+                rowReorder: {
+                    selector: 'td:nth-child(1)'
+                },
+                "responsive": true,
+                "ajax": {
+                    "url": "@Url.Action("LoadData")",
+                    "type": "post",
+                    "dataType": "json"
+                },
+                "columnDefs": [
+            {
+                "width": "1%", "targets": 0, 'searchable': false, 'orderable': false, 'className': 'flat',
+                'render': function (data, type, full, meta) {
+                    return '<input type="checkbox" name="Ids" id="Ids" value="' + data + '"/>';
+                },
+            },
+                    { "width": "20%", "targets": 1 ,'orderable': true},
+                    { "width": "30%", "targets": 2 ,'orderable': true},
+                    { "width": "20%", "targets": 3 ,'orderable': false},
+                    { "width": "9%",  "targets": 4 },
+                    { "width": "15%", "targets": 5 }
+
+
+                ],
+                "columns": [
+                    { "data": "OrderId", "name": "OrderId" },
+                    { "data": "OrderDt", "name": "OrderDt" },
+                    { "data": "ShipName", "name": "ShipName" },
+                    { "data": "GrandTotal", "name": "GrandTotal" },
+                    {
+                        "data": "IsPaid", "name": "IsPaid", 'orderable': false,
+                        'render': function (data) {
+                            if (data == true)
+                                return '<span class="label label-sm label-success">Paid</span>';
+                            else
+                                return '<span class="label label-sm label-warning">Unpaid</span>';
+                        }
+                    },
+                    {
+                        "data": "OrderId", 'orderable': false,"orderable":false, "render": function (data) {
+                            return '<a title="Details" href="@Url.Action("Index","Order")" class="green">Details</a>';
+                        }
+                    }
+                ],
+                "order": [[1, 'asc']],
+                initComplete: function () {
+                    $('#tbl_filter input').unbind();
+                    $('#tbl_filter input').bind('keyup', function (e) {
+                        if (e.keyCode == 13 || !this.value) {
+                            oTable.search(this.value).draw();
+                        }
+                    });
+                }
+            });
+            var detailRows = [];
+
+            $('#tbl tbody').on( 'click', 'tr td.details-control', function () {
+                var tr = $(this).closest('tr');
+                var row = oTable.row( tr );
+                var idx = $.inArray( tr.attr('id'), detailRows );
+
+                if ( row.child.isShown() ) {
+                    tr.removeClass( 'details' );
+                    row.child.hide();
+                    detailRows.splice( idx, 1 );
+                }
+                else {
+                    tr.addClass( 'details' );
+                    row.child( format( row.data() ) ).show();
+                    if ( idx === -1 ) {
+                        detailRows.push( tr.attr('id') );
+                    }
+                }
+            });
+            setInterval(fetchdata,60000);
+        });
+        function fetchdata()
+        {
+            var oTable=$('#tbl').DataTable({
+                "pageLength":@(TempData.Peek("PageSize")!=null?TempData.Peek("PageSize"):5),
+                "lengthMenu": [5, 10, 15, 20],
+                "processing": true,
+                "serverSide": true,
+                "filter": true,
+                "orderMulti": false,
+                "bDestroy": true,
+                rowReorder: {
+                    selector: 'td:nth-child(1)'
+                },
+                "responsive": true,
+                "ajax": {
+                    "url": "@Url.Action("LoadData")",
+                    "type": "post",
+                    "dataType": "json"
+                },
+                "columnDefs": [
+                    {
+                        "width": "1%", "targets": 0, 'searchable': false, 'orderable': false, 'className': 'flat',
+                        'render': function (data, type, full, meta) {
+                            return '<input type="checkbox" name="Ids" id="Ids" value="' + data + '"/>';
+                        },
+                    },
+                    { "width": "20%", "targets": 1 ,'orderable': true},
+                    { "width": "30%", "targets": 2 ,'orderable': true},
+                    { "width": "20%", "targets": 3 ,'orderable': false},
+                    { "width": "9%",  "targets": 4 },
+                    { "width": "10%", "targets": 5 },
+                    { "width": "15%", "targets": 6 }
+
+
+                ],
+                "columns": [
+                    { "data": "OrderId", "name": "OrderId" },
+                    { "data": "OrderDt", "name": "OrderDt" },
+                    { "data": "ShipName", "name": "ShipName" },
+                    { "data": "GrandTotal", "name": "GrandTotal" },
+                    {
+                        "data": "IsPaid", "name": "IsPaid", 'orderable': false,
+                        'render': function (data) {
+                            if (data == true)
+                                return '<span class="label label-sm label-success">Paid</span>';
+                            else
+                                return '<span class="label label-sm label-warning">Unpaid</span>';
+                        }
+                    },
+                    {
+                        "data": "OrderId", 'orderable': false,"class": "details-control","orderable":false, "render": function (data) {
+                            return '<u>Products</u>';
+                        }
+                    },
+                    {
+                        "data": "OrderId", 'orderable': false,"orderable":false, "render": function (data) {
+                            return '<a title="Details" href="@Url.Action("Details")/' + data + '" class="green">Details</a>   <a title="Delete" href="@Url.Action("Delete")/' + data + '" class="red" onclick="return confirm(\'Are you Sure to Delete?\')"><i class="ace-icon fa fa-trash-o bigger-130"></i></a>';
+                        }
+                    }
+                ],
+                "order": [[1, 'asc']],
+                initComplete: function () {
+                    $('#tbl_filter input').unbind();
+                    $('#tbl_filter input').bind('keyup', function (e) {
+                        if (e.keyCode == 13 || !this.value) {
+                            oTable.search(this.value).draw();
+                        }
+                    });
+                }
+            });
+            var detailRows = [];
+
+            $('#tbl tbody').on( 'click', 'tr td.details-control', function () {
+                var tr = $(this).closest('tr');
+                var row = oTable.row( tr );
+                var idx = $.inArray( tr.attr('id'), detailRows );
+
+                if ( row.child.isShown() ) {
+                    tr.removeClass( 'details' );
+                    row.child.hide();
+                    detailRows.splice( idx, 1 );
+                }
+                else {
+                    tr.addClass( 'details' );
+                    row.child( format( row.data() ) ).show();
+                    if ( idx === -1 ) {
+                        detailRows.push( tr.attr('id') );
+                    }
+                }
+            });
+        }
+
+    </script>
+}

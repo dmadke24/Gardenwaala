@@ -1,0 +1,334 @@
+﻿@model RecentUpdateViewModel
+@{
+    ViewBag.Heading = "Recent Post";
+    string action;
+    ViewBag.CurrentMenu = "rpost";
+    string imgFile = "", imgFile1 = "", imgFile2 = "";
+    if (Model == null)
+    {
+        ViewBag.Title = "Create";
+        action = "Create";
+        ViewBag.Breadcrumbs = "New POST";
+    }
+    else
+    {
+        ViewBag.Title = "Edit";
+        action = "Edit";
+        ViewBag.Breadcrumbs = "Edit POST";
+        imgFile = "/Areas/Admin/UploadImg/Images/RecentPostImg/" + Model.Image;
+        imgFile1 = "/Areas/Admin/UploadImg/Images/RecentPostImg/" + Model.Image1;
+        imgFile2 = "/Areas/Admin/UploadImg/Images/RecentPostImg/" + Model.Image2;
+    }
+}
+<style>
+    .datepicker-dropdown::after, .datepicker-dropdown::before {
+        position: relative !important;
+    }
+</style>
+<link href="~/Areas/Admin/AdminDesign/css/bootstrap-wysihtml5.css" rel="stylesheet" />
+<div class="page-header">
+    <h1>
+        @action
+        <small>
+            <i class="ace-icon fa fa-angle-double-right"></i>
+            POST
+        </small>
+    </h1>
+</div><!-- /.page-header -->
+<div class="ace-settings-container" id="ace-settings-container">
+    <div class="btn btn-app btn-xs btn-warning ace-settings-btn" id="ace-settings-btn">
+        <i class="ace-icon fa fa-question-circle bigger-130"></i>
+    </div>
+
+    <div class="ace-settings-box clearfix" id="ace-settings-box">
+        <h3>Help</h3>
+        <p>This page brings you to stay on top with latest news, events, special offers, product updates.</p>
+        <ul class="help_list">
+            <li>Fill a little info and a few clicks is all it takes to make sure the latest updates and special offers go straight to your valuable clients.</li>
+            <li>Here you are offered to choose your posting media like FaceBook, Twitter, Website, SMS, Email etc.</li>
+            <li>You can also have a control on scheduling day and time.</li>
+            <li>Upload a Image up to 2MB.</li>
+        </ul>
+
+    </div><!-- help-box -->
+</div>
+@Html.ValidationSummary(true, "Error", new { @class = "alert alert-danger" })
+<div class="row">
+    <div class="col-xs-12">
+        <!-- PAGE CONTENT BEGINS -->
+        @using (Html.BeginForm(action, "RecentPost", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+
+            if (action == "Edit")
+            {
+                @Html.HiddenFor(m => m.UpdateId)
+                @Html.HiddenFor(m => m.OldFile)
+                @Html.HiddenFor(m => m.OldFile1)
+                @Html.HiddenFor(m => m.OldFile2)
+            }
+            else
+            {
+                @Html.Hidden("UpdateId", 0)
+                @Html.Hidden("UserId", 0)
+            }
+            <div class="form-group">
+                @Html.LabelFor(m => m.Title, new { @class = "col-sm-3 control-label no-padding-right" })
+                <div class="col-sm-5">
+                    @Html.TextBoxFor(m => m.Title, new { @class = "col-xs-10 col-sm-5 width-100" })
+                </div>
+                <div class="col-sm-4">
+                    @Html.ValidationMessageFor(m => m.Title, "", new { @class = "col-xs-12 col-sm-6" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Link, new { @class = "col-sm-3 control-label no-padding-right" })
+                <div class="col-sm-5">
+                    @Html.TextBoxFor(m => m.Link, new { @class = "col-xs-10 col-sm-5 width-100" })
+                </div>
+                <div class="col-sm-4">
+                    @Html.ValidationMessageFor(m => m.Link, "", new { @class = "col-xs-12 col-sm-6" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Description, new { @class = "col-sm-3 control-label no-padding-right" })
+                <div class="col-sm-5">
+                    @Html.TextAreaFor(m => m.Description, new { @class = "col-xs-10 col-sm-5 width-100", rows = "5" })
+                </div>
+                <div class="col-sm-4">
+                    @Html.ValidationMessageFor(m => m.Description, "", new { @class = "col-xs-12 col-sm-6" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.ImageFile, new { @class = "col-sm-3 control-label no-padding-right" })
+                <div class="col-sm-5">
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <input type="file" id="ImageFile" name="ImageFile" data-val="true" data-val-filesize="Upload file upto 2 mb" data-val-extension="Invalid File Type" data-val-extension-extension="png,jpg,jpeg,gif" />
+                        </div>
+                    </div>
+                    @if (action == "Edit")
+                    {
+                        <img src="@imgFile" width="100" />
+                    }
+                </div>
+                <div class="col-sm-4">
+                    @Html.ValidationMessageFor(m => m.ImageFile, "", new { @class = "col-xs-12 col-sm-6" })
+                    <span id="imgFileErr" style="display:block!important;color:red"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.ImageFile1, new { @class = "col-sm-3 control-label no-padding-right" })
+                <div class="col-sm-5">
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <input type="file" id="ImageFile1" name="ImageFile1" data-val="true" data-val-filesize="Upload file upto 2 mb" data-val-extension="Invalid File Type" data-val-extension-extension="png,jpg,jpeg,gif" />
+                        </div>
+                    </div>
+                    @if (action == "Edit")
+                    {
+                        <img src="@imgFile1" width="100" />
+                    }
+                </div>
+                <div class="col-sm-4">
+                    @Html.ValidationMessageFor(m => m.ImageFile1, "", new { @class = "col-xs-12 col-sm-6" })
+                    <span id="imgFileErr1" style="display:block!important;color:red"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.ImageFile2, new { @class = "col-sm-3 control-label no-padding-right" })
+                <div class="col-sm-5">
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <input type="file" id="ImageFile2" name="ImageFile2" data-val="true" data-val-filesize="Upload file upto 2 mb" data-val-extension="Invalid File Type" data-val-extension-extension="png,jpg,jpeg,gif" />
+                        </div>
+                    </div>
+                    @if (action == "Edit")
+                    {
+                        <img src="@imgFile2" width="100" />
+                    }
+                </div>
+                <div class="col-sm-4">
+                    @Html.ValidationMessageFor(m => m.ImageFile2, "", new { @class = "col-xs-12 col-sm-6" })
+                    <span id="imgFileErr2" style="display:block!important;color:red"></span>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right">Schedule Post</label>
+                <div class="col-sm-5">
+                    <div class="radio">
+                        <label>
+                            <input type="radio" id="rdoPost" name="rdoPost" value="n" class="ace" />
+                            <span class="lbl"> Now</span>
+                        </label>
+                        <label>
+                            <input type="radio" id="rdoPost" name="rdoPost" value="s" class="ace" checked="checked" />
+                            <span class="lbl"> Schedule</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.ScheduleDt, new { @class = "col-sm-3 control-label no-padding-right" })
+                <div class="col-sm-5">
+                    <div class="input-group">
+                        @Html.TextBoxFor(m => m.ScheduleDt, new { @class = "col-xs-10 col-sm-5 width-100" })
+                        <span class="input-group-addon">
+                            <i class="fa fa-clock-o bigger-110"></i>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    @Html.ValidationMessageFor(m => m.ScheduleDt, "", new { @class = "col-xs-12 col-sm-6" })
+                </div>
+            </div>
+            <div class="space-4"></div>
+            <div class="clearfix form-actions">
+                <div class="col-md-offset-3 col-md-9">
+                    <button class="btn btn-info" type="submit">
+                        <i class="ace-icon fa fa-check bigger-110"></i>
+                        Submit
+                    </button>
+                    &nbsp; &nbsp; &nbsp;
+                    <button class="btn" type="reset">
+                        <i class="ace-icon fa fa-undo bigger-110"></i>
+                        Reset
+                    </button>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+@section Validation{
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Areas/Admin/AdminDesign/js/chosen.jquery.min.js"></script>
+    <script src="~/Areas/Admin/assets/js/moment.min.js"></script>
+    <script src="~/Areas/Admin/assets/js/bootstrap-datepicker.min.js"></script>
+    <script src="~/Areas/Admin/assets/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="~/Areas/Admin/AdminDesign/js/wysihtml5-0.3.0.js"></script>
+    <script src="~/Areas/Admin/AdminDesign/js/bootstrap-wysihtml5.js"></script>
+    <script type="text/javascript">
+        $.validator.unobtrusive.adapters.addBool("chkreq");
+        $.validator.addMethod("chkreq", function (value, element, params) {
+
+            var cnt = $('.post-media:checkbox:checked').length;
+
+            return cnt > 0;
+        });
+        $('form').on('submit', function (evt) {
+            var form = $('form');
+            form.validate();
+            var isValid = form.valid();
+            if (isValid == true) {
+                var files = $('#ImageFile').prop('files');
+                size = files[0].size;
+                if (size > 2097152) {
+                    $('#imgFileErr').html('You can upload file upto 2MB');
+                    return false;
+                }
+                var files = $('#ImageFile1').prop('files');
+                size = files[0].size;
+                if (size > 2097152) {
+                    $('#imgFileErr1').html('You can upload file upto 2MB');
+                    return false;
+                }
+                var files = $('#ImageFile2').prop('files');
+                size = files[0].size;
+                if (size > 2097152) {
+                    $('#imgFileErr2').html('You can upload file upto 2MB');
+                    return false;
+                }
+            }
+            else
+                evt.preventDefault();
+        });
+        $(document).ready(function () {
+            //Drop file
+            $('#ImageFile').ace_file_input({
+                style: 'well',
+                btn_choose: 'Drop Image here or click to choose, Upload Image upto 2MB',
+                btn_change: null,
+                no_icon: 'ace-icon fa fa-cloud-upload',
+                droppable: true,
+                thumbnail: 'large',
+                preview_error: function (filename, error_code) { }
+
+            }).on('change', function () {
+                var files = $(this).prop('files');
+                var size = files[0].size;
+                if (size > 0)
+                    $('#PostOnSMS').prop('checked', false);
+            });
+
+            $('#ImageFile1').ace_file_input({
+                style: 'well',
+                btn_choose: 'Drop Image here or click to choose, Upload Image upto 2MB',
+                btn_change: null,
+                no_icon: 'ace-icon fa fa-cloud-upload',
+                droppable: true,
+                thumbnail: 'large',
+                preview_error: function (filename, error_code) { }
+
+            }).on('change', function () {
+                var files = $(this).prop('files');
+                var size = files[0].size;
+                if (size > 0)
+                    $('#PostOnSMS').prop('checked', false);
+            });
+
+            $('#ImageFile2').ace_file_input({
+                style: 'well',
+                btn_choose: 'Drop Image here or click to choose, Upload Image upto 2MB',
+                btn_change: null,
+                no_icon: 'ace-icon fa fa-cloud-upload',
+                droppable: true,
+                thumbnail: 'large',
+                preview_error: function (filename, error_code) { }
+
+            }).on('change', function () {
+                var files = $(this).prop('files');
+                var size = files[0].size;
+                if (size > 0)
+                    $('#PostOnSMS').prop('checked', false);
+            });
+
+            $('.ace').change(function () {
+                if ($('#rdoPost:checked').val() == 'n') {
+
+                    var curDtTm = new Date();
+                    var hr = curDtTm.getHours();
+                    var strAMPM = hr >= 12 ? "PM" : "AM";
+                    hr = hr > 12 ? hr % 12 : hr;
+                    $('#ScheduleDt').val(curDtTm.getFullYear() + '-' + (curDtTm.getMonth() + 1) + '-' + curDtTm.getDate() + " " + hr + ":" + curDtTm.getMinutes() + " " + strAMPM);
+                }
+                else {
+                    $('#ScheduleDt').val('').focus();
+                }
+            });
+            //Date-Time Picker
+            $('#ScheduleDt').datetimepicker({
+                format: 'YYYY-MM-DD hh:mm A',//use this option to display seconds
+                minDate: new Date(),
+                disabledDates: [new Date()],
+                icons: {
+                    time: 'fa fa-clock-o',
+                    date: 'fa fa-calendar',
+                    up: 'fa fa-chevron-up',
+                    down: 'fa fa-chevron-down',
+                    previous: 'fa fa-chevron-left',
+                    next: 'fa fa-chevron-right',
+                    today: 'fa fa-arrows ',
+                    clear: 'fa fa-trash',
+                    close: 'fa fa-times'
+                }
+            }).next().on(ace.click_event, function () {
+                $(this).prev().focus();
+            });
+            $('#Description').wysihtml5();
+
+        });
+    </script>
+}
+

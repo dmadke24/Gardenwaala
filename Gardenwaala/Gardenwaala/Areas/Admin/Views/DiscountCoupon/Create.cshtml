@@ -1,0 +1,161 @@
+﻿@model DiscountCouponViewModel
+@{
+    ViewBag.Heading = "Discount Coupon";
+    string action;
+    ViewBag.CurrentMenu = "coup";
+
+    if (Model == null)
+    {
+        ViewBag.Title = "Create";
+        action = "Create";
+        ViewBag.Breadcrumbs = "New Discount Coupon";
+    }
+    else
+    {
+        ViewBag.Title = "Edit";
+        action = "Edit";
+        ViewBag.Breadcrumbs = "Edit Discount Coupon";
+    }
+}
+<link href="~/Areas/Admin/assets/css/bootstrap-datepicker3.min.css" rel="stylesheet" />
+<style>
+    .datepicker-dropdown::after, .datepicker-dropdown::before {
+        position: relative !important;
+    }
+</style>
+<div class="page-header">
+    <h1>
+        @action
+        <small>
+            <i class="ace-icon fa fa-angle-double-right"></i>
+            Discount Coupon
+        </small>
+    </h1>
+</div><!-- /.page-header -->
+@Html.ValidationSummary(true, "Error", new { @class = "alert alert-danger" })
+<div class="row">
+    <div class="col-xs-12">
+        <!-- PAGE CONTENT BEGINS -->
+        @using (Html.BeginForm(action, "DiscountCoupon", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+
+            if (action == "Edit")
+            {
+                @Html.HiddenFor(m => m.CouponId)
+            }
+            else
+            {
+                @Html.Hidden("CouponId", 0)
+            }
+            <div class="form-group">
+                @Html.LabelFor(m => m.CategoryId, new { @class = "col-sm-3 control-label no-padding-right" })
+                <div class="col-sm-5">
+                    @Html.DropDownListFor(m => m.CategoryId, new SelectList(ViewBag.TypeList, "ID", "Text"), "Select Type", new { @class = "form-control" })
+                </div>
+                <div class="col-sm-4">
+                    @Html.ValidationMessageFor(m => m.CategoryId, "", new { @class = "col-xs-12 col-sm-6" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Code, new { @class = "col-sm-3 control-label no-padding-right" })
+                <div class="col-sm-5">
+                    @Html.TextBoxFor(m => m.Code, new { @class = "col-xs-10 col-sm-5 width-100" })
+                </div>
+                <div class="col-sm-4">
+                    @Html.ValidationMessageFor(m => m.Code, "", new { @class = "col-xs-12 col-sm-6" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Title, new { @class = "col-sm-3 control-label no-padding-right" })
+                <div class="col-sm-5">
+                    @Html.TextBoxFor(m => m.Title, new { @class = "col-xs-10 col-sm-5 width-100" })
+                </div>
+                <div class="col-sm-4">
+                    @Html.ValidationMessageFor(m => m.Title, "", new { @class = "col-xs-12 col-sm-6" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.ValidFrom, new { @class = "col-sm-3 control-label no-padding-right" })
+                <div class="col-sm-5">
+                    <div class="input-group">
+                        @Html.TextBoxFor(m => m.ValidFrom, new { @class = "col-xs-10 col-sm-5 width-100 form-control date-picker", data_date_format = "dd-mm-yyyy", @readonly = "readonly" })
+                        <span class="input-group-addon">
+                            <i class="fa fa-calendar bigger-110"></i>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    @Html.ValidationMessageFor(m => m.ValidFrom, "", new { @class = "col-xs-12 col-sm-6" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.ValidTo, new { @class = "col-sm-3 control-label no-padding-right" })
+                <div class="col-sm-5">
+                    <div class="input-group">
+                        @Html.TextBoxFor(m => m.ValidTo, new { @class = "col-xs-10 col-sm-5 width-100 form-control date-picker", data_date_format = "dd-mm-yyyy", @readonly = "readonly", data_val_isgreater = "Invalid Date, Should be Greater than From Date" })
+                        <span class="input-group-addon">
+                            <i class="fa fa-calendar bigger-110"></i>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    @Html.ValidationMessageFor(m => m.ValidTo, "", new { @class = "col-xs-12 col-sm-6" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.DiscountPercent, new { @class = "col-sm-3 control-label no-padding-right" })
+                <div class="col-sm-5">
+                    @Html.TextBoxFor(m => m.DiscountPercent, new { @class = "col-xs-10 col-sm-5 width-100" })
+                </div>
+                <div class="col-sm-4">
+                    @Html.ValidationMessageFor(m => m.DiscountPercent, "", new { @class = "col-xs-12 col-sm-6" })
+                </div>
+            </div>
+            <div class="space-4"></div>
+            <div class="clearfix form-actions">
+                <div class="col-md-offset-3 col-md-9">
+                    <button class="btn btn-info" type="submit">
+                        <i class="ace-icon fa fa-check bigger-110"></i>
+                        Submit
+                    </button>
+                    &nbsp; &nbsp; &nbsp;
+                    <button class="btn" type="reset">
+                        <i class="ace-icon fa fa-undo bigger-110"></i>
+                        Reset
+                    </button>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+@section Validation{
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Areas/Admin/assets/js/moment.min.js"></script>
+    <script src="~/Areas/Admin/assets/js/bootstrap-datepicker.min.js"></script>
+    <script src="~/Areas/Admin/assets/js/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript">
+        $.validator.unobtrusive.adapters.addBool("isgreater");
+        $.validator.addMethod("isgreater", function (value, element, params) {
+            var toDtStr = $(element).val().split('-');
+            var fromDtStr = $('#ValidFrom').val().split('-');
+            var fromDt = new Date(fromDtStr[2], fromDtStr[1] - 1, fromDtStr[0]);
+            var toDt = new Date(toDtStr[2], toDtStr[1] - 1, toDtStr[0]);
+            return true;
+        });
+        jQuery(function ($) {
+            //datepicker plugin
+            //link
+            $('.date-picker').datepicker({
+                autoclose: true,
+                todayHighlight: true
+            })
+            //show datepicker when clicking on the icon
+            .next().on(ace.click_event, function () {
+                $(this).prev().focus();
+            });
+        });
+    </script>
+}
+

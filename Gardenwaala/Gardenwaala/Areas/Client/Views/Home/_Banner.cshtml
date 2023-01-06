@@ -1,0 +1,19 @@
+﻿@using GardenViewModel
+@model IEnumerable<BannerViewModel>
+<div class="banner">
+    <div class="main-banner owl-carousel">
+        @foreach (BannerViewModel ban in Model)
+        {
+
+            <div class="item">
+                @*<div class="banner-info container">
+                    <div class="text1"> shop garden plant online at</div>
+                    <div class="text2"> @ban.Title</div>
+                    <div class="text3"> over 3000 plants, great offers </div>
+                    <div class="btn-banner"> <a href="#">shop now</a></div>
+                </div>*@
+                <a href="#"><img src="~/Areas/Admin/UploadImg/BannerImg/@ban.Image" alt="@ban.Title" class="img-responsive" /></a>
+            </div>
+        }
+    </div>
+</div>

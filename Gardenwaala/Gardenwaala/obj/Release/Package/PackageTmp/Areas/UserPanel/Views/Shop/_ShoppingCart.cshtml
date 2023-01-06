@@ -1,0 +1,98 @@
+﻿@model IEnumerable<GardenViewModel.TempCartViewModel>
+@if (Model != null && Model.Count() > 0)
+{
+    double total = 0;
+    int cnt = Model.Count();
+    <div class="cart-sidebar">
+        <div class="cart-sidebar-header">
+            <h5>
+                My Cart <span class="text-info">(@Model.Count() item)</span> <a data-toggle="offcanvas" class="float-right" href="javascript:void(0);">
+                    <i class="icofont icofont-close-line"></i>
+                </a>
+            </h5>
+        </div>
+        <div class="cart-sidebar-body">
+            @foreach (var cartItem in Model)
+            {
+
+                <div class="cart-list-product">
+                    <a class="float-right remove-cart" href="#"><i class="icofont icofont-close-circled"></i></a>
+                    <img class="img-fluid" src="~/Areas/Admin/UploadImg/ProductImg/@cartItem.Image" alt="@cartItem.ProdName">
+                    <span class="badge badge-success">50% OFF</span>
+                    <h5><a href="#">@cartItem.ProdName</a></h5>
+                    <p class="f-14 mb-0 text-dark float-right">₹@cartItem.Price.ToString("0.00")</p>
+                    <span class="count-number float-left">
+                        @*<button class="btn btn-outline-secondary  btn-sm left dec btnMinus"> <i class="icofont-minus"></i> </button>*@
+                        Quantity:&nbsp;<input class="count-number-input btnQty" type="text" value="@cartItem.Quantity" readonly="" name="Quantity[]">
+                        @*<button class="btn btn-outline-secondary btn-sm right inc btnPlus"> <i class="icofont-plus"></i> </button>*@
+                    </span>
+                </div>
+                total += (cartItem.Price * cartItem.Quantity);
+            }
+        </div>
+        <div class="cart-sidebar-footer">
+            <div class="cart-store-details">
+                <p>Sub Total <strong class="float-right">₹@total.ToString("0.00")</strong></p>
+                <p>Delivery Charges <strong class="float-right text-danger">+ ₹0.00</strong></p>
+                <h6>Your total savings @*<strong class="float-right text-danger">₹55 (42.31%)</strong>*@</h6>
+            </div>
+            <a href="@Url.Action("ShoppingCart","Shop")">
+                <button class="btn btn-primary btn-lg btn-block text-left" type="button">
+                    <span class="float-left"><i class="icofont icofont-cart"></i>Proceed to Checkout</span><span class="float-right">
+                        <strong>₹@total.ToString("0.00")</strong> <span class="icofont icofont-bubble-right"></span>
+                    </span>
+                </button>
+            </a>
+        </div>
+    </div>
+}
+@section ShoppingCart
+{
+    <script>
+        (function ($) {
+            @*$(".btnMinus").on('click', function () {
+                var Qty = $("#qty").val();
+                if (parseInt(Qty) === 1) {
+                    $("#qty").val(1);
+                }
+                else {
+                    Qty = parseInt(Qty) - 1;
+                    $("#qty").val(Qty);
+
+                }
+            });
+
+            $("#btnPlus").on('click', function () {
+                var Qty = $("#qty").val();
+                if (parseInt(Qty) === 15) {
+                    $("#qty").val(15);
+                }
+                else {
+                    Qty = parseInt(Qty) + 1;
+                    $("#qty").val(Qty);
+                }
+            });
+
+            $('#btnAddToCart').click(function () {
+               $.ajax({
+                   url: '@Url.Action("AddToTempCart")',
+                   data: { prodid:@Model.ProductId, qty: $('#qty').val(), price:@Model.OfferPrice},
+                   type: 'POST',
+                   //dataType: 'json',
+                   success: function (result, status, xhr) {
+                       $('#cartItems').html(result);
+                       /*if (result.Status == true) {
+                           for (i = 0; i < result.Data.length; i++) {
+
+                           }
+                       }
+                       else if (result.Status == false) {
+                           alert(result.Msg);
+                       }*/
+                   }
+               });
+            });*@
+
+        })(jQuery);
+    </script>
+}

@@ -1,0 +1,519 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Gurdeep singh osahan">
+    <meta name="author" content="Gurdeep singh osahan">
+    <title>Gardenwaala - By Aadnya Agro</title>
+    <!-- Favicon Icon -->
+    <link rel="icon" type="image/png" href="img/fav-icon.png">
+    <!-- Bootstrap core CSS -->
+    <link href="~/Areas/UserPanel/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Slider CSS -->
+    <link rel="stylesheet" href="~/Areas/UserPanel/vendor/slider/slider.css">
+    <!-- Select2 CSS -->
+    <link href="~/Areas/UserPanel/vendor/select2/css/select2-bootstrap.css" />
+    <link href="~/Areas/UserPanel/vendor/select2/css/select2.min.css" rel="stylesheet" />
+    <!-- Font Awesome-->
+    <link href="~/Areas/UserPanel/vendor/fontawesome/css/all.min.css" rel="stylesheet">
+    <link href="~/Areas/UserPanel/vendor/icofont/icofont.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="~/Areas/UserPanel/css/style.css" rel="stylesheet">
+    <!-- Owl Carousel -->
+    <link rel="stylesheet" href="~/Areas/UserPanel/vendor/owl-carousel/owl.carousel.css">
+    <link rel="stylesheet" href="~/Areas/UserPanel/vendor/owl-carousel/owl.theme.css">
+    <style>
+        .lblCartCount {
+            font-size: 12px;
+            background: #ff0000;
+            color: #fff;
+            padding: 0 5px;
+            vertical-align: top;
+            margin-left: -13px;
+            padding-left: 5px;
+            padding-right: 5px;
+            -webkit-border-radius: 9px;
+            -moz-border-radius: 9px;
+            border-radius: 9px;
+        }
+    </style>
+</head>
+<body>
+    <div class="btn-primary pt-2 pb-2">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    @*<a href="shop.html" class="mb-0 text-white">
+                            40% CASHBACK FOR NEW USERS | CODE: <strong>
+                                <span class="text-light">
+                                    GURDEEPOSAHAN40 <span class="mdi mdi-tag-faces"></span>
+                                </span>
+                            </strong>
+                        </a>*@
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade login-modal-main" id="login">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="login-modal">
+                        <div class="row">
+                            <div class="col-lg-6 d-flex align-items-center">
+                                <div class="login-modal-left p-4 text-center pl-5">
+                                    <img src="~/Areas/Client/Assets/images/logo white.png" alt="Gardenwaala.com">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <button type="button" class="close close-top-right position-absolute" data-dismiss="modal"
+                                        aria-label="Close">
+                                    <span aria-hidden="true"><i class="icofont-close-line"></i></span>
+                                    <span class="sr-only">Close</span>
+                                </button>
+                                @*<form class="position-relative">*@
+                                <ul class="mt-4 mr-4 nav nav-tabs-login float-right position-absolute" role="tablist">
+                                    <li>
+                                        <a class="nav-link-login active" data-toggle="tab" href="#login-form" role="tab">
+                                            <i class="icofont-ui-lock"></i> LOGIN
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="nav-link-login" data-toggle="tab" href="#register" role="tab">
+                                            <i class="icofont icofont-pencil"></i> REGISTER
+                                        </a>
+                                    </li>
+                                </ul>
+                                <div class="login-modal-right p-4">
+                                    <!-- Tab panes -->
+                                    <div class="tab-content">
+                                        <div class="tab-pane active" id="login-form" role="tabpanel">
+                                            <h5 class="heading-design-h5 text-dark">LOGIN</h5>
+                                            @using (Html.BeginForm("Login", "MyAccount", FormMethod.Post, new { @class = "form-horizontal HealthLedger-form-horizontal", role = "form" }))
+                                            {
+                                                @Html.AntiForgeryToken()
+                                                <fieldset class="form-group mt-4">
+                                                    <label>Enter Email</label>
+                                                    @Html.TextBox("Username", "", new { @class = "form-control", placeholder = "Enter Email Id", required = "true" })
+                                                </fieldset>
+                                                <fieldset class="form-group">
+                                                    <label>Enter Password</label>
+                                                    @Html.Password("Password", "", new { @class = "form-control", placeholder = "Password", required = "true" })
+                                                </fieldset>
+                                                <fieldset class="form-group">
+                                                    <button type="submit" class="btn btn-lg btn-primary btn-block">
+                                                        Enter to your
+                                                        account
+                                                    </button>
+                                                </fieldset>
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input" id="customCheck1">
+                                                    <label class="custom-control-label" for="customCheck1">Remember me</label>
+                                                </div>
+                                                @*<div class="login-with-sites mt-4">
+                                                        <p class="mb-2">or Login with your social profile:</p>
+                                                        <div class="row text-center">
+                                                            <div class="col-6 pr-1">
+                                                                <button class="btn-facebook btn-block login-icons btn-lg">
+                                                                    <i class="icofont icofont-facebook"></i> Facebook
+                                                                </button>
+                                                            </div>
+                                                            <div class="col-6 pl-1">
+                                                                <button class="btn-google btn-block login-icons btn-lg">
+                                                                    <i class="icofont icofont-google-plus"></i> Google
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>*@
+                                            }
+                                        </div>
+                                        <div class="tab-pane" id="register" role="tabpanel">
+                                            <h5 class="heading-design-h5 text-dark">REGISTER</h5>
+                                            @using (Html.BeginForm("RegisterUser", "MyAccount", FormMethod.Post, new { @class = "form-horizontal HealthLedger-form-horizontal", role = "form" }))
+                                            {
+                                                @Html.AntiForgeryToken()
+                                                <fieldset class="form-group mt-4">
+                                                    <label>Name</label>
+                                                    @Html.TextBox("Name", "", new { @class = "form-control", placeholder = "Enter Name" })
+                                                </fieldset>
+                                                <fieldset class="form-group mt-4">
+                                                    <label>Enter Contact No.</label>
+                                                    @Html.TextBox("ContactNo", "", new { @class = "form-control", placeholder = "Enter Contact Number" })
+
+                                                </fieldset>
+                                                <fieldset class="form-group">
+                                                    <label>Enter Email Id</label>
+                                                    @Html.TextBox("Email", "", new { @class = "form-control", placeholder = "Enter Email Id" })
+                                                </fieldset>
+                                                <fieldset class="form-group">
+                                                    <label>Enter Password</label>
+                                                    @Html.Password("Password", "", new { @class = "form-control", placeholder = "Enter Password" })
+                                                </fieldset>
+                                                <fieldset class="form-group">
+                                                    <button type="submit" class="btn btn-lg btn-primary btn-block">
+                                                        Create Your
+                                                        Account
+                                                    </button>
+                                                </fieldset>
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input" id="customCheck2" checked="checked">
+                                                    <label class="custom-control-label" for="customCheck2">
+                                                        I Agree with <a href="#">Term and Conditions</a>
+                                                    </label>
+                                                </div>
+                                                @*<div class="login-with-sites mt-4">
+                                                        <p class="mb-2">or Login with your social profile:</p>
+                                                        <div class="row text-center">
+                                                            <div class="col-6 pr-1">
+                                                                <button class="btn-facebook btn-block login-icons btn-lg">
+                                                                    <i class="icofont icofont-facebook"></i> Facebook
+                                                                </button>
+                                                            </div>
+                                                            <div class="col-6 pl-1">
+                                                                <button class="btn-google btn-block login-icons btn-lg">
+                                                                    <i class="icofont icofont-google-plus"></i> Google
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>*@
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @RenderBody()
+    <footer class="bg-white border-bottom border-top">
+        <div class="container">
+            <div class="row no-gutters">
+                <div class="col-md-4">
+                    <div class="border-right py-5 pr-5">
+                        <h6 class="mt-0 mb-4 f-14 text-dark font-weight-bold">TOP CATEGORIES</h6>
+                        <div class="row no-gutters">
+                            <div class="col-6">
+                                <ul class="list-unstyled mb-0">
+                                    <li><a href="#">Indoor Plants</a></li>
+                                    <li><a href="#">Outdoor Plants</a></li>
+                                </ul>
+                            </div>
+                            <div class="col-6">
+                                <ul class="list-unstyled mb-0">
+                                    <li><a href="#">Plants on Rent</a></li>
+                                    <li><a href="#">Pots & Planters</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="border-right py-5 px-5">
+                        <h6 class="mt-0 mb-4 f-14 text-dark font-weight-bold">ABOUT US</h6>
+                        <div class="row no-gutters">
+                            <div class="col-6">
+                                <ul class="list-unstyled mb-0">
+                                    <li><a href="#">Terms & Conditions</a></li>
+                                    <li><a href="#">Privacy Policy</a></li>
+                                </ul>
+                            </div>
+                            <div class="col-6">
+                                <ul class="list-unstyled mb-0">
+                                    <li><a href="#">Careers</a></li>
+                                    <li><a href="#">Offers</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="py-5 pl-5">
+                        @*<h6 class="mt-0 mb-4 f-14 text-dark font-weight-bold">DOWNLOAD APP</h6>
+                            <div class="app">
+                                <a href="#">
+                                    <img class="img-fluid" src="img/google.png">
+                                </a>
+                                <a href="#">
+                                    <img class="img-fluid" src="img/apple.png">
+                                </a>
+                            </div>*@
+                        <h6 class="mt-4 mb-4 f-14 text-dark font-weight-bold">KEEP IN TOUCH</h6>
+                        <div class="footer-social">
+                            <a class="btn-facebook" href="https://www.facebook.com/gardenwaala" target="_blank"><i class="icofont-facebook"></i></a>
+                            <a class="btn-instagram" href="https://goo.gl/maps/559xQAtka4YLjFEj8" target="_blank"><i class="icofont-instagram"></i></a>
+                            @*<a class="btn-whatsapp" href="#"><i class="icofont-whatsapp"></i></a>*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.container -->
+    </footer>
+    <div class="popular-tag py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h6 class="mt-0 mb-4 f-14 text-dark font-weight-bold">POPULAR SEARCHES</h6>
+                    <p class="mb-0">
+                        <a href="@Url.Action("ProductListCategory", "Shop", new { pid = 20210004 })">Indoor</a> &nbsp; | &nbsp; <a href="@Url.Action("ProductListCategory", "Shop", new { pid = 20210005 })">Plants On Rent</a> &nbsp; | &nbsp; <a href="@Url.Action("ProductListCategory", "Shop", new { pid = 20210007 })">Outdoor</a> &nbsp; | &nbsp; <a href="@Url.Action("ProductListCategory", "Shop", new { pid = 20210008 })">Combo Packs</a> &nbsp; | &nbsp; <a href="@Url.Action("ProductListCategory", "Shop", new { pid = 20210006})">Pots & Planters</a> &nbsp; | &nbsp; <a href="@Url.Action("ProductListCategory", "Shop", new { pid = 20210009})">Gardening Service</a> &nbsp; | &nbsp; <a href="@Url.Action("ProductListCategory", "Shop", new { pid =  20210010})">Gardening Material</a> &nbsp; | &nbsp; <a href="@Url.Action("ProductListCategory", "Shop", new { pid = 20210012})">Garden Tools</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="copyright bg-light py-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 d-flex align-items-center">
+                    <p class="mb-0">
+                        © Copyright 2020 - @DateTime.Now.Year <a href="https://www.gardenwaala.com">Gardenwaala</a> . All Rights Reserved
+                    </p>
+                </div>
+                <div class="col-md-6 text-right">
+                    <img class="img-fluid" src="img/payment_methods.png">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle">Search...</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input class="form-control form-control-lg mb-3" type="text" placeholder="Search for products, brands and more">
+                    <button type="button" class="btn btn-primary btn-block btn-lg">Search</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="footer-fix-nav shadow">
+        <div class="row">
+            <div class="col">
+                <a href="@Url.Action("Index","Home")"><i class="icofont icofont-home"></i></a>
+            </div>
+            <div class="col border-0">
+                <a type="button" data-toggle="modal" data-target="#exampleModalCenter" href="#"><i class="icofont icofont-search"></i></a>
+            </div>
+            @*<div class="col">
+                    <a href="#">
+                        <i class="icofont icofont-heart"></i>
+                    </a>
+                </div>*@
+            @*<div class="col">
+                    <a href="#"><i class="icofont icofont-tag"></i></a>
+                </div>*@
+            <div class="col">
+                <a href="javascript:void(0);" data-toggle="offcanvas" class="nav-link">
+                    <i class="icofont icofont-bag"></i>
+                    <span class='badge badge-warning lblCartCount' id="cartItemsCntMobile"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <nav id="main-nav">
+        <ul class="first-nav">
+            <li class="search" data-nav-custom-content>
+                <div class="form-container">
+                    <form class="search-form" action="https://www.google.com/search" target="_blank" method="get">
+                        <input type="text" name="q" placeholder="Search..." autocomplete="off">
+                    </form>
+                </div>
+            </li>
+        </ul>
+        <ul class="second-nav">
+            <li class="store">
+                <span>Plants</span>
+                <ul>
+                    <li class="store">
+                        <a href="#">Indoor Plants</a>
+                        <ul>
+                            @Html.Action("SubCategoryMobileView", "Home", new { cid = 20210004 })
+                        </ul>
+                    </li>
+                    <li class="store">
+                        <a href="#">Plants on Rent</a>
+                        <div class="subnav-container">
+                            <ul>
+                                @Html.Action("SubCategoryMobileView", "Home", new { cid = 20210005 })
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="store">
+                        <a href="#">Outdoor Plants</a>
+                        <ul>
+                            @Html.Action("SubCategoryMobileView", "Home", new { cid = 20210007 })
+                        </ul>
+                    </li>
+                    <li class="store">
+                        <a href="#">Combo Packs</a>
+                        <ul>
+                            @Html.Action("SubCategoryMobileView", "Home", new { cid = 20210008 })
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li class="store">
+                <a href="@Url.Action("ProductListCategory", "Shop", new { pid = 20210006})">Pots & Planters</a>
+            </li>
+            <li class="store">
+                <a href="#">Gardening</a>
+                <ul>
+                    <li><a href="@Url.Action("ProductList", "Shop", new { pid = 20210009})">Garden Service</a></li>
+                    <li><a href="@Url.Action("ProductList", "Shop", new { pid =  20210010})">Garden Materials</a></li>
+                    <li><a href="@Url.Action("ProductList", "Shop", new { pid = 20210012})">Garden Tools</a></li>
+                </ul>
+            </li>
+            <li class="store">
+                <a href="#">Seeds & Bulb</a>
+                <ul>
+                    <li><a href="@Url.Action("ProductList", "Shop", new { pid = 20210054})">Vegetable Seeds</a></li>
+                    <li><a href="@Url.Action("ProductList", "Shop", new { pid =  20210055})">Seasonal Flower seeds</a></li>
+                    <li><a href="@Url.Action("ProductList", "Shop", new { pid = 20210057})">Native Plant Seeds</a></li>
+                    <li><a href="@Url.Action("ProductList", "Shop", new { pid = 20210059})">Bulbs</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+    @Html.Action("Cart", "Shop")
+    <!-- Bootstrap core JavaScript -->
+    <script src="~/Areas/UserPanel/vendor/jquery/jquery.min.js"></script>
+    <script src="~/Areas/UserPanel/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- select2 Js -->
+    <script src="~/Areas/UserPanel/vendor/select2/js/select2.min.js"></script>
+    <!-- Owl Carousel -->
+    <script src="~/Areas/UserPanel/vendor/owl-carousel/owl.carousel.js"></script>
+    <!-- Slider Js -->
+    <script src="~/Areas/UserPanel/vendor/slider/slider.js"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="~/Areas/UserPanel/js/custom.js"></script>
+    <script src="~/Areas/UserPanel/js/hc-offcanvas-nav.js?ver=4.1.1"></script>
+    <link rel="stylesheet" href="~/Areas/UserPanel/js/demo.css?ver=3.4.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    @RenderSection("Register", false)
+    @RenderSection("ShoppingCart", false)
+    @RenderSection("ContentViewScript", false)
+    ContentViewScript
+    <script>
+        (function ($) {
+            var $main_nav = $('#main-nav');
+            var $toggle = $('.toggle');
+
+            var defaultOptions = {
+                disableAt: false,
+                customToggle: $toggle,
+                levelSpacing: 40,
+                navTitle: 'All Categories',
+                levelTitles: true,
+                levelTitleAsBack: true,
+                pushContent: '#container',
+                insertClose: 2
+            };
+
+            // call our plugin
+            var Nav = $main_nav.hcOffcanvasNav(defaultOptions);
+
+            // add new items to original nav
+            $main_nav.find('li.add').children('a').on('click', function () {
+                var $this = $(this);
+                var $li = $this.parent();
+                var items = eval('(' + $this.attr('data-add') + ')');
+
+                $li.before('<li class="new"><a href="#">' + items[0] + '</a></li>');
+
+                items.shift();
+
+                if (!items.length) {
+                    $li.remove();
+                }
+                else {
+                    $this.attr('data-add', JSON.stringify(items));
+                }
+
+                Nav.update(true);
+            });
+
+            // demo settings update
+
+            const update = (settings) => {
+                if (Nav.isOpen()) {
+                    Nav.on('close.once', function () {
+                        Nav.update(settings);
+                        Nav.open();
+                    });
+
+                    Nav.close();
+                }
+                else {
+                    Nav.update(settings);
+                }
+            };
+
+            $('.actions').find('a').on('click', function (e) {
+                e.preventDefault();
+
+                var $this = $(this).addClass('active');
+                var $siblings = $this.parent().siblings().children('a').removeClass('active');
+                var settings = eval('(' + $this.data('demo') + ')');
+
+                update(settings);
+            });
+
+            $('.actions').find('input').on('change', function () {
+                var $this = $(this);
+                var settings = eval('(' + $this.data('demo') + ')');
+
+                if ($this.is(':checked')) {
+                    update(settings);
+                }
+                else {
+                    var removeData = {};
+                    $.each(settings, function (index, value) {
+                        removeData[index] = false;
+                    });
+
+                    update(removeData);
+                }
+            });
+
+            $.ajax({
+                   url: '@Url.Action("CartCount","Shop")',
+                   type: 'POST',
+                success: function (result, status, xhr) {
+                        if(result!=0)
+                       $('#cartItemsCnt').html(result);
+                       $('#cartItemsCntMobile').html(result);
+                   }
+            });
+
+            $(window).scroll(function () {
+                var sticky = $('.sticky'),
+                    scroll = $(window).scrollTop();
+
+                if (scroll >= 100) sticky.addClass('fixed');
+                else sticky.removeClass('fixed');
+            });
+
+            //
+            $(window).scroll(function () {
+                var sticky = $('.sticky'),
+                    scroll = $(window).scrollTop();
+
+                if (scroll >= 100) sticky.addClass('fixed');
+                else sticky.removeClass('fixed');
+            });
+
+        })(jQuery);
+    </script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+﻿@using GardenViewModel
+@model IEnumerable<ProductViewModel>
+<div class="container">
+    <div class="row">
+        <div class="heading-part text-center mb_10 mt_80">
+            <h2 class="main_title">Best Seller</h2>
+        </div>
+        <div id="speial">
+            <div class="speial owl-carousel">
+                @foreach (ProductViewModel pmnu in Model)
+                {
+                    <div class="product-grid">
+                        <div class="item">
+                            <div class="product-thumb  mb_30">
+                                <div class="button-group text-center">
+                                    <div class="wishlist"><a href="#"><span>wishlist</span></a></div>
+                                    <div class="quickview"><a href="#"><span>Quick View</span></a></div>
+                                    <div class="compare"><a href="#"><span>Compare</span></a></div>
+                                    <div class="add-to-cart"><a href="#"><span>Add to cart</span></a></div>
+                                </div>
+                                <div class="image product-imageblock"> <a href="@Url.Action("ProductDetail", "Shop", new { Pid = @pmnu.ProductId})"> <img data-name="product_image" src="~/Areas/Admin/UploadImg/ProductImg/@pmnu.Image1" alt="@pmnu.Name" title="@pmnu.Name" class="img-responsive"> <img src="~/Areas/Admin/UploadImg/ProductImg/@pmnu.Image2" alt="@pmnu.Name" title="@pmnu.Name " class="img-responsive"> </a> </div>
+                                <div class="caption product-detail text-center">
+                                    <h4 data-name="product_name" class="product-name mt_20"><a href="@Url.Action("ProductDetail", "Shop", new { Pid = @pmnu.ProductId})" title="@pmnu.Name">@pmnu.Name</a></h4>
+                                    <div class="rating"> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i class="fa fa-star fa-stack-1x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i class="fa fa-star fa-stack-1x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i class="fa fa-star fa-stack-1x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i class="fa fa-star fa-stack-1x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i class="fa fa-star fa-stack-x"></i></span> </div>
+                                    <span class="price">
+                                        <span class="price small garden-price"><i class="fa fa-rupee"></i> @pmnu.Price.ToString("0.00") </span><span class="amount small">
+                                            <span class="currencySymbol"><i class="fa fa-rupee"></i> </span> @pmnu.OfferPrice.Value.ToString("0.00")
+                                        </span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

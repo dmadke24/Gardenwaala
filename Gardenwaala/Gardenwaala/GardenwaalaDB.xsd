@@ -1,0 +1,205 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="GardenwaalaDB" targetNamespace="http://tempuri.org/GardenwaalaDB.xsd" xmlns:mstns="http://tempuri.org/GardenwaalaDB.xsd" xmlns="http://tempuri.org/GardenwaalaDB.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="GardenDBConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="GardenDBConnectionString (Web.config)" ParameterPrefix="@" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.GardenDBConnectionString.ConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="GetBillDetailTableAdapter" GeneratorDataComponentClassName="GetBillDetailTableAdapter" Name="GetBillDetail" UserDataComponentName="GetBillDetailTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="GardenDBConnectionString (Web.config)" DbObjectName="GardenDB.dbo.GetBillDetail" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT Price, OrderId, ProductId, OrderDt, DeliveryCharges, DiscountAmt, TotalAmt, Name, Qty FROM dbo.GetBillDetail</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="Price" DataSetColumn="Price" />
+              <Mapping SourceColumn="OrderId" DataSetColumn="OrderId" />
+              <Mapping SourceColumn="ProductId" DataSetColumn="ProductId" />
+              <Mapping SourceColumn="OrderDt" DataSetColumn="OrderDt" />
+              <Mapping SourceColumn="DeliveryCharges" DataSetColumn="DeliveryCharges" />
+              <Mapping SourceColumn="DiscountAmt" DataSetColumn="DiscountAmt" />
+              <Mapping SourceColumn="TotalAmt" DataSetColumn="TotalAmt" />
+              <Mapping SourceColumn="Name" DataSetColumn="Name" />
+              <Mapping SourceColumn="Qty" DataSetColumn="Qty" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="GetUserDetailsTableAdapter" GeneratorDataComponentClassName="GetUserDetailsTableAdapter" Name="GetUserDetails" UserDataComponentName="GetUserDetailsTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="GardenDBConnectionString (Web.config)" DbObjectName="GardenDB.dbo.GetUserDetails" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT Name, Email, Gender, Address, ContactNo FROM dbo.GetUserDetails</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="Name" DataSetColumn="Name" />
+              <Mapping SourceColumn="Email" DataSetColumn="Email" />
+              <Mapping SourceColumn="Gender" DataSetColumn="Gender" />
+              <Mapping SourceColumn="Address" DataSetColumn="Address" />
+              <Mapping SourceColumn="ContactNo" DataSetColumn="ContactNo" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="GetOrderDetailsTableAdapter" GeneratorDataComponentClassName="GetOrderDetailsTableAdapter" Name="GetOrderDetails" UserDataComponentName="GetOrderDetailsTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="GardenDBConnectionString (Web.config)" DbObjectName="GardenDB.dbo.GetOrderDetails" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT OrderDt, TotalAmount, DeliveryCharges, DiscountAmt, FinalAmount, PayMode, PayRemark FROM dbo.GetOrderDetails</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="OrderDt" DataSetColumn="OrderDt" />
+              <Mapping SourceColumn="TotalAmount" DataSetColumn="TotalAmount" />
+              <Mapping SourceColumn="DeliveryCharges" DataSetColumn="DeliveryCharges" />
+              <Mapping SourceColumn="DiscountAmt" DataSetColumn="DiscountAmt" />
+              <Mapping SourceColumn="FinalAmount" DataSetColumn="FinalAmount" />
+              <Mapping SourceColumn="PayMode" DataSetColumn="PayMode" />
+              <Mapping SourceColumn="PayRemark" DataSetColumn="PayRemark" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="GetSaleProductsTableAdapter" GeneratorDataComponentClassName="GetSaleProductsTableAdapter" Name="GetSaleProducts" UserDataComponentName="GetSaleProductsTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="GardenDBConnectionString (Web.config)" DbObjectName="GardenDB.dbo.GetSaleProducts" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT Name, OrderDt, Qty FROM dbo.GetSaleProducts</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="Name" DataSetColumn="Name" />
+              <Mapping SourceColumn="OrderDt" DataSetColumn="OrderDt" />
+              <Mapping SourceColumn="Qty" DataSetColumn="Qty" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="GardenwaalaDB" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="GardenwaalaDB" msprop:Generator_UserDSName="GardenwaalaDB">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="GetBillDetail" msprop:Generator_TableClassName="GetBillDetailDataTable" msprop:Generator_TableVarName="tableGetBillDetail" msprop:Generator_TablePropName="GetBillDetail" msprop:Generator_RowDeletingName="GetBillDetailRowDeleting" msprop:Generator_RowChangingName="GetBillDetailRowChanging" msprop:Generator_RowEvHandlerName="GetBillDetailRowChangeEventHandler" msprop:Generator_RowDeletedName="GetBillDetailRowDeleted" msprop:Generator_UserTableName="GetBillDetail" msprop:Generator_RowChangedName="GetBillDetailRowChanged" msprop:Generator_RowEvArgName="GetBillDetailRowChangeEvent" msprop:Generator_RowClassName="GetBillDetailRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Price" msprop:Generator_ColumnVarNameInTable="columnPrice" msprop:Generator_ColumnPropNameInRow="Price" msprop:Generator_ColumnPropNameInTable="PriceColumn" msprop:Generator_UserColumnName="Price" type="xs:float" />
+              <xs:element name="OrderId" msprop:Generator_ColumnVarNameInTable="columnOrderId" msprop:Generator_ColumnPropNameInRow="OrderId" msprop:Generator_ColumnPropNameInTable="OrderIdColumn" msprop:Generator_UserColumnName="OrderId" type="xs:long" />
+              <xs:element name="ProductId" msprop:Generator_ColumnVarNameInTable="columnProductId" msprop:Generator_ColumnPropNameInRow="ProductId" msprop:Generator_ColumnPropNameInTable="ProductIdColumn" msprop:Generator_UserColumnName="ProductId" type="xs:int" />
+              <xs:element name="OrderDt" msprop:Generator_ColumnVarNameInTable="columnOrderDt" msprop:Generator_ColumnPropNameInRow="OrderDt" msprop:Generator_ColumnPropNameInTable="OrderDtColumn" msprop:Generator_UserColumnName="OrderDt" type="xs:dateTime" />
+              <xs:element name="DeliveryCharges" msprop:Generator_ColumnVarNameInTable="columnDeliveryCharges" msprop:Generator_ColumnPropNameInRow="DeliveryCharges" msprop:Generator_ColumnPropNameInTable="DeliveryChargesColumn" msprop:Generator_UserColumnName="DeliveryCharges" type="xs:float" />
+              <xs:element name="DiscountAmt" msprop:Generator_ColumnVarNameInTable="columnDiscountAmt" msprop:Generator_ColumnPropNameInRow="DiscountAmt" msprop:Generator_ColumnPropNameInTable="DiscountAmtColumn" msprop:Generator_UserColumnName="DiscountAmt" type="xs:float" />
+              <xs:element name="TotalAmt" msprop:Generator_ColumnVarNameInTable="columnTotalAmt" msprop:Generator_ColumnPropNameInRow="TotalAmt" msprop:Generator_ColumnPropNameInTable="TotalAmtColumn" msprop:Generator_UserColumnName="TotalAmt" type="xs:float" />
+              <xs:element name="Name" msprop:Generator_ColumnVarNameInTable="columnName" msprop:Generator_ColumnPropNameInRow="Name" msprop:Generator_ColumnPropNameInTable="NameColumn" msprop:Generator_UserColumnName="Name">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Qty" msprop:Generator_ColumnVarNameInTable="columnQty" msprop:Generator_ColumnPropNameInRow="Qty" msprop:Generator_ColumnPropNameInTable="QtyColumn" msprop:Generator_UserColumnName="Qty" type="xs:float" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="GetUserDetails" msprop:Generator_TableClassName="GetUserDetailsDataTable" msprop:Generator_TableVarName="tableGetUserDetails" msprop:Generator_TablePropName="GetUserDetails" msprop:Generator_RowDeletingName="GetUserDetailsRowDeleting" msprop:Generator_RowChangingName="GetUserDetailsRowChanging" msprop:Generator_RowEvHandlerName="GetUserDetailsRowChangeEventHandler" msprop:Generator_RowDeletedName="GetUserDetailsRowDeleted" msprop:Generator_UserTableName="GetUserDetails" msprop:Generator_RowChangedName="GetUserDetailsRowChanged" msprop:Generator_RowEvArgName="GetUserDetailsRowChangeEvent" msprop:Generator_RowClassName="GetUserDetailsRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Name" msprop:Generator_ColumnVarNameInTable="columnName" msprop:Generator_ColumnPropNameInRow="Name" msprop:Generator_ColumnPropNameInTable="NameColumn" msprop:Generator_UserColumnName="Name">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="150" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Email" msprop:Generator_ColumnVarNameInTable="columnEmail" msprop:Generator_ColumnPropNameInRow="Email" msprop:Generator_ColumnPropNameInTable="EmailColumn" msprop:Generator_UserColumnName="Email">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="150" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Gender" msprop:Generator_ColumnVarNameInTable="columnGender" msprop:Generator_ColumnPropNameInRow="Gender" msprop:Generator_ColumnPropNameInTable="GenderColumn" msprop:Generator_UserColumnName="Gender" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Address" msprop:Generator_ColumnVarNameInTable="columnAddress" msprop:Generator_ColumnPropNameInRow="Address" msprop:Generator_ColumnPropNameInTable="AddressColumn" msprop:Generator_UserColumnName="Address" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ContactNo" msprop:Generator_ColumnVarNameInTable="columnContactNo" msprop:Generator_ColumnPropNameInRow="ContactNo" msprop:Generator_ColumnPropNameInTable="ContactNoColumn" msprop:Generator_UserColumnName="ContactNo">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="13" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="GetOrderDetails" msprop:Generator_TableClassName="GetOrderDetailsDataTable" msprop:Generator_TableVarName="tableGetOrderDetails" msprop:Generator_TablePropName="GetOrderDetails" msprop:Generator_RowDeletingName="GetOrderDetailsRowDeleting" msprop:Generator_RowChangingName="GetOrderDetailsRowChanging" msprop:Generator_RowEvHandlerName="GetOrderDetailsRowChangeEventHandler" msprop:Generator_RowDeletedName="GetOrderDetailsRowDeleted" msprop:Generator_UserTableName="GetOrderDetails" msprop:Generator_RowChangedName="GetOrderDetailsRowChanged" msprop:Generator_RowEvArgName="GetOrderDetailsRowChangeEvent" msprop:Generator_RowClassName="GetOrderDetailsRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="OrderDt" msprop:Generator_ColumnVarNameInTable="columnOrderDt" msprop:Generator_ColumnPropNameInRow="OrderDt" msprop:Generator_ColumnPropNameInTable="OrderDtColumn" msprop:Generator_UserColumnName="OrderDt" type="xs:dateTime" />
+              <xs:element name="TotalAmount" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnTotalAmount" msprop:Generator_ColumnPropNameInRow="TotalAmount" msprop:Generator_ColumnPropNameInTable="TotalAmountColumn" msprop:Generator_UserColumnName="TotalAmount" type="xs:float" minOccurs="0" />
+              <xs:element name="DeliveryCharges" msprop:Generator_ColumnVarNameInTable="columnDeliveryCharges" msprop:Generator_ColumnPropNameInRow="DeliveryCharges" msprop:Generator_ColumnPropNameInTable="DeliveryChargesColumn" msprop:Generator_UserColumnName="DeliveryCharges" type="xs:float" />
+              <xs:element name="DiscountAmt" msprop:Generator_ColumnVarNameInTable="columnDiscountAmt" msprop:Generator_ColumnPropNameInRow="DiscountAmt" msprop:Generator_ColumnPropNameInTable="DiscountAmtColumn" msprop:Generator_UserColumnName="DiscountAmt" type="xs:float" />
+              <xs:element name="FinalAmount" msprop:Generator_ColumnVarNameInTable="columnFinalAmount" msprop:Generator_ColumnPropNameInRow="FinalAmount" msprop:Generator_ColumnPropNameInTable="FinalAmountColumn" msprop:Generator_UserColumnName="FinalAmount" type="xs:float" />
+              <xs:element name="PayMode" msprop:Generator_ColumnVarNameInTable="columnPayMode" msprop:Generator_ColumnPropNameInRow="PayMode" msprop:Generator_ColumnPropNameInTable="PayModeColumn" msprop:Generator_UserColumnName="PayMode" type="xs:unsignedByte" />
+              <xs:element name="PayRemark" msprop:Generator_ColumnVarNameInTable="columnPayRemark" msprop:Generator_ColumnPropNameInRow="PayRemark" msprop:Generator_ColumnPropNameInTable="PayRemarkColumn" msprop:Generator_UserColumnName="PayRemark" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="GetSaleProducts" msprop:Generator_TableClassName="GetSaleProductsDataTable" msprop:Generator_TableVarName="tableGetSaleProducts" msprop:Generator_TablePropName="GetSaleProducts" msprop:Generator_RowDeletingName="GetSaleProductsRowDeleting" msprop:Generator_RowChangingName="GetSaleProductsRowChanging" msprop:Generator_RowEvHandlerName="GetSaleProductsRowChangeEventHandler" msprop:Generator_RowDeletedName="GetSaleProductsRowDeleted" msprop:Generator_UserTableName="GetSaleProducts" msprop:Generator_RowChangedName="GetSaleProductsRowChanged" msprop:Generator_RowEvArgName="GetSaleProductsRowChangeEvent" msprop:Generator_RowClassName="GetSaleProductsRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Name" msprop:Generator_ColumnVarNameInTable="columnName" msprop:Generator_ColumnPropNameInRow="Name" msprop:Generator_ColumnPropNameInTable="NameColumn" msprop:Generator_UserColumnName="Name">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="OrderDt" msprop:Generator_ColumnVarNameInTable="columnOrderDt" msprop:Generator_ColumnPropNameInRow="OrderDt" msprop:Generator_ColumnPropNameInTable="OrderDtColumn" msprop:Generator_UserColumnName="OrderDt" type="xs:dateTime" />
+              <xs:element name="Qty" msprop:Generator_ColumnVarNameInTable="columnQty" msprop:Generator_ColumnPropNameInRow="Qty" msprop:Generator_ColumnPropNameInTable="QtyColumn" msprop:Generator_UserColumnName="Qty" type="xs:float" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:GetBillDetail" />
+      <xs:field xpath="mstns:OrderId" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

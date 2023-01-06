@@ -1,0 +1,79 @@
+﻿@using GardenViewModel
+@model LoginViewModel
+<div class="main-nav shadow-sm">
+    @Html.Action("HeaderMenu", "Home")
+</div>
+</div>
+<section class="py-5 bg-light border-top">
+    <div class="container">
+        <div class="modal-content">
+            <div class="modal-body register-box">
+                <div class="login-modal">
+                    <div class="row">
+                        <div class="col-lg-12">
+
+                            <div class="login-modal-right p-4">
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="login-form" role="tabpanel">
+                                        <h5 class="heading-design-h5 text-dark">Welcome back! Sign in with</h5>
+                                        @using (Html.BeginForm("Login", "MyAccount", FormMethod.Post, new { @class = "form-horizontal HealthLedger-form-horizontal", role = "form", autocomplete = "false" }))
+                                        {
+                                            @Html.AntiForgeryToken()
+                                            <fieldset class="form-group mt-4">
+                                                <label>Enter Email</label>
+                                                @Html.TextBoxFor(u => u.Username, new { @class = "form-control", placeholder = "Enter Email Id" })
+                                                @Html.ValidationMessageFor(u => u.Username)
+                                            </fieldset>
+                                            <fieldset class="form-group">
+                                                <label>Enter Password</label>
+                                                @Html.PasswordFor(u => u.Password, new { @class = "form-control", placeholder = "Password" })
+                                                @Html.ValidationMessageFor(u => u.Password)
+                                            </fieldset>
+                                            <fieldset class="form-group">
+                                                <button type="submit" class="btn btn-lg btn-primary btn-block">
+                                                    Enter to your
+                                                    account
+                                                </button>
+                                            </fieldset>
+                                            @*<div class="login-with-sites mt-4">
+                                                    <p class="mb-2">or Login with your social profile:</p>
+                                                    <div class="row text-center">
+                                                        <div class="col-6 pr-1">
+                                                            <button class="btn-facebook btn-block login-icons btn-lg">
+                                                                <i class="icofont icofont-facebook"></i> Facebook
+                                                            </button>
+                                                        </div>
+                                                        <div class="col-6 pl-1">
+                                                            <button class="btn-google btn-block login-icons btn-lg">
+                                                                <i class="icofont icofont-google-plus"></i> Google
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>*@
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            <ul class="mt-4 mr-4 nav nav-tabs-login float-right position-absolute" role="tablist">
+                                <li>
+                                    New here? <a class="nav-link-login active" href="@Url.Action("Register","MyAccount")" role="tab">
+                                        <i class="icofont icofont-pencil"></i> REGISTER
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Contact Us -->
+@section Register
+{
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+
+}

@@ -1,0 +1,54 @@
+﻿@using GardenViewModel
+@model CountViewModel
+<div class="col-lg-3 col-xs-6">
+    <!-- small box -->
+    <div class="small-box bg-aqua" style="background-color:#9abc32 !important;height:110px;    border-radius: 10px;">
+        <div class="inner">
+            <h3 class="total_enq_dash"><div id="total_enq">@Model.totalUrs</div></h3>
+            <p class="visitor_count">Total Users</p>
+            <a href="@Url.Action("Index","User")" id="VisitorCnt" class="more_info_new">More Info</a>
+        </div>
+        <div class="icon-traffic-dashboard">
+            <i class="ace-icon fa fa-user"></i>
+        </div>
+    </div>
+
+</div>
+<div class="col-lg-3 col-xs-6">
+    <!-- small box -->
+    <div class="small-box bg-aqua" style="background-color:#6fb3e0 !important;height:110px;    border-radius: 10px;">
+        <div class="inner">
+            <h3 class="total_enq_dash"><div id="total_enq">@Model.TodaysOrders</div></h3>
+            <p class="visitor_count">Today's Orders</p>
+        </div>
+        <div class="icon-traffic-dashboard">
+            <i class="ace-icon fa fa-cart-plus black"></i>
+        </div>
+    </div>
+</div>
+<div class="col-lg-3 col-xs-6">
+    <!-- small box -->
+    <div class="small-box bg-aqua" style="background-color:#ffb752 !important;height:110px;    border-radius: 10px;">
+        <div class="inner">
+            <h3 class="total_enq_dash"><div id="total_enq">@Model.CompletedOrders</div></h3>
+            <p class="visitor_count">Completed Orders</p>
+        </div>
+        <div class="icon-traffic-dashboard">
+            <i class="ace-icon fa fa-cart-plus black"></i>
+        </div>
+    </div>
+</div>
+<div class="col-lg-3 col-xs-6">
+    <!-- small box -->
+    <div class="small-box bg-aqua" style="background-color:#d15b47 !important;height:110px;    border-radius: 10px;">
+        <div class="inner">
+            <h3 class="total_enq_dash"><div id="total_enq">@Model.PendingOrders</div></h3>
+
+            <p class="visitor_count">Pending Orders</p>
+        </div>
+        <div class="icon-traffic-dashboard">
+            <i class="ace-icon fa fa-cart-plus black"></i>
+        </div>
+    </div>
+</div>
+

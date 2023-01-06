@@ -1,0 +1,187 @@
+@media only screen and (max-width: 568px) and (min-width: 320px)
+{
+	.signup__thumbnail
+	{
+		display:none;
+	}
+	.container__child
+	{
+		width:100%;
+	 padding-top:5%;
+	}
+	.website_feature_reg
+	{
+	display: block;
+    margin-left: 5px;	
+	}
+	.new_user_reg
+	{
+		margin-left:0px !important;
+	}
+	#tool_logo
+	{
+		display:none;
+	}
+	.customized_form
+	{
+		margin-left:0px !important;
+	}
+	.forgot_password_right
+	{
+		float:left;
+		padding-left:50px;
+		padding-top: 20px;
+		
+	}
+	.remember_login_left
+	{
+/* 		margin-bottom:20px;
+ */		margin-top:20px;
+		padding-left:50px;
+	}
+	
+	.form_group_login
+	{
+		margin-bottom:10px;
+	}
+	.form_login
+	{
+		padding-top:60%;
+	}
+	.has-search .form-control
+	{
+		padding-left:50px !important;
+		font-size:15px;
+	}
+	.register_left
+	{
+		display:none;
+	}
+	.bv-form
+	{
+		padding-top:12%;
+	}
+	.selectpicker
+	{
+		width:105% !important;
+	}
+	.reg {
+    padding-top: 10%;
+}
+}
+
+
+@media only screen and (max-width: 640px) and (min-width: 360px)
+{
+	.signup__thumbnail
+	{
+		display:none;
+	}
+	.new_user_reg
+	{
+		margin-left:0px !important;
+	}
+	.wrapper_login
+	{
+		padding-top:25%;
+	}
+	.website_feature_reg
+	{
+		display: block;
+    margin-left: 5px;	
+	}
+	.container__child
+	{
+		width:100%;
+	 padding-top: 7%;
+	}
+	.form_login
+	{
+		padding-top:60%;
+	}
+	.has-search .form-control
+	{
+		padding-left:50px !important;
+		font-size:15px;
+	}
+	.register_left
+	{
+		display:none;
+	}
+	.bv-form
+	{
+		padding-top:12%;
+	}
+	.selectpicker
+	{
+		width:105% !important;
+	}
+	.reg {
+    padding-top: 10%;
+}
+}
+
+
+@media only screen and (max-width:732px) and (min-width:412px)
+{
+.form-login
+{
+	padding-top: 70% !important;
+}	
+.new_user_reg
+	{
+		margin-left:0px !important;
+	}
+.website_feature_reg
+	{
+		display: block;
+    margin-left: 5px;	
+	}
+}
+ 
+@media screen and (max-width:736px) and (min-width:414px)
+{
+.form_login {
+    padding-top: 65% !important;
+}
+.website_feature_reg
+	{
+		display: block;
+    margin-left: 5px;	
+	}
+.new_user_reg
+	{
+		margin-left:0px !important;
+	}	
+}
+
+/* @media screen and (max-width:812px) and (min-width:375px)
+{
+.form_login {
+    padding-top: 82% !important;
+}	
+}
+ */
+
+@media only screen and (max-width:1366px) and (min-width:768px)
+{
+	.form_login {
+    padding-top: 41%;
+}
+}
+/* @media only screen and (max-width:1024px) and (min-width:768px)
+{
+	.signup__thumbnail
+	{
+		display:none;
+	}
+	.form_login {
+    padding-top: 60% !important ;
+	}
+	.container__child
+	{
+		width:100%;
+	}
+} */
+
+}

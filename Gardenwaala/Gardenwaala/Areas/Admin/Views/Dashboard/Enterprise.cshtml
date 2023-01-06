@@ -1,0 +1,309 @@
+﻿@{
+    ViewBag.Heading = "Dashboard";
+    ViewBag.CurrentMenu = "db";
+    
+
+}
+<div class="page-content">
+    <div class="page-header">
+        <h1>
+            Dashboard
+            <small>
+                <i class="ace-icon fa fa-angle-double-right"></i>
+                overview &amp; stats
+            </small>
+        </h1>
+    </div><!-- /.page-header -->
+
+    <div class="row">
+        <div class="col-xs-12">
+            <!-- PAGE CONTENT BEGINS -->
+            @if (CurrentUser.SubRole == "A")
+            {
+                @Html.Action("EnterpriseCount", "Dashboard")
+            }
+            @if (CurrentUser.SubRole == "C" || CurrentUser.SubRole == "A")
+            {
+
+                <div class="hr hr32 hr-dotted"></div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="widget-box">
+                            <div class="widget-header">
+                                <h4 class="widget-title lighter smaller">
+                                    <i class="ace-icon fa fa-clock-o blue"></i>
+                                    Today's Schedule
+                                </h4>
+                                <div class="widget-toolbar">
+                                    <a href="#" data-action="collapse">
+                                        <i class="ace-icon fa fa-chevron-up"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                    <div class="widget-body" id="todaysSchedule">
+                                        <div class="widget-main no-padding">
+                                            <div class="row">
+                                                @if (CurrentUser.Features.Contains("Appointment") || CurrentUser.Features.Contains("Table-Booking") || CurrentUser.Features.Contains("Hotel-Booking"))
+                                                {
+                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                    <h5 class="appointment_head">Followup</h5>
+                                                    @Html.Action("TodaysFollowup", "Dashboard")
+                                                </div>
+                                                    if (CurrentUser.Features.Contains("Appointment"))
+                                                    {
+                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                    <h5 class="appointment_head">Appointment</h5>
+                                                    @Html.Action("TodaysAppointment", "Appointment")
+                                                </div>
+                                                    }
+                                                     else if (CurrentUser.Features.Contains("Table-Booking"))
+                                                    {
+
+                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                    <h5 class="appointment_head">Bookings</h5>
+                                                    @Html.Action("TodaysBooking", "Booking")
+                                                </div>
+                                                    }
+                                                    else if (CurrentUser.Features.Contains("Hotel-Booking"))
+                                                    {
+                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                    <h5 class="appointment_head">Check-Ins</h5>
+                                                    @Html.Action("TodaysCheckIn", "RoomBooking")
+                                                </div>
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                                    <h5 class="appointment_head">Followup</h5>
+                                                    @Html.Action("TodaysFollowup", "Dashboard")
+                                                </div>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- /.widget-box -->
+                </div>
+                <div class="hr hr32 hr-dotted"></div>
+            }
+            @if (CurrentUser.SubRole == "A")
+            {
+                @Html.Action("CustomerCount", "Dashboard")
+            }
+            <!-- PAGE CONTENT ENDS -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+    @if (CurrentUser.SubRole == "A")
+    {
+        <div class="row">
+            <!--Visitors details come here-->
+            <div class="col-sm-12" id="visitorDetails">
+                <div class="widget-box">
+                    <div class="widget-header">
+                        <h4 class="widget-title lighter smaller">
+                            <i class="ace-icon fa fa-clock-o blue"></i>
+                            Monthly Visitors
+                        </h4>
+                        <div class="widget-toolbar">
+                            <a href="#" data-action="collapse">
+                                <i class="ace-icon fa fa-chevron-up"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="widget-body">
+                        <div class="widget-main no-padding">
+                            <div id="chart_div" class="chart"></div>
+                        </div>
+                    </div>
+                </div><!-- /.widget-box -->
+            </div>
+        </div>
+    }
+    <div class="col-sm-12 " id="widget-container-col-1">
+        <div class="widget-box" id="widget-box-1">
+            <div class="widget-header">
+                <h5 class="widget-title">Facebook Insight</h5>
+                <div class="widget-toolbar">
+                    <a href="#" data-action="collapse">
+                        <i class="ace-icon fa fa-chevron-up"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="widget-body">
+                <div class="widget-main">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <!--Facebook Insights come here-->
+                                @if (CurrentUser.SubRole == "S" || CurrentUser.SubRole == "A")
+                                {
+                                    <div class="col-sm-6">
+                                        @Html.Action("SocialInsight", "Dashboard")
+                                    </div>
+                                    <div class="col-sm-6">
+                                        @Html.Action("SocialDemographic", "Dashboard")
+                                    </div><!-- /.col -->
+                                }
+                                <!--Facebook Insights Grapg come here-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+    <!--Today's Schedule-->
+</div><!-- /.page-content -->
+@section Piechart{
+    <script src="~/Areas/Admin/AdminDesign/js/jquery.flot.min.js"></script>
+    <script src="~/Areas/Admin/AdminDesign/js/jquery.flot.pie.min.js"></script>
+    <script src="~/Areas/Admin/AdminDesign/js/jquery.flot.resize.min.js"></script>
+    <script src="~/Areas/Admin/AdminDesign/js/canvas.js"></script>
+    <script>
+
+        google.load("visualization", "1", { packages: ["corechart"] });
+        $(document).ready(function () {
+            //flot chart resize plugin, somehow manipulates default browser resize event to optimize it!
+            //but sometimes it brings up errors with normal resize event handlers
+            $.resize.throttleWindow = false;
+
+            var placeholderM = $('#piechart-placeholderM').css({ 'width': '90%', 'min-height': '150px' });
+            var dataM = [
+              { label: "18-24", data: @TempData["M.18_24"],color: "#68BC31" },
+              { label: "25-34", data: @TempData["M.25_34"],color: "#2091CF" },
+              { label: "35-44", data: @TempData["M.35_44"],color: "#AF4E96" },
+              { label: "45-54", data: @TempData["M.45_54"],color: "#DA5430" },
+              { label: "55-64", data: @TempData["M.55_64"],color: "#FEE074" }
+            ]
+
+            var placeholderF = $('#piechart-placeholderF').css({ 'width': '90%', 'min-height': '150px' });
+            var dataF = [
+              { label: "18-24", data: @TempData["F.18_24"],color: "#68BC31" },
+              { label: "25-34", data: @TempData["F.25_34"],color: "#2091CF" },
+              { label: "35-44", data: @TempData["F.35_44"],color: "#AF4E96" },
+              { label: "45-54", data: @TempData["F.45_54"],color: "#DA5430" },
+              { label: "55-64", data: @TempData["F.55_64"],color: "#FEE074" }
+            ]
+
+            function drawPieChart(placeholder, data, position) {
+                $.plot(placeholder, data, {
+                    series: {
+                        pie: {
+                            show: true,
+                            tilt: 0.8,
+                            highlight: {
+                                opacity: 0.25
+                            },
+                            stroke: {
+                                color: '#fff',
+                                width: 2
+                            },
+                            startAngle: 2
+                        }
+                    },
+                    legend: {
+                        show: true,
+                        position: position || "ne",
+                        labelBoxBorderColor: null,
+                        margin: [-30, 15]
+                    }
+                  ,
+                    grid: {
+                        hoverable: true,
+                        clickable: true
+                    }
+                })
+            }
+            drawPieChart(placeholderM, dataM);
+            drawPieChart(placeholderF, dataF);
+
+            /**
+             we saved the drawing function and the data to redraw with different position later when switching to RTL mode dynamically
+             so that's not needed actually.
+             */
+            placeholderM.data('chart', dataM);
+            placeholderM.data('draw', drawPieChart);
+
+            placeholderF.data('chart', dataF);
+            placeholderF.data('draw', drawPieChart);
+
+
+            //pie chart tooltip example
+            var $tooltip = $("<div class='tooltip top in'><div class='tooltip-inner'></div></div>").hide().appendTo('body');
+            var previousPoint = null;
+
+            placeholderM.on('plothover', function (event, pos, item) {
+                if (item) {
+                    if (previousPoint != item.seriesIndex) {
+                        previousPoint = item.seriesIndex;
+                        var tip = item.series['label'] + " : " + Math.round(item.series['percent'])+ '%';
+                        $tooltip.show().children(0).text(tip);
+                    }
+                    $tooltip.css({ top: pos.pageY + 10, left: pos.pageX + 10 });
+                } else {
+                    $tooltip.hide();
+                    previousPoint = null;
+                }
+
+            });
+
+            placeholderF.on('plothover', function (event, pos, item) {
+                if (item) {
+                    if (previousPoint != item.seriesIndex) {
+                        previousPoint = item.seriesIndex;
+                        var tip = item.series['label'] + " : " + Math.round(item.series['percent']) + '%';
+                        $tooltip.show().children(0).text(tip);
+                    }
+                    $tooltip.css({ top: pos.pageY + 10, left: pos.pageX + 10 });
+                } else {
+                    $tooltip.hide();
+                    previousPoint = null;
+                }
+
+            });
+            var vCntData = [,];
+            $.ajax({
+                type: "post",
+                url: "@Url.Action("VisitorCountDet", "Dashboard")",
+                dataType: "json",
+                success: function (response) {
+                    vCnt = response.length;
+
+                    vCntData = [['Month', 'Visitor']];
+
+                    for(var i=0;i<vCnt;i++)
+                    {
+                        vCntData.push([response[i].Mon+"-"+response[i].VisitorYear, response[i].VisitorCnt]);
+                    }
+
+                    google.load('visualization', '1', {'packages':['corechart'], "callback": drawChart1(vCntData)});
+                    function drawChart1(vCntData) {
+
+                        var data = google.visualization.arrayToDataTable(
+                          vCntData
+                        );
+
+                        var options = {
+                            // title: 'Monthly Visitors',
+                            hAxis: { title: 'Month', titleTextStyle: { color: 'Black' } }
+                        };
+
+                        var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+                        chart.draw(data, options);
+                    }
+                },failure: function (response) {
+                    alert(response.responseText);
+                },
+                error: function (response) {
+                    alert(response.responseText);
+                }
+            });
+        });
+    </script>
+}

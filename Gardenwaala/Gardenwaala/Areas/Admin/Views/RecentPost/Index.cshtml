@@ -1,0 +1,200 @@
+﻿@{
+    ViewBag.Heading = "Recent Post";
+    ViewBag.CurrentMenu = "rpost";
+
+    string delTitle = "";
+    string delMsg = "";
+    string delClass = "";
+    if (TempData["delStatus"] != null)
+    {
+        if (Convert.ToBoolean(TempData["delStatus"]) == true)
+        {
+            delTitle = "Success";
+            delMsg = "Record Deleted Successfully";
+            delClass = "success";
+        }
+        else
+        {
+            delTitle = "Error";
+            delMsg = "Can't Delete Record";
+            delClass = "danger";
+        }
+    }
+}
+
+<div class="page-header">
+    <h1>
+        Recent Post
+    </h1>
+</div><!-- /.page-header -->
+@if (TempData["delStatus"] != null)
+{
+    <div class="alert alert-@delClass" id="divDel">
+        <strong>
+            <i class="ace-icon fa fa-times"></i>
+            @delTitle!
+        </strong>
+        @delMsg
+    </div>
+}
+<div class="row">
+    <div class="col-xs-12">
+        <!-- PAGE CONTENT BEGINS -->
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="table-header">
+                    <div class="row">
+                        <div class="col-xs-8">
+
+                        </div>
+                        <div class="col-xs-4">
+                            <div class="pull-right">
+                                <a class="btn icon-btn btn-danger" href="@Url.Action("Create")"><span class="glyphicon btn-glyphicon glyphicon-plus img-circle text-danger"></span>New Post</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- div.table-responsive -->
+                <!-- div.dataTables_borderWrap -->
+                <div>
+                    <table id="tbl" class="table table-striped table-bordered table-hove">
+                        <thead>
+                            <tr>
+                                <th><input type="checkbox" id="SelectAll" /> </th>
+                                <th>Date</th>
+                                <th>Title</th>
+                                <th>Image</th>
+                                <th>Image1</th>
+                                <th>Image2</th>
+                                <th>Schedule Date</th>
+                                <th>Post Media</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div><!-- /.col -->
+</div><!-- /.row -->
+<!-- <![endif]-->
+<!--[if IE]>
+<![endif]-->
+<!-- inline scripts related to this page -->
+@section LoadDataTable{
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Areas/Admin/assets/js/UserAdmin.js"></script>
+    <script>
+        $(document).ready(function () {
+            var oTable=$('#tbl').DataTable({
+                "pageLength":@(TempData.Peek("PageSize")!=null?TempData.Peek("PageSize"):5),
+                "lengthMenu": [5, 10, 15, 20],
+                "processing": true,
+                "serverSide": true,
+                "filter": true,
+                "orderMulti": false,
+                rowReorder: {
+                    selector: 'td:nth-child(1)'
+                },
+                "responsive": true,
+                "ajax": {
+                    "url": "@Url.Action("LoadData")",
+                    "type": "post",
+                    "dataType": "json"
+                },
+                "columnDefs": [
+                    {
+                        "width": "1%", "targets": 0, 'searchable': false, 'orderable': false, 'className': 'flat',
+                        'render': function (data, type, full, meta) {
+                            return '<input type="checkbox" name="Ids" id="Ids" value="' + data + '"/>';
+                        },
+                    },
+                    { "width" : "10%", "targets": 1 },
+                    { "width" : "10%", "targets": 2 },
+                    { "width" : "10%", "targets": 3 ,'orderable': false,
+                        'render':function(data,type,full,meta){
+                            if(data)
+                                return '<img width="40%" src="/Areas/Admin/UploadImgImages/RecentPostImg/'+ data +'" />';
+                            else
+                                return 'No Image';
+                        }},
+                        { "width" : "10%", "targets": 4 ,'orderable': false,
+                            'render':function(data,type,full,meta){
+                                if(data)
+                                    return '<img width="40%" src="/Areas/Admin/UploadImgImages/RecentPostImg/'+ data +'" />';
+                                else
+                                    return 'No Image';
+                            }},
+                        { "width" : "10%", "targets": 5 ,'orderable': false,
+                            'render':function(data,type,full,meta){
+                                if(data)
+                                    return '<img width="40%" src="/Areas/Admin/UploadImgImages/RecentPostImg/'+ data +'" />';
+                                else
+                                    return 'No Image';
+                            }
+                        },
+                 { "width": "12%", "targets": 6 },
+                 { "width": "10%", "targets": 7, 'orderable':false },
+                 { "width": "5%", "targets": 8, },
+                 { "width": "10%", "targets": 9 }
+
+                ],
+                "columns": [
+                    { "data": "UpdateId", "name": "UpdateId" },
+                    { "data": "UpdateDt", "name": "UpdateDt" },
+                    { "data": "Title", "name": "Title" },
+                    { "data": "Image", "name": "Image" },
+                    { "data": "Image1", "name": "Image1" },
+                    { "data": "Image2", "name": "Image2" },
+                    { "data": "ScheduleDt", "name": "ScheduleDt" },
+                    { "data": "PostOnEmail", "name": "PostOnEmail",
+                        'render':function(data,type,full,meta){
+                            var postStr="";
+                            if(full['PostOnFB']==true)
+                                postStr ='<span title="FaceBook" class="fa fa-facebook-square bigger-150 blue"></span> ';
+                            if(full['PostOnTW']==true)
+                                postStr = postStr+'<span title="Twitter" class="fa fa-twitter-square bigger-150 lighter purple"></span> ';
+                            if(full['PostOnSMS']==true)
+                                postStr = postStr+'<span title="SMS" class="fa fa-mobile bigger-150 lighter green"></span> ';
+                            if(full['PostOnEmail']==true)
+                                postStr = postStr+'<span title="Email" class="fa fa-envelope-square bigger-150 lighter red"></span> ';
+                            if(full['PostOnWeb']==true)
+                                postStr = postStr+'<span title="Website" class="fa fa-globe bigger-150 lighter pink"></span> ';
+                            return postStr;
+                        }
+                    },
+                    {
+                        "data": "Status", "name": "Status", 'orderable': false,
+                        'render': function (data) {
+                            if (data == true)
+                                return '<span class="label label-sm label-success">Published</span>';
+                            else
+                                return '<span class="label label-sm label-warning">Unpublished</span>';
+                        }
+                    },
+                    {
+                        "data": "UpdateId", 'orderable': false, "render": function (data,type,full,meta) {
+                            if(full['Status']==false)
+                            {
+                                return '<a title="Edit" href="@Url.Action("Edit")/' + data + '" class="green"><i class="ace-icon fa fa-pencil bigger-130"></i></a>  <a title="Delete" href="@Url.Action("Delete")/' + data + '" class="red" onclick="return confirm(\'Are you Sure to Delete?\')"><i class="ace-icon fa fa-trash-o bigger-130"></i></a>';
+                            }
+                            else
+                                return '<a title="Delete" href="@Url.Action("Delete")/' + data + '" class="red" onclick="return confirm(\'Are you Sure to Delete?\')"><i class="ace-icon fa fa-trash-o bigger-130"></i></a>';
+                        }
+                    }
+                ],
+                "order": [[1, 'desc']],
+                initComplete: function () {
+                    $('#tbl_filter input').unbind();
+                    $('#tbl_filter input').bind('keyup', function (e) {
+                        if (e.keyCode == 13 || !this.value) {
+                            oTable.search(this.value).draw();
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+}
